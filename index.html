@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" x-data="{ page: 'home', 'loaded': true, 'darkMode': true }" x-init="
+       darkMode = JSON.parse(localStorage.getItem('darkMode'));
+       $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+  :class="{'dark': darkMode === true}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <title>AI Tools - DCWorks</title>
+  <link rel="icon" href="favicon.ico">
+
+  <!-- All CSS Links -->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dialog.css">
+
+  <!-- Tailwind -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4">
+
+  </script>
+</head>
+
+<body class="bg-[#121723] overflow-x-hidden">
+  <!-- <body class="bg-[#080321]"> -->
+
+  <!-- Navbar Area -->
+  <header
+    x-data="{stickyMenu: false, navigationOpen: false, isLogin: false, showProfileDropdown: false, userInfo: JSON.parse(localStorage.getItem('user'))}"
+    @click.outside="showProfileDropdown = false" @scroll.window="stickyMenu = (window.scrollY > 0) ? true : false"
+    class="navbar-area fixed z-100 top-0 w-full shadow-navbar z-2 backdrop-blur-md bg-[#181c31]/50"
+    :class="{ 'is-sticky': stickyMenu }">
+    <!-- H5 -->
+    <div class="dc-responsive-nav lg:hidden">
+      <div class="container">
+        <nav class="navbar w-full h-[60px] flex justify-between items-center">
+          <div class="flex gap-3">
+            <!-- Hamburger Toggle BTN -->
+            <button class="lg:hidden block shrink-0" @click="navigationOpen = !navigationOpen">
+              <span class="block relative cursor-pointer w-5.5 h-5.5">
+                <span class="du-block absolute right-0 w-full h-full">
+                  <span
+                    class="block relative top-0 left-0 dc-bg-blue rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-[0]"
+                    :class="{ '!w-full delay-300': !navigationOpen }">
+                  </span>
+                  <span
+                    class="block relative top-0 left-0 dc-bg-blue rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-150"
+                    :class="{ '!w-full delay-400': !navigationOpen }">
+                  </span>
+                  <span
+                    class="block relative top-0 left-0 dc-bg-blue rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-200"
+                    :class="{ '!w-full delay-500': !navigationOpen }">
+                  </span>
+                </span>
+                <span class="du-block absolute right-0 w-full h-full rotate-45">
+                  <span
+                    class="block dc-bg-blue unded-sm ease-in-out duration-200 delay-300 absolute left-2.5 top-0 w-0.5 h-full"
+                    :class="{ '!h-0 delay-[0]': !navigationOpen }">
+                  </span>
+                  <span
+                    class="block dc-bg-blue rounded-sm ease-in-out duration-200 delay-400 absolute left-0 top-2.5 w-full h-0.5"
+                    :class="{ '!h-0 dealy-200': !navigationOpen }">
+                  </span>
+                </span>
+              </span>
+            </button>
+            <!-- Hamburger Toggle BTN -->
+
+            <a class="navbar-brand shrink-0 text-xl font-bold" href="/">
+              LOGO
+              <!-- <img class="w-[60%]" src="assets/img/logo.png" alt="logo"> -->
+            </a>
+          </div>
+
+          <div class="flex gap-10 text-white">
+            <ul x-show="navigationOpen" x-transition:enter="animate__fadeInDown" x-transition:leave="animate__fadeOut"
+              class="absolute top-[60px] left-0 w-full self-center flex flex-col justify-between p-10 animate__animated animate__faster bg-[#181c31]">
+              <li class="border-b border-gray-700">
+                <a href="/" class="block text-[16px] ease-in duration-300 hover:text-primary-color py-5">Home</a>
+              </li>
+              <li class="border-b border-gray-700">
+                <a href="./api.html"
+                  class="block text-[16px] ease-in duration-300 hover:text-primary-color py-5">API</a>
+              </li>
+              <li>
+                <a href="./demo.html"
+                  class="block text-[16px] ease-in duration-300 hover:text-primary-color py-5">Demo</a>
+              </li>
+            </ul>
+
+            <div class="self-center flex gap-2">
+              <a x-show="!isLogin" href="#sign-dialog"
+                class="signIn inline-block text-[13px] rounded-full dc-bg-blue py-1 px-5 shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">
+                Sign In
+              </a>
+
+              <!-- 语言 -->
+              <div x-data="{ isOpen: false }" @click="isOpen = !isOpen" @click.away="isOpen = false"
+                class="group/item peer relative rounded-lg border border-gray-600 bg-[#252a42]">
+
+                <div
+                  class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
+                  <div class="flex flex-1 items-center justify-between gap-3 pr-2">
+                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <p class="text-sm leading-5 text-gray-300">English</p>
+                  </div>
+                </div>
+                <div :class="{ 'z-10 translate-y-0 scale-y-100 opacity-100': isOpen }"
+                  class="bg-[#181c31] absolute top-9 start-1/2 -translate-x-3/5 xl:end-0 max-sm:start-5 xl:start-0 2xl:start-1/2 2xl:-translate-x-1/2 -z-10 flex w-full min-w-fit origin-top scale-y-0 flex-col overflow-hidden rounded-xl border border-gray-600 p-4 opacity-0 shadow-[0_20px_38px_0_rgba(0,0,0,0.48)] transition-all group-hover/item:z-10 group-hover/item:translate-y-0 group-hover/item:scale-y-100 group-hover/item:opacity-100">
+                  <ul class="grid grid-cols-[max-content_max-content] gap-x-6 gap-y-[2px]">
+                    <li>
+                      <a class="hover:text-f-primary inline-flex rounded px-2 py-1.5 bg-f-bg-hover"
+                        href="/image-to-video">English</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ja/image-to-video">日本語</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ko/image-to-video">한국어</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/tw/image-to-video">繁體中文</a>
+                    </li>
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/zh/image-to-video">简体中文</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- My Account -->
+              <div x-show="isLogin">
+                <!-- Profile dropdown -->
+                <div @click="showProfileDropdown = !showProfileDropdown" @click.away="showProfileDropdown = false"
+                  class="avatar relative flex max-w-xs items-center rounded-full bg-indigo-600 text-sm text-white ring-1 ring-white/50 hover:outline-none hover:ring-2 hover:ring-white/80 hover:ring-offset-2 hover:ring-offset-indigo-600">
+                  <span class="absolute -inset-1.5">
+
+                  </span>
+                  <img class="size-8 rounded-full object-cover" src="./assets/img/user/user3.jpg" alt="Avatar">
+                </div>
+
+                <div id="profile_dropdown" :class="{'!block': showProfileDropdown}"
+                  class="profile_dropdown hidden hover:block absolute right-0 z-10 mt-1 mr-3 w-48 origin-top-right rounded-xl bg-[#181c31] backdrop-blur-lg py-1 shadow-lg ring-1 ring-black/5 hover:outline-none item-border border border-gray-600 bg-[#181c31]">
+                  <div x-text="userInfo?.user_name || 'simmons@gmail.com'"
+                    class="block px-4 py-2 text-sm text-gray-300">
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <div class="flex items-center justify-between px-4 py-2 text-sm text-gray-300">
+                    <div class="flex items-center gap-2">
+                      <span class="inline-block w-4">
+                        <img src="./assets/img/header/gold_coins.svg" alt="">
+                      </span>
+                      <span x-text="userInfo?.credit || '0'">
+
+                      </span>
+                    </div>
+                    <a class="dc-bg-blue px-2 text-[12px] text-white rounded-full cursor-pointer">Buy</a>
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer">Credit
+                    History</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-blue-500/20 cursor-pointer">Delete
+                    Account</a>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer" @click="
+                  localStorage.clear()
+                  isLogin = false;
+                ">Sign out</a>
+                  <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
+                    <span class="absolute left-0 bottom-0 -z-1 w-full">
+                      <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                    </span>
+                    <span class="absolute left-0 top-0 -z-1 w-full">
+                      <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                    </span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- PC -->
+    <div class="hidden lg:block">
+      <div class="container xl:max-w-full 3xl:max-w-[1700px]">
+        <nav class="navbar flex gap-20 justify-between items-center">
+          <!-- Left -->
+          <div class="flex items-center">
+            <!-- Logo -->
+            <a class="navbar-brand shrink-0 w-[150px] text-4xl font-bold" href="/">
+              LOGO
+              <!-- <img class="w-100" src="assets/img/logo.png" alt="logo"> -->
+            </a>
+            <!-- Menu -->
+            <ul class="self-center flex text-center">
+              <li>
+                <a href="#"
+                  class="block w-20 px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">Home</a>
+              </li>
+              <li>
+                <a href="./api.html"
+                  class="block w-20 px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">API</a>
+              </li>
+              <li>
+                <a href="./demo.html"
+                  class="block w-20 px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">Demo</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right -->
+          <div class="flex gap-20">
+            <div class="self-center flex items-center gap-5">
+              <!-- Sign In -->
+              <!-- <a href="#sign-dialog" class="signIn text-regular font-medium text-lg hover:text-blue-500">Sign
+                Up</a> -->
+
+              <!-- Sign In -->
+              <a x-show="!isLogin" href="#sign-dialog"
+                class="signIn flex items-center justify-center rounded-full dc-bg-blue px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out dc-button-hover-shadow dc-button-hover-outline-white"
+                href="#">Sign In</a>
+
+              <!-- 语言 -->
+              <div class="group/item peer relative rounded-lg border border-gray-600 bg-[#252a42]">
+                <div
+                  class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
+                  <div class="flex flex-1 items-center justify-between gap-3 pr-2">
+                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <p class="text-sm leading-5 text-gray-300">English</p>
+                  </div>
+                </div>
+                <div
+                  class="bg-[#181c31] absolute top-9 start-1/2 -translate-x-1/2 xl:end-0 xl:start-0 2xl:start-1/2 2xl:-translate-x-1/2 -z-10 flex w-full min-w-fit origin-top scale-y-0 flex-col overflow-hidden rounded-xl border border-gray-600 p-4 opacity-0 shadow-[0_20px_38px_0_rgba(0,0,0,0.48)] transition-all group-hover/item:z-10 group-hover/item:translate-y-0 group-hover/item:scale-y-100 group-hover/item:opacity-100">
+                  <ul class="grid grid-cols-[max-content_max-content] gap-x-6 gap-y-[2px]">
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/image-to-video">English</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ja/image-to-video">日本語</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ko/image-to-video">한국어</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/tw/image-to-video">繁體中文</a>
+                    </li>
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/zh/image-to-video">简体中文</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- My Account -->
+              <div x-show="isLogin">
+                <!-- Profile dropdown -->
+                <div @click="showProfileDropdown = !showProfileDropdown" @click.away="showProfileDropdown = false"
+                  class="avatar relative flex max-w-xs items-center rounded-full bg-indigo-600 text-sm text-white ring-1 ring-white/50 hover:outline-none hover:ring-2 hover:ring-white/80 hover:ring-offset-2 hover:ring-offset-indigo-600">
+                  <span class="absolute -inset-1.5">
+
+                  </span>
+                  <img class="size-8 rounded-full object-cover" src="./assets/img/user/user3.jpg" alt="Avatar">
+                </div>
+
+                <div id="profile_dropdown" :class="{'!block': showProfileDropdown}"
+                  class="profile_dropdown hidden hover:block absolute right-0 z-10 mt-1 mr-3 w-48 origin-top-right rounded-xl bg-[#181c31] backdrop-blur-lg py-1 shadow-lg ring-1 ring-black/5 hover:outline-none item-border border border-gray-600 bg-[#181c31]">
+                  <div x-text="userInfo?.user_name || 'simmons@gmail.com'"
+                    class="block px-4 py-2 text-sm text-gray-300">
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <div class="flex items-center justify-between px-4 py-2 text-sm text-gray-300">
+                    <div class="flex items-center gap-2">
+                      <span class="inline-block w-4">
+                        <img src="./assets/img/header/gold_coins.svg" alt="">
+                      </span>
+                      <span x-text="userInfo?.credit || '0'">
+
+                      </span>
+                    </div>
+                    <a class="dc-bg-blue px-2 text-[12px] text-white rounded-full cursor-pointer">Buy</a>
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer">Credit
+                    History</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-blue-500/20 cursor-pointer">Delete
+                    Account</a>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer" @click="
+                  localStorage.clear()
+                  isLogin = false;
+                ">Sign out</a>
+                  <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
+                    <span class="absolute left-0 bottom-0 -z-1 w-full">
+                      <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                    </span>
+                    <span class="absolute left-0 top-0 -z-1 w-full">
+                      <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                    </span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- End Navbar Area -->
+
+  <main>
+
+    <!-- Hero Area -->
+    <section id="home"
+      class="relative z-10 pb-16 pt-[120px] dark:bg-gray-dark md:pb-[30px] md:pt-[150px] xl:pb-[40px] xl:pt-[150px] 2xl:pb-[80px] 2xl:pt-[160px]">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div class="w-full px-4">
+            <div class="mx-auto max-w-[800px] text-center animate__animated animate__fadeInUp">
+              <h1
+                class="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
+                Al Video Generator with Stunning Results</h1>
+              <p class="mb-12 text-base !leading-relaxed text-gray-400 dark:text-body-color-dark sm:text-lg md:text-xl">
+                Turn your ideas to stunning visuals with Pollo Al. Our text to image generator creates HD images
+                strictly followingany given prompt. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Background -->
+      <video autoplay muted loop class="absolute top-0 -z-1 object-cover w-full h-150 rounded-3xl shadow-lg opacity-20"
+        src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+      </video>
+
+      <!-- 装饰 -->
+      <div class="absolute right-0 top-0 z-[-1] opacity-5 lg:opacity-15">
+        <svg width="450" height="556" viewBox="0 0 450 556" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="277" cy="63" r="225" fill="url(#paint0_linear_25:217)" class="dc-animate-movebounce"></circle>
+          <circle cx="17.9997" cy="182" r="18" fill="url(#paint1_radial_25:217)"></circle>
+          <circle cx="76.9997" cy="288" r="34" fill="url(#paint2_radial_25:217)" class="dc-animate-movebounce"></circle>
+          <circle cx="325.486" cy="302.87" r="180" transform="rotate(-37.6852 325.486 302.87)"
+            fill="url(#paint3_linear_25:217)">
+          </circle>
+          <circle opacity="0.8" cx="184.521" cy="315.521" r="132.862" transform="rotate(114.874 184.521 315.521)"
+            stroke="url(#paint4_linear_25:217)">
+          </circle>
+          <circle opacity="0.8" cx="356" cy="290" r="179.5" transform="rotate(-30 356 290)"
+            stroke="url(#paint5_linear_25:217)">
+          </circle>
+          <circle opacity="0.8" cx="191.659" cy="302.659" r="133.362" transform="rotate(133.319 191.659 302.659)"
+            fill="url(#paint6_linear_25:217)">
+          </circle>
+          <defs>
+            <linearGradient id="paint0_linear_25:217" x1="-54.5003" y1="-178" x2="222" y2="288"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7"> </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"> </stop>
+            </linearGradient>
+            <radialGradient id="paint1_radial_25:217" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(17.9997 182) rotate(90) scale(18)">
+              <stop offset="0.145833" stop-color="#4A6CF7" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.08"> </stop>
+            </radialGradient>
+            <radialGradient id="paint2_radial_25:217" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(76.9997 288) rotate(90) scale(34)">
+              <stop offset="0.145833" stop-color="#4A6CF7" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.08"> </stop>
+            </radialGradient>
+            <linearGradient id="paint3_linear_25:217" x1="226.775" y1="-66.1548" x2="292.157" y2="351.421"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7"> </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"> </stop>
+            </linearGradient>
+            <linearGradient id="paint4_linear_25:217" x1="184.521" y1="182.159" x2="184.521" y2="448.882"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7"> </stop>
+              <stop offset="1" stop-color="white" stop-opacity="0"> </stop>
+            </linearGradient>
+            <linearGradient id="paint5_linear_25:217" x1="356" y1="110" x2="356" y2="470"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7"> </stop>
+              <stop offset="1" stop-color="white" stop-opacity="0"> </stop>
+            </linearGradient>
+            <linearGradient id="paint6_linear_25:217" x1="118.524" y1="29.2497" x2="166.965" y2="338.63"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7"> </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"> </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="absolute bottom-0 left-0 z-[-1] opacity-30 lg:opacity-80">
+        <svg width="364" height="201" viewBox="0 0 364 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.88928 72.3303C33.6599 66.4798 101.397 64.9086 150.178 105.427C211.155 156.076 229.59 162.093 264.333 166.607C299.076 171.12 337.718 183.657 362.889 212.24"
+            stroke="url(#paint0_linear_25:218)">
+          </path>
+          <path
+            d="M-22.1107 72.3303C5.65989 66.4798 73.3965 64.9086 122.178 105.427C183.155 156.076 201.59 162.093 236.333 166.607C271.076 171.12 309.718 183.657 334.889 212.24"
+            stroke="url(#paint1_linear_25:218)">
+          </path>
+          <path
+            d="M-53.1107 72.3303C-25.3401 66.4798 42.3965 64.9086 91.1783 105.427C152.155 156.076 170.59 162.093 205.333 166.607C240.076 171.12 278.718 183.657 303.889 212.24"
+            stroke="url(#paint2_linear_25:218)">
+          </path>
+          <path
+            d="M-98.1618 65.0889C-68.1416 60.0601 4.73364 60.4882 56.0734 102.431C120.248 154.86 139.905 161.419 177.137 166.956C214.37 172.493 255.575 186.165 281.856 215.481"
+            stroke="url(#paint3_linear_25:218)">
+          </path>
+          <circle opacity="0.8" cx="214.505" cy="60.5054" r="49.7205" transform="rotate(-13.421 214.505 60.5054)"
+            stroke="url(#paint4_linear_25:218)" class="dc-animate-movebounce">
+          </circle>
+          <circle cx="220" cy="63" r="43" fill="url(#paint5_radial_25:218)" class="dc-animate-movebounce"></circle>
+          <defs>
+            <linearGradient id="paint0_linear_25:218" x1="184.389" y1="69.2405" x2="184.389" y2="212.24"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="#4A6CF7"> </stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_25:218" x1="156.389" y1="69.2405" x2="156.389" y2="212.24"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="#4A6CF7"> </stop>
+            </linearGradient>
+            <linearGradient id="paint2_linear_25:218" x1="125.389" y1="69.2405" x2="125.389" y2="212.24"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="#4A6CF7"> </stop>
+            </linearGradient>
+            <linearGradient id="paint3_linear_25:218" x1="93.8507" y1="67.2674" x2="89.9278" y2="210.214"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="#4A6CF7"> </stop>
+            </linearGradient>
+            <linearGradient id="paint4_linear_25:218" x1="214.505" y1="10.2849" x2="212.684" y2="99.5816"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7"> </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"> </stop>
+            </linearGradient>
+            <radialGradient id="paint5_radial_25:218" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+              gradientTransform="translate(220 63) rotate(90) scale(43)">
+              <stop offset="0.145833" stop-color="white" stop-opacity="0"> </stop>
+              <stop offset="1" stop-color="white" stop-opacity="0.08"> </stop>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+    <!-- Hero Area End -->
+
+    <!-- 操作区 Start -->
+    <section class="banner-area relative z-10">
+      <div class="mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-0 flex gap-5 overflow-hidden">
+        <!-- AI Tools -->
+        <div
+          class="relative w-full p-5 lg:flex-1 rounded-4xl bg-[#181d2c] animate__animated animate__fadeInUp animate__delay-0_5s">
+          <form class="dc-form mx-auto max-h-[inherit] w-full overflow-y-auto p-4 md:p-5 text-white rounded-3xl">
+            <div class="mb-4">
+              <h2 class="text-f-text-secondary text-xl">Text to Video</h2>
+            </div>
+
+            <div class="dc-form-item-control-input-content">
+              <div class="p-4 bg-white/4 border border-white/10 rounded-lg">
+                <div class="h-30">
+
+                </div>
+
+                <div class="flex justify-between gap-2 pb-1.5 pt-1">
+                  <div class="text-xs text-gray-400">Generate with AI</div>
+                  <div class="pt-1 text-xs">0 / 1500</div>
+                </div>
+              </div>
+
+              <div class="mt-2 flex justify-between gap-2 text-xs text-gray-400">
+                <div class="flex flex-wrap gap-x-3 gap-y-1">
+                  <span>Ideas: </span>
+                  <span class="hover:text-f-primary cursor-pointer">Dawn Jogger</span>
+                  <span class="hover:text-f-primary cursor-pointer">The Lone Commuter</span>
+                  <span class="hover:text-f-primary cursor-pointer">Snow Drifter</span>
+                  <span class="hover:text-f-primary cursor-pointer">Mountain Dog</span>
+                </div>
+                <span class="i-cus--pol-change hover:text-f-primary size-4 min-w-4 cursor-pointer">
+                </span>
+              </div>
+            </div>
+
+            <div class="dc-form-item mt-5 mb-2">
+              <div class="dc-row dc-form-item-row">
+                <div class="mb-2">
+                  <label for="aspectRatio">
+                    <div class="flex flex-col">
+                      <div class="inline-flex items-center text-sm leading-5">
+                        Aspect Ratio</div>
+                      <span class="text-xs">Choose the appropriate aspect ratio.</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="dc-form-item-control">
+                  <div class="dc-form-item-control-input">
+                    <div class="dc-form-item-control-input-content">
+                      <div class="scrollbar flex gap-5 overflow-y-auto">
+                        <div class=" overflow-hidden flex flex-1 flex-col items-center justify-center gap-5 text-sm
+                            bg-white/14 border border-white/30 rounded-lg cursor-pointer">
+                          <div class="flex items-center justify-center">
+                            <img src="./assets/img/ai/01.png"
+                              class="aspect-16/9 object-cover wow animate__animated animate__fadeInUp"
+                              data-wow-delay=".1s" alt="overview-image">
+                          </div>
+                        </div>
+                        <div
+                          class="overflow-hidden flex flex-1 flex-col items-center justify-center gap-5 text-sm bg-white/14 border border-white/30 rounded-lg cursor-pointer">
+                          <div class="flex items-center justify-center h-[32px]">
+                            <img src="./assets/img/ai/02.png"
+                              class="object-cover wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
+                              alt="overview-image">
+                          </div>
+                        </div>
+                        <div
+                          class="overflow-hidden flex flex-1 flex-col items-center justify-center gap-5 text-sm bg-white/14 border border-white/30 rounded-lg cursor-pointer">
+                          <div class="flex items-center justify-center h-[32px]">
+                            <img src="./assets/img/ai/03.png"
+                              class="object-cover wow animate__animated animate__fadeInUp" data-wow-delay=".1s"
+                              alt="overview-image">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 text-right">
+              <button
+                class="inline-block rounded-full bg-black px-8 py-3.5 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5 dc-bg-blue cursor-pointer">Generater</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- 操作区 End -->
+
+    <!-- 作品展示 -->
+    <section id="features" class="relative py-16 md:py-20 lg:py-28">
+      <div class="container">
+        <!-- Section Title -->
+        <div class="w-full md:max-w-[600px] mx-auto text-center mb-20">
+          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">High
+            Quality Outputs</h2>
+          <p class="text-base !leading-relaxed text-body-color md:text-lg">Tutn your idaas bo shunring wbsuats with palo
+            Al, socldl medla and eutn pralessional usns.</p>
+        </div>
+
+        <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+          <!-- Col 1 -->
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
+                src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_274716753155888/-6528481295767128728/output.mp4?x-kcdn-pid=112452">
+              </video>
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 1" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300" srcset="./assets/img/ai/02.png"
+                src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm57ib3oe04z6mu3q9go59ra4/poster/1735973776844-906ce4c0-5705-4014-a42c-8c7a6b49880c.jpg">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 2" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/0a671ed68635ae96d3f568dad80661c8.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F2.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 3" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/2e438c84b41131f23f6acf6a29724387.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F3.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+
+          <!-- Col 2 -->
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 4" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300" srcset="./assets/img/ai/01.png"
+                src="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/c8f8ea24662c3a7955f860e1dfe23927.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
+                src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/ac711670-7167-44dc-b759-1414d70672df--3xtjicGMyyo8-HhREr90A-output.mp4?x-kcdn-pid=112452">
+              </video>
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 6" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://raphael.app/_next/image?url=%2Fexample-images%2F6.webp&amp;w=828&amp;q=75 1x, https://raphael.app/_next/image?url=%2Fexample-images%2F6.webp&amp;w=1920&amp;q=75 2x"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F6.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 7" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/4e21fcc7229d264eccacc4c0975621c1.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F7.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+
+          <!-- Col 3 -->
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 8" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/16fd4a0b49724ce9369f2d4322b92f26.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_771%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F8.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 8" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300" srcset="./assets/img/ai/03.png"
+                src="hhttps://p2-kling.klingai.com/bs2/upload-ylab-stunt/17192ac92c0df84c82b4971baa66ffed.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 9" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/87e7d71c3efc1495d4f2d0ab77bf80e3.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F9.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 11" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/03323bbd404e3f91c1e955fb8a87e318.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1050%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F11.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+
+          <!-- Col 4 -->
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 12" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/se/ai_portal_queue_mmu_image_upscale_aiweb/d373e916-2f64-452f-a41d-bb0bd90c81ad_raw_image_0.jpg?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_800%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F12.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
+                src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452">
+              </video>
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
+                src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/adf04aab-c2c1-43e3-b97a-dd9853e5be6e-x9i_AGJa3YZWOTkCGlBFbw-output.mp4?x-kcdn-pid=112452">
+              </video>
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 4" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300" srcset="./assets/img/ai/01.png"
+                src="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/c8f8ea24662c3a7955f860e1dfe23927.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 13" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/cf9718712c9182a55b1505fe11a5f8d6.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F13.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <img alt="Example 14" loading="lazy" width="800" height="1000" decoding="async" data-nimg="1"
+                class="w-full h-auto hover:scale-105 transition-transform duration-300"
+                srcset="https://p2-kling.klingai.com/bs2/upload-ylab-stunt/19d1b981ad39822310a06c0820584ab5.png?x-kcdn-pid=112452&x-oss-process=image%2Fresize%2Cw_600%2Ch_1067%2Cm_mfit"
+                src="https://raphael.app/_next/image?url=%2Fexample-images%2F14.webp&amp;w=1920&amp;q=75">
+            </div>
+          </div>
+          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
+            <div class="relative overflow-hidden rounded-lg">
+              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
+                src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 功能介绍 一 -->
+    <section class="relative py-16 md:py-20 lg:py-28">
+      <div class="container relative">
+        <div class="flex flex-wrap items-center">
+          <!-- Left Text -->
+          <div class="w-full px-4 lg:w-1/2 wow animate__animated animate__fadeInLeft">
+            <div class="text-center lg:text-right aspect-[4/3]">
+              <video controls class="object-cover w-full h-full rounded-3xl shadow-lg"
+                src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+              </video>
+            </div>
+          </div>
+
+          <!-- Right Content -->
+          <div class="w-full px-4 pl-30 max-sm:pl-0 max-sm:pt-10 lg:w-1/2 wow animate__animated animate__fadeInRight">
+            <h2
+              class="text-black dark:text-white font-bold text-3xl sm:text-4xl md:text-[45px] lg:text-4xl xl:text-[45px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-tight mb-6">
+              Text to Video
+            </h2>
+            <div class="max-w-[470px]">
+              <div class="mb-9">
+                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Video
+                  free</h3>
+                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Lorem
+                  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua.</p>
+              </div>
+              <div class="mb-9">
+                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Premier
+                  support</h3>
+                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Lorem
+                  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+              </div>
+              <div class="mb-1">
+                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Video
+                </h3>
+                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Lorem
+                  ipsum dolor sit amet, sed do eiusmod tempor incididunt consectetur adipiscing elit setim.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 装饰 -->
+      <div class="absolute bottom-0 right-0 z-[-1]">
+        <svg width="179" height="158" viewBox="0 0 179 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path opacity="0.5"
+            d="M75.0002 63.256C115.229 82.3657 136.011 137.496 141.374 162.673C150.063 203.47 207.217 197.755 202.419 167.738C195.393 123.781 137.273 90.3579 75.0002 63.256Z"
+            fill="url(#paint0_linear_70:153)">
+          </path>
+          <path opacity="0.3"
+            d="M178.255 0.150879C129.388 56.5969 134.648 155.224 143.387 197.482C157.547 265.958 65.9705 295.709 53.1024 246.401C34.2588 174.197 100.939 83.7223 178.255 0.150879Z"
+            fill="url(#paint1_linear_70:153)">
+          </path>
+          <defs>
+            <linearGradient id="paint0_linear_70:153" x1="69.6694" y1="29.9033" x2="196.108" y2="83.2919"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_70:153" x1="165.348" y1="-75.4466" x2="-3.75136" y2="103.645"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 功能介绍 二 -->
+    <section id="about" class="relative pt-[120px]">
+      <div class="container relative">
+        <div class="pb-[100px] border-b border-white/10">
+          <div class="flex flex-wrap items-center mx-[-16px]">
+            <!-- Left Content -->
+            <div class="w-full lg:w-1/2 px-4 wow animate__animated animate__fadeInLeft">
+              <div class="mb-12 lg:mb-0 max-w-[570px]" data-wow-delay=".15s"
+                style="visibility: visible; animation-delay: 0.15s;">
+                <h2
+                  class="text-black dark:text-white font-bold text-3xl sm:text-4xl md:text-[45px] lg:text-4xl xl:text-[45px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-tight mb-6">
+                  Image to Video
+                </h2>
+                <p class="font-medium text-body-color text-base sm:text-lg leading-relaxed sm:leading-relaxed mb-11">
+                  Experimenting with different possibilities using our highly customizable text to video AI generator.
+                  We support various styles from realistic videos to anime, and allow you to specify the aspect ratio,
+                  video length, and even the camera movement.
+                </p>
+                <div class="flex flex-wrap mx-[-12px]">
+                  <div class="w-full sm:w-1/2 lg:w-full xl:w-1/2 px-3">
+                    <p class="flex items-center text-body-color text-lg font-medium mb-5">
+                      <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
+                        <svg width="16" height="13" viewBox="0 0 16 13" class="fill-current">
+                          <path
+                            d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z">
+                          </path>
+                        </svg>
+                      </span>
+                      Premium quality
+                    </p>
+                    <p class="flex items-center text-body-color text-lg font-medium mb-5">
+                      <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
+                        <svg width="16" height="13" viewBox="0 0 16 13" class="fill-current">
+                          <path
+                            d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z">
+                          </path>
+                        </svg>
+                      </span>
+                      No code required
+                    </p>
+                    <p class="flex items-center text-body-color text-lg font-medium mb-5">
+                      <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
+                        <svg width="16" height="13" viewBox="0 0 16 13" class="fill-current">
+                          <path
+                            d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z">
+                          </path>
+                        </svg>
+                      </span>
+                      Use for lifetime
+                    </p>
+                  </div>
+                  <div class="w-full sm:w-1/2 lg:w-full xl:w-1/2 px-3">
+                    <p class="flex items-center text-body-color text-lg font-medium mb-5">
+                      <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
+                        <svg width="16" height="13" viewBox="0 0 16 13" class="fill-current">
+                          <path
+                            d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z">
+                          </path>
+                        </svg>
+                      </span>
+                      Regular updates
+                    </p>
+                    <p class="flex items-center text-body-color text-lg font-medium mb-5">
+                      <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
+                        <svg width="16" height="13" viewBox="0 0 16 13" class="fill-current">
+                          <path
+                            d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z">
+                          </path>
+                        </svg>
+                      </span>
+                      Rich documentation
+                    </p>
+                    <p class="flex items-center text-body-color text-lg font-medium mb-5">
+                      <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
+                        <svg width="16" height="13" viewBox="0 0 16 13" class="fill-current">
+                          <path
+                            d="M5.8535 12.6631C5.65824 12.8584 5.34166 12.8584 5.1464 12.6631L0.678505 8.1952C0.483242 7.99994 0.483242 7.68336 0.678505 7.4881L2.32921 5.83739C2.52467 5.64193 2.84166 5.64216 3.03684 5.83791L5.14622 7.95354C5.34147 8.14936 5.65859 8.14952 5.85403 7.95388L13.3797 0.420561C13.575 0.22513 13.8917 0.225051 14.087 0.420383L15.7381 2.07143C15.9333 2.26669 15.9333 2.58327 15.7381 2.77854L5.8535 12.6631Z">
+                          </path>
+                        </svg>
+                      </span>
+                      Developer friendly
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="w-full lg:w-1/2 px-4 wow animate__animated animate__fadeInRight">
+              <div class="text-center lg:text-right aspect-[4/3]">
+                <video controls class="object-cover w-full h-full rounded-3xl shadow-lg"
+                  src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 装饰 -->
+      <div class="absolute bottom-0 left-0 z-[-1]">
+        <svg width="179" height="158" viewBox="0 0 179 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path opacity="0.5"
+            d="M75.0002 63.256C115.229 82.3657 136.011 137.496 141.374 162.673C150.063 203.47 207.217 197.755 202.419 167.738C195.393 123.781 137.273 90.3579 75.0002 63.256Z"
+            fill="url(#paint0_linear_70:153)">
+          </path>
+          <path opacity="0.3"
+            d="M178.255 0.150879C129.388 56.5969 134.648 155.224 143.387 197.482C157.547 265.958 65.9705 295.709 53.1024 246.401C34.2588 174.197 100.939 83.7223 178.255 0.150879Z"
+            fill="url(#paint1_linear_70:153)">
+          </path>
+          <defs>
+            <linearGradient id="paint0_linear_70:153" x1="69.6694" y1="29.9033" x2="196.108" y2="83.2919"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_70:153" x1="165.348" y1="-75.4466" x2="-3.75136" y2="103.645"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="relative py-16 md:py-20 lg:py-28">
+      <div class="container relative">
+        <div class="w-full max-w-[570px] mb-[100px] mx-auto text-center">
+          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">Main
+            Features</h2>
+          <p class="text-base !leading-relaxed text-body-color md:text-lg">There are many variations of passages of
+            Lorem Ipsum available but the majority have suffered alteration in some form.</p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          <div class="w-full">
+            <div class="wow fadeInUp" data-wow-delay=".15s">
+              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
+                <svg width="40" height="41" viewBox="0 0 40 41" class="fill-current">
+                  <path opacity="0.5"
+                    d="M37.7778 40.2223H24C22.8954 40.2223 22 39.3268 22 38.2223V20.0001C22 18.8955 22.8954 18.0001 24 18.0001H37.7778C38.8823 18.0001 39.7778 18.8955 39.7778 20.0001V38.2223C39.7778 39.3268 38.8823 40.2223 37.7778 40.2223Z">
+                  </path>
+                  <path
+                    d="M23.2222 0C22.6699 0 22.2222 0.447715 22.2222 1V12.3333C22.2222 12.8856 22.6699 13.3333 23.2222 13.3333H39C39.5523 13.3333 40 12.8856 40 12.3333V0.999999C40 0.447714 39.5523 0 39 0H23.2222ZM0 39C0 39.5523 0.447715 40 1 40H16.7778C17.3301 40 17.7778 39.5523 17.7778 39V27.6667C17.7778 27.1144 17.3301 26.6667 16.7778 26.6667H1C0.447716 26.6667 0 27.1144 0 27.6667V39ZM0 21.2222C0 21.7745 0.447715 22.2222 1 22.2222H16.7778C17.3301 22.2222 17.7778 21.7745 17.7778 21.2222V0.999999C17.7778 0.447714 17.3301 0 16.7778 0H1C0.447716 0 0 0.447715 0 1V21.2222Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Crafted
+                for Startups</h3>
+              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Tuae nam ex similique incidunt
+                expedita exerci tationem laudantium. Repellendus quisquam numquam perferendis earum sapiente non
+                tempore? Fugit repellat ut maiores.</p>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="wow fadeInUp" data-wow-delay=".15s">
+              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="fill-current">
+                  <path opacity="0.5"
+                    d="M20.5914 34.2584C20.2394 34.5172 19.7603 34.5175 19.408 34.2593L4.19163 23.1079C3.8395 22.8498 3.36065 22.85 3.00873 23.1084L1.09802 24.5111C0.553731 24.9107 0.553731 25.7237 1.09802 26.1233L19.4082 39.5655C19.7604 39.824 20.2396 39.824 20.5918 39.5655L38.9029 26.1226C39.4469 25.7232 39.4473 24.9107 38.9036 24.5109L36.9701 23.0889C36.6177 22.8298 36.1378 22.8297 35.7854 23.0888L20.5914 34.2584Z">
+                  </path>
+                  <path
+                    d="M19.408 28.931C19.7603 29.1896 20.2396 29.1894 20.5918 28.9306L36.3556 17.3466L38.8979 15.4883C39.4437 15.0894 39.4446 14.275 38.8996 13.8749L20.5918 0.43445C20.2396 0.175911 19.7604 0.175913 19.4082 0.434452L1.09706 13.8774C0.553051 14.2767 0.552712 15.0892 1.09638 15.4891L3.62222 17.3466L19.408 28.931Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
+                High-quality Design</h3>
+              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Tuae nam ex similique incidunt
+                expedita exerci tationem laudantium. Repellendus quisquam numquam perferendis earum sapiente non
+                tempore? Fugit repellat ut maiores.</p>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="wow fadeInUp" data-wow-delay=".15s">
+              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="fill-current">
+                  <path opacity="0.5"
+                    d="M20 30C22.75 30 25 32.25 25 35C25 37.75 22.75 40 20 40C17.25 40 15 37.75 15 35C15 32.25 17.25 30 20 30ZM35 30C37.75 30 40 32.25 40 35C40 37.75 37.75 40 35 40C32.25 40 30 37.75 30 35C30 32.25 32.25 30 35 30ZM35 15C37.75 15 40 17.25 40 20C40 22.75 37.75 25 35 25C32.25 25 30 22.75 30 20C30 17.25 32.25 15 35 15Z">
+                  </path>
+                  <path
+                    d="M20 15C22.75 15 25 17.25 25 20C25 22.75 22.75 25 20 25C17.25 25 15 22.75 15 20C15 17.25 17.25 15 20 15ZM20 0C22.75 0 25 2.25 25 5C25 7.75 22.75 10 20 10C17.25 10 15 7.75 15 5C15 2.25 17.25 0 20 0ZM5 30C7.75 30 10 32.25 10 35C10 37.75 7.75 40 5 40C2.25 40 0 37.75 0 35C0 32.25 2.25 30 5 30ZM5 15C7.75 15 10 17.25 10 20C10 22.75 7.75 25 5 25C2.25 25 0 22.75 0 20C0 17.25 2.25 15 5 15ZM5 0C7.75 0 10 2.25 10 5C10 7.75 7.75 10 5 10C2.25 10 0 7.75 0 5C0 2.25 2.25 0 5 0ZM35 0C37.75 0 40 2.25 40 5C40 7.75 37.75 10 35 10C32.25 10 30 7.75 30 5C30 2.25 32.25 0 35 0Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Next.js
+                13 (Latest)</h3>
+              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Tuae nam ex similique incidunt
+                expedita exerci tationem laudantium. Repellendus quisquam numquam perferendis earum sapiente non
+                tempore? Fugit repellat ut maiores.</p>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="wow fadeInUp" data-wow-delay=".15s">
+              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
+                <svg width="40" height="42" viewBox="0 0 40 42" class="fill-current">
+                  <path opacity="0.5"
+                    d="M31.8943 25.3303C34.1233 25.3303 36.1497 26.1409 37.5682 27.762L39.1464 26.1839C39.4614 25.8689 39.9999 26.092 39.9999 26.5374V32.936C39.9999 33.2121 39.7761 33.436 39.4999 33.436H33.1014C32.6559 33.436 32.4328 32.8974 32.7478 32.5825L35.5418 29.7885C34.5286 28.9779 33.3128 28.37 31.8943 28.37C29.0573 28.37 26.8282 30.599 26.8282 33.436C26.8282 36.273 29.0573 38.5021 31.8943 38.5021C33.3549 38.5021 34.6511 37.844 35.6345 36.8244C35.8406 36.6107 36.1187 36.4756 36.4155 36.4756H38.6535C39.0072 36.4756 39.2477 36.833 39.0881 37.1487C37.7427 39.8107 35.0781 41.5417 31.8943 41.5417C27.4361 41.5417 23.7886 37.8941 23.7886 33.436C23.7886 28.9779 27.4361 25.3303 31.8943 25.3303Z">
+                  </path>
+                  <path
+                    d="M18.7226 33.436C18.7226 31.3572 19.2513 29.4548 19.9799 27.7285C20.0541 27.5529 19.9264 27.3567 19.7358 27.3567C15.8856 27.3567 12.6433 24.1144 12.6433 20.2642C12.6433 16.414 15.8856 13.1717 19.7358 13.1717C23.586 13.1717 26.8283 16.414 26.8283 20.2642C26.8283 20.5105 27.3897 21.0054 27.6246 20.9313C28.9274 20.5206 30.2827 20.2642 31.8943 20.2642C32.775 20.2642 33.6557 20.4173 34.5364 20.5905C34.7422 20.6309 34.9339 20.4739 34.9339 20.2642C34.9339 19.8699 34.9339 19.3904 34.8787 18.9362C34.827 18.5117 34.9599 18.0636 35.3001 17.8045L38.9868 14.9955C39.3921 14.5902 39.3921 14.1849 39.1894 13.7797L35.1857 6.77316C35.153 6.71599 35.1272 6.65499 35.1021 6.59411C34.9143 6.13895 34.5848 6.08618 34.1135 6.08007C33.9863 6.07841 33.86 6.10354 33.7419 6.15079L29.3957 7.88927C29.0613 8.02302 28.6829 7.96367 28.3887 7.75599C27.6155 7.21023 26.7521 6.75466 25.8752 6.31262C25.5838 6.16573 25.3813 5.88702 25.3335 5.56423L24.6729 1.10574C24.6265 0.792572 24.6613 0.389935 24.3993 0.212245C24.2235 0.0930361 23.9828 0 23.7886 0H15.6829C15.3021 0 14.7424 0.35783 14.6762 0.73726C14.6678 0.785579 14.6661 0.834927 14.6589 0.883445L13.9492 5.67408C13.894 6.04692 13.6313 6.35205 13.2873 6.50604C12.4439 6.88359 11.673 7.42345 10.8193 7.89265C10.5647 8.03264 10.26 8.04143 9.99178 7.92966L5.73545 6.15619C5.61358 6.10541 5.48273 6.07832 5.35072 6.08016C4.8506 6.08715 4.49147 6.1485 4.13234 6.68719L0.0794975 13.7797C-0.123145 14.1849 0.0794976 14.5902 0.484782 14.9955L4.34631 17.9376C4.59456 18.1268 4.74261 18.4216 4.7079 18.7317C4.65068 19.243 4.53762 19.8101 4.53762 20.2642C4.53762 20.6648 4.53762 21.1534 4.59561 21.614C4.64767 22.0276 4.52563 22.4644 4.20164 22.7267L0.484782 25.7355C0.0794976 26.1408 0.0794978 26.5461 0.28214 26.9514L4.33498 34.0439C4.5154 34.4047 4.85644 34.4443 5.35811 34.4486C5.48532 34.4497 5.61152 34.4249 5.72964 34.3776L10.0758 32.6392C10.4102 32.5054 10.7887 32.5648 11.0829 32.7724C11.8561 33.3182 12.7195 33.7738 13.5964 34.2158C13.8878 34.3627 14.0903 34.6414 14.1381 34.9642L14.8616 39.8476C14.8688 39.8961 14.871 39.9453 14.8768 39.994C14.9222 40.3734 15.3145 40.7311 15.8856 40.7311H19.13C19.9191 40.7311 20.4065 39.8523 20.0627 39.1421C19.1998 37.3593 18.7226 35.4573 18.7226 33.436Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Tailwind
+                CSS</h3>
+              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Tuae nam ex similique incidunt
+                expedita exerci tationem laudantium. Repellendus quisquam numquam perferendis earum sapiente non
+                tempore? Fugit repellat ut maiores.</p>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="wow fadeInUp" data-wow-delay=".15s">
+              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
+                <svg width="40" height="40" viewBox="0 0 40 40" class="fill-current">
+                  <path opacity="0.5"
+                    d="M39 12C39.5523 12 40 12.4477 40 13V39C40 39.5523 39.5523 40 39 40H13C12.4477 40 12 39.5523 12 39V33C12 32.4477 12.4477 32 13 32H31C31.5523 32 32 31.5523 32 31V13C32 12.4477 32.4477 12 33 12H39Z">
+                  </path>
+                  <rect width="28" height="28" rx="1">
+
+                  </rect>
+                </svg>
+              </div>
+              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Fully
+                Customizable</h3>
+              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Tuae nam ex similique incidunt
+                expedita exerci tationem laudantium. Repellendus quisquam numquam perferendis earum sapiente non
+                tempore? Fugit repellat ut maiores.</p>
+            </div>
+          </div>
+          <div class="w-full">
+            <div class="wow fadeInUp" data-wow-delay=".15s">
+              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
+                <svg width="40" height="45" viewBox="0 0 40 45" class="fill-current">
+                  <path opacity="0.5"
+                    d="M31.579 37.8948C28.6737 37.8948 26.3158 35.5369 26.3158 32.6317C26.3158 31.9159 26.4527 31.2306 26.7135 30.6015C26.7959 30.4027 26.7605 30.1711 26.6083 30.019L24.9997 28.4103C24.7766 28.1872 24.4043 28.2238 24.2487 28.4983C23.5588 29.7145 23.1579 31.125 23.1579 32.6317C23.1579 37.2843 26.9263 41.0527 31.579 41.0527V43.0035C31.579 43.449 32.1175 43.6721 32.4325 43.3571L35.9622 39.8273C36.1575 39.6321 36.1575 39.3155 35.9622 39.1202L32.4325 35.5905C32.1175 35.2755 31.579 35.4986 31.579 35.9441V37.8948ZM31.579 24.2106V22.2598C31.579 21.8144 31.0404 21.5913 30.7254 21.9063L27.1957 25.436C27.0004 25.6313 27.0004 25.9479 27.1957 26.1431L30.7254 29.6729C31.0404 29.9879 31.579 29.7648 31.579 29.3193V27.3685C34.4842 27.3685 36.8421 29.7264 36.8421 32.6317C36.8421 33.3474 36.7052 34.0328 36.4444 34.6618C36.362 34.8606 36.3974 35.0922 36.5496 35.2444L38.1582 36.853C38.3813 37.0762 38.7536 37.0396 38.9092 36.7651C39.5991 35.5488 40 34.1384 40 32.6317C40 27.9791 36.2316 24.2106 31.579 24.2106Z">
+                  </path>
+                  <path
+                    d="M18.9474 32.6316C18.9474 35.4705 19.8099 38.0969 21.2941 40.2796C21.7904 41.0094 21.3054 42.1053 20.4229 42.1053H4.21053C1.87368 42.1053 0 40.2316 0 37.8947V4.21053C0 1.89474 1.87368 0 4.21053 0H6.31579H16.8421H29.4737C31.7895 0 33.6842 1.87368 33.6842 4.21053V17.9544C33.6842 18.5032 33.1804 18.9474 32.6316 18.9474C25.0737 18.9474 18.9474 25.0737 18.9474 32.6316Z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Free and
+                Open-Source</h3>
+              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Tuae nam ex similique incidunt
+                expedita exerci tationem laudantium. Repellendus quisquam numquam perferendis earum sapiente non
+                tempore? Fugit repellat ut maiores.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 装饰 -->
+      <div class="absolute right-0 top-5 z-[-1]">
+        <svg width="238" height="531" viewBox="0 0 238 531" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.3" x="422.819" y="-70.8145" width="196" height="541.607" rx="2"
+            transform="rotate(51.2997 422.819 -70.8145)" fill="url(#paint0_linear_83:2)">
+          </rect>
+          <rect opacity="0.3" x="426.568" y="144.886" width="59.7544" height="541.607" rx="2"
+            transform="rotate(51.2997 426.568 144.886)" fill="url(#paint1_linear_83:2)">
+          </rect>
+          <defs>
+            <linearGradient id="paint0_linear_83:2" x1="517.152" y1="-251.373" x2="517.152" y2="459.865"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_83:2" x1="455.327" y1="-35.673" x2="455.327" y2="675.565"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Steps -->
+    <section id="step" class="bg-f-other-5 px-4 py-12 lg:py-[160px]">
+      <div class="mx-auto container relative">
+        <div class="w-full max-w-[570px] mb-[100px] mx-auto text-center">
+          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">How
+            to Use the AI Video Generator</h2>
+          <p class="text-f-text-secondary mt-3 text-sm md:text-lg">Our AI video generator from text is designed to be
+            straightforward and allows anyone to create videos with just a few steps.</p>
+        </div>
+
+        <div class="mt-6 lg:mt-10 flex flex-col-reverse items-center gap-6 md:flex-row md:gap-14">
+          <div class="w-full md:w-[50%] aspect-[6/4]">
+            <video controls class="object-cover w-full h-full rounded-3xl shadow-lg"
+              src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+            </video>
+          </div>
+
+          <div class="w-full md:w-[50%] flex flex-col gap-4 md:gap-10">
+            <div class="bg-gray-500/10 border-f-border-secondary flex-1 rounded-xl border p-4 text-start md:p-6">
+              <p class="font-semibold text-sm lg:text-xl">Step 1</p>
+              <p class="text-f-text-secondary mt-2 text-sm lg:text-base">Type your text prompt and configure the
+                customization options.</p>
+            </div>
+            <div class="bg-gray-500/10 border-f-border-secondary flex-1 rounded-xl border p-4 text-start md:p-6">
+              <p class="font-semibold text-sm lg:text-xl">Step 2</p>
+              <p class="text-f-text-secondary mt-2 text-sm lg:text-base">Start our text to video generator.</p>
+            </div>
+            <div class="bg-gray-500/10 border-f-border-secondary flex-1 rounded-xl border p-4 text-start md:p-6">
+              <p class="font-semibold text-sm lg:text-xl">Step 3</p>
+              <p class="text-f-text-secondary mt-2 text-sm lg:text-base">View and share the generated video.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ Start ===== -->
+    <section id="FAQ" class="overflow-hidden pb-20 lg:pb-25 xl:pb-30">
+      <div class="container mx-auto relative">
+        <!-- 装饰 -->
+        <div>
+          <span class="absolute left-2 top-7">
+            <svg width="57" height="65" viewBox="0 0 57 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.5" d="M0.407629 15.9573L39.1541 64.0714L56.4489 0.160793L0.407629 15.9573Z"
+                fill="url(#paint0_linear_1028_600)">
+              </path>
+              <defs>
+                <linearGradient id="paint0_linear_1028_600" x1="-18.3187" y1="55.1044" x2="37.161" y2="15.3509"
+                  gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" stop-opacity="0.62">
+
+                  </stop>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                  </stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="absolute bottom-24 left-1.5">
+            <svg width="39" height="32" viewBox="0 0 39 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.5" d="M14.7137 31.4215L38.6431 4.24115L6.96581e-07 0.624124L14.7137 31.4215Z"
+                fill="url(#paint0_linear_1028_601)">
+              </path>
+              <defs>
+                <linearGradient id="paint0_linear_1028_601" x1="39.1948" y1="38.335" x2="10.6982" y2="10.2511"
+                  gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" stop-opacity="0.62">
+
+                  </stop>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                  </stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <span class="absolute right-2 top-[140px]">
+            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.5"
+                d="M10.6763 35.3091C23.3976 41.6367 38.1681 31.7045 37.107 17.536C36.1205 4.3628 21.9407 -3.46901 10.2651 2.71063C-2.92254 9.69061 -2.68321 28.664 10.6763 35.3091Z"
+                fill="url(#paint0_linear_1028_602)">
+              </path>
+              <defs>
+                <linearGradient id="paint0_linear_1028_602" x1="-0.571054" y1="-37.1717" x2="28.7937" y2="26.7564"
+                  gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" stop-opacity="0.62">
+
+                  </stop>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                  </stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Section Title Start -->
+        <div class=" wow animate__animated animate__fadeInUp mx-auto text-center"
+          x-data="{ sm: `OUR FAQS`, sectionSubtitle: `Frequently Asked Questions`, smPara: `Our virtual try-on solution combines precision, speed, and flexibility to deliver unmatched results. See how our features can transform your platform and elevate user experiences.`}">
+          <h2 x-text="sectionSubtitle"
+            class="mx-auto mb-4 text-5xl font-bold text-black dark:text-white md:w-4/5 xl:w-1/2 xl:text-5xl">
+          </h2>
+          <p class="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]" x-text="smPara">
+
+          </p>
+        </div>
+
+        <!-- Content -->
+        <div class="mt-12.5 gap-5 lg:mt-15 lg:grid-cols-4 xl:mt-20 xl:gap-5">
+          <div class="wow animate__animated animate__fadeInRight">
+            <div class="relative rounded-lg bg-white shadow-solid-8 dark:border dark:border-[#2d2f40] dark:bg-[#1d2430]"
+              x-data="{selected:0}">
+
+              <!-- 装饰 -->
+              <span class="absolute right-0 top-0">
+                <svg width="162" height="91" viewBox="0 0 162 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g opacity="0.3">
+                    <path opacity="0.45"
+                      d="M1 89.9999C8 77.3332 27.7 50.7999 50.5 45.9999C79 39.9999 95 41.9999 106 30.4999C117 18.9999 126 -3.50014 149 -3.50014C172 -3.50014 187 4.99986 200.5 -8.50014C214 -22.0001 210.5 -46.0001 244 -37.5001C270.8 -30.7001 307.167 -45 322 -53"
+                      stroke="url(#paint0_linear_1028_603)">
+                    </path>
+                    <path opacity="0.45"
+                      d="M43 64.9999C50 52.3332 69.7 25.7999 92.5 20.9999C121 14.9999 137 16.9999 148 5.49986C159 -6.00014 168 -28.5001 191 -28.5001C214 -28.5001 229 -20.0001 242.5 -33.5001C256 -47.0001 252.5 -71.0001 286 -62.5001C312.8 -55.7001 349.167 -70 364 -78"
+                      stroke="url(#paint1_linear_1028_603)">
+                    </path>
+                    <path opacity="0.45"
+                      d="M4 73.9999C11 61.3332 30.7 34.7999 53.5 29.9999C82 23.9999 98 25.9999 109 14.4999C120 2.99986 129 -19.5001 152 -19.5001C175 -19.5001 190 -11.0001 203.5 -24.5001C217 -38.0001 213.5 -62.0001 247 -53.5001C273.8 -46.7001 310.167 -61 325 -69"
+                      stroke="url(#paint2_linear_1028_603)">
+                    </path>
+                    <path opacity="0.45"
+                      d="M41 40.9999C48 28.3332 67.7 1.79986 90.5 -3.00014C119 -9.00014 135 -7.00014 146 -18.5001C157 -30.0001 166 -52.5001 189 -52.5001C212 -52.5001 227 -44.0001 240.5 -57.5001C254 -71.0001 250.5 -95.0001 284 -86.5001C310.8 -79.7001 347.167 -94 362 -102"
+                      stroke="url(#paint3_linear_1028_603)">
+                    </path>
+                  </g>
+                  <defs>
+                    <linearGradient id="paint0_linear_1028_603" x1="291.35" y1="12.1032" x2="179.211" y2="237.617"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.328125" stop-color="#fff">
+
+                      </stop>
+                      <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                      </stop>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_1028_603" x1="333.35" y1="-12.8968" x2="221.211" y2="212.617"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.328125" stop-color="#fff">
+
+                      </stop>
+                      <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                      </stop>
+                    </linearGradient>
+                    <linearGradient id="paint2_linear_1028_603" x1="294.35" y1="-3.89678" x2="182.211" y2="221.617"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.328125" stop-color="#fff">
+
+                      </stop>
+                      <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                      </stop>
+                    </linearGradient>
+                    <linearGradient id="paint3_linear_1028_603" x1="331.35" y1="-36.8968" x2="219.211" y2="188.617"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.328125" stop-color="#fff">
+
+                      </stop>
+                      <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                      </stop>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+
+              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
+                <h4
+                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
+                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  Lorem ipsum dolor sit amet, consectetur.
+                </h4>
+                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
+                  We provide digital experience services to startups and small businesses. We help our clients succeed
+                  by creating brand identities, digital experiences.
+                </p>
+              </div>
+
+              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
+                <h4
+                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
+                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  Lorem ipsum dolor sit amet, consectetur.
+                </h4>
+                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
+                  We provide digital experience services to startups and small businesses. We help our clients succeed
+                  by creating brand identities, digital experiences.
+                </p>
+              </div>
+
+              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
+                <h4
+                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
+                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  Lorem ipsum dolor sit amet, consectetur.
+                </h4>
+                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
+                  We provide digital experience services to startups and small businesses. We help our clients succeed
+                  by creating brand identities, digital experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- ===== FAQ End ===== -->
+
+    <!-- 评论 -->
+    <section class="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
+      <div class="container">
+        <!-- Section Title -->
+        <div class="w-full mx-auto text-center" style="max-width:570px;margin-bottom:100px">
+          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">What
+            Our Users Says</h2>
+          <p class="text-base !leading-relaxed text-body-color md:text-lg">There are many variations of passages of
+            Lorem Ipsum available but the majority have suffered alteration in some form.</p>
+        </div>
+
+        <!-- Slider main container -->
+        <div class="swiper clients-carousel swiper-initialized swiper-horizontal swiper-backface-hidden">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper items-center select-none !ease-linear">
+            <!-- Slides -->
+            <div class="swiper-slide !w-auto">
+              <div class="w-full">
+                <div
+                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
+                  <div class="mb-5 flex items-center space-x-1">
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </div>
+                  <p
+                    class="mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
+                    “Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're
+                    building a community.”</p>
+                  <div class="flex items-center">
+                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
+                      <img alt="Lethium Frenci" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                        srcset="./assets/img/user/user1.jpg" src="./assets/img/user/user1.jpg">
+                    </div>
+                    <div class="w-full">
+                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Sarah
+                        Schneider</h3>
+                      <p class="text-sm text-body-color">CEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slides -->
+            <div class="swiper-slide !w-auto">
+              <div class="w-full">
+                <div
+                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
+                  <div class="mb-5 flex items-center space-x-1">
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </div>
+                  <p
+                    class="mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
+                    “Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're
+                    building a community.”</p>
+                  <div class="flex items-center">
+                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
+                      <img alt="Lethium Frenci" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                        srcset="./assets/img/user/user2.jpg" src="./assets/img/user/user2.jpg">
+                    </div>
+                    <div class="w-full">
+                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Craig
+                        Adkins</h3>
+                      <p class="text-sm text-body-color">CEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slides -->
+            <div class="swiper-slide !w-auto">
+              <div class="w-full">
+                <div
+                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
+                  <div class="mb-5 flex items-center space-x-1">
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </div>
+                  <p
+                    class="mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
+                    “Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're
+                    building a community.”</p>
+                  <div class="flex items-center">
+                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
+                      <img alt="Lethium Frenci" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                        srcset="./assets/img/user/user3.jpg" src="./assets/img/user/user3.jpg">
+                    </div>
+                    <div class="w-full">
+                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Mae Vega
+                      </h3>
+                      <p class="text-sm text-body-color">CEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slides -->
+            <div class="swiper-slide !w-auto">
+              <div class="w-full">
+                <div
+                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
+                  <div class="mb-5 flex items-center space-x-1">
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </div>
+                  <p
+                    class="mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
+                    “Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're
+                    building a community.”</p>
+                  <div class="flex items-center">
+                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
+                      <img alt="Lethium Frenci" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                        srcset="./assets/img/user/user4.jpg" src="./assets/img/user/user4.jpg">
+                    </div>
+                    <div class="w-full">
+                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Thomas
+                        Parsons</h3>
+                      <p class="text-sm text-body-color">CEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slides -->
+            <div class="swiper-slide !w-auto">
+              <div class="w-full">
+                <div
+                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
+                  <div class="mb-5 flex items-center space-x-1">
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </div>
+                  <p
+                    class="mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
+                    “Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're
+                    building a community.”</p>
+                  <div class="flex items-center">
+                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
+                      <img alt="Lethium Frenci" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                        srcset="./assets/img/user/user5.jpg" src="./assets/img/user/user5.jpg">
+                    </div>
+                    <div class="w-full">
+                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Addie
+                        Ferguson</h3>
+                      <p class="text-sm text-body-color">CEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slides -->
+            <div class="swiper-slide !w-auto">
+              <div class="w-full">
+                <div
+                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
+                  <div class="mb-5 flex items-center space-x-1">
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                    <span class="text-yellow">
+                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
+                        <path
+                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
+                        </path>
+                      </svg>
+                    </span>
+                  </div>
+                  <p
+                    class="mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
+                    “Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're
+                    building a community.”</p>
+                  <div class="flex items-center">
+                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
+                      <img alt="Lethium Frenci" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
+                        srcset="./assets/img/user/user6.jpg" src="./assets/img/user/user6.jpg">
+                    </div>
+                    <div class="w-full">
+                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Jean
+                        Gordon</h3>
+                      <p class="text-sm text-body-color">CEO</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 装饰 -->
+      <div class="absolute right-0 top-5 z-[-1]">
+        <svg width="238" height="531" viewBox="0 0 238 531" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect opacity="0.3" x="422.819" y="-70.8145" width="196" height="541.607" rx="2"
+            transform="rotate(51.2997 422.819 -70.8145)" fill="url(#paint0_linear_83:2)">
+          </rect>
+          <rect opacity="0.3" x="426.568" y="144.886" width="59.7544" height="541.607" rx="2"
+            transform="rotate(51.2997 426.568 144.886)" fill="url(#paint1_linear_83:2)">
+          </rect>
+          <defs>
+            <linearGradient id="paint0_linear_83:2" x1="517.152" y1="-251.373" x2="517.152" y2="459.865"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_83:2" x1="455.327" y1="-35.673" x2="455.327" y2="675.565"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <!-- 装饰 -->
+      <div class="absolute bottom-5 left-0 z-[-1]">
+        <svg width="279" height="106" viewBox="0 0 279 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity="0.5">
+            <path
+              d="M-57 12L50.0728 74.8548C55.5501 79.0219 70.8513 85.7589 88.2373 79.3692C109.97 71.3821 116.861 60.9642 156.615 63.7423C178.778 65.291 195.31 69.2985 205.911 62.3533C216.513 55.408 224.994 47.7682 243.016 49.1572C255.835 50.1453 265.278 50.8936 278 45.3373"
+              stroke="url(#paint0_linear_72:302)">
+            </path>
+            <path
+              d="M-57 1L50.0728 63.8548C55.5501 68.0219 70.8513 74.7589 88.2373 68.3692C109.97 60.3821 116.861 49.9642 156.615 52.7423C178.778 54.291 195.31 58.2985 205.911 51.3533C216.513 44.408 224.994 36.7682 243.016 38.1572C255.835 39.1453 265.278 39.8936 278 34.3373"
+              stroke="url(#paint1_linear_72:302)">
+            </path>
+            <path
+              d="M-57 23L50.0728 85.8548C55.5501 90.0219 70.8513 96.7589 88.2373 90.3692C109.97 82.3821 116.861 71.9642 156.615 74.7423C178.778 76.291 195.31 80.2985 205.911 73.3533C216.513 66.408 224.994 58.7682 243.016 60.1572C255.835 61.1453 265.278 61.8936 278 56.3373"
+              stroke="url(#paint2_linear_72:302)">
+            </path>
+            <path
+              d="M-57 35L50.0728 97.8548C55.5501 102.022 70.8513 108.759 88.2373 102.369C109.97 94.3821 116.861 83.9642 156.615 86.7423C178.778 88.291 195.31 92.2985 205.911 85.3533C216.513 78.408 224.994 70.7682 243.016 72.1572C255.835 73.1453 265.278 73.8936 278 68.3373"
+              stroke="url(#paint3_linear_72:302)">
+            </path>
+          </g>
+          <defs>
+            <linearGradient id="paint0_linear_72:302" x1="256.267" y1="53.6717" x2="-40.8688" y2="8.15715"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint1_linear_72:302" x1="256.267" y1="42.6717" x2="-40.8688" y2="-2.84285"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint2_linear_72:302" x1="256.267" y1="64.6717" x2="-40.8688" y2="19.1572"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7">
+
+              </stop>
+            </linearGradient>
+            <linearGradient id="paint3_linear_72:302" x1="256.267" y1="76.6717" x2="-40.8688" y2="31.1572"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4A6CF7" stop-opacity="0">
+
+              </stop>
+              <stop offset="1" stop-color="#4A6CF7">
+
+              </stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== CTA Start ===== -->
+    <section class="pb-20 lg:pb-25 xl:pb-30">
+      <div class="container">
+        <div class="overflow-hidden relative z-1 rounded-xl bg-gradient-to-t from-[#F8F9FF]
+        to-[#DEE7FF] py-22.5 dark:bg-[#1d2430] dark:bg-gradient-to-t dark:from-transparent dark:to-transparent
+        dark:stroke-[#2d2f40] xl:py-27.5">
+
+          <!-- Blur Background -->
+          <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden opacity-20">
+            <span class="absolute left-0 right-0 top-0 -z-1">
+              <img src="./assets/img/other/blur-19.svg" alt="blur" class="w-full">
+            </span>
+            <span class="absolute left-0 right-0 top-0 -z-1">
+              <img src="./assets/img/other/blur-20.svg" alt="blur" class="w-full">
+            </span>
+            <span class="absolute left-0 right-0 top-0 -z-1">
+              <img src="./assets/img/other/blur-21.svg" alt="blur" class="w-full">
+            </span>
+          </div>
+
+          <!-- 装饰 -->
+          <div>
+            <span class="absolute left-2 top-7">
+              <svg width="57" height="65" viewBox="0 0 57 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M0.407629 15.9573L39.1541 64.0714L56.4489 0.160793L0.407629 15.9573Z"
+                  fill="url(#paint0_linear_1028_600)">
+                </path>
+                <defs>
+                  <linearGradient id="paint0_linear_1028_600" x1="-18.3187" y1="55.1044" x2="37.161" y2="15.3509"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" stop-opacity="0.62">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="absolute bottom-24 left-1.5">
+              <svg width="39" height="32" viewBox="0 0 39 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5" d="M14.7137 31.4215L38.6431 4.24115L6.96581e-07 0.624124L14.7137 31.4215Z"
+                  fill="url(#paint0_linear_1028_601)">
+                </path>
+                <defs>
+                  <linearGradient id="paint0_linear_1028_601" x1="39.1948" y1="38.335" x2="10.6982" y2="10.2511"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" stop-opacity="0.62">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="absolute right-2 top-[140px]">
+              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.5"
+                  d="M10.6763 35.3091C23.3976 41.6367 38.1681 31.7045 37.107 17.536C36.1205 4.3628 21.9407 -3.46901 10.2651 2.71063C-2.92254 9.69061 -2.68321 28.664 10.6763 35.3091Z"
+                  fill="url(#paint0_linear_1028_602)">
+                </path>
+                <defs>
+                  <linearGradient id="paint0_linear_1028_602" x1="-0.571054" y1="-37.1717" x2="28.7937" y2="26.7564"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" stop-opacity="0.62">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="absolute right-0 top-0">
+              <svg width="162" height="91" viewBox="0 0 162 91" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g opacity="0.3">
+                  <path opacity="0.45"
+                    d="M1 89.9999C8 77.3332 27.7 50.7999 50.5 45.9999C79 39.9999 95 41.9999 106 30.4999C117 18.9999 126 -3.50014 149 -3.50014C172 -3.50014 187 4.99986 200.5 -8.50014C214 -22.0001 210.5 -46.0001 244 -37.5001C270.8 -30.7001 307.167 -45 322 -53"
+                    stroke="url(#paint0_linear_1028_603)">
+                  </path>
+                  <path opacity="0.45"
+                    d="M43 64.9999C50 52.3332 69.7 25.7999 92.5 20.9999C121 14.9999 137 16.9999 148 5.49986C159 -6.00014 168 -28.5001 191 -28.5001C214 -28.5001 229 -20.0001 242.5 -33.5001C256 -47.0001 252.5 -71.0001 286 -62.5001C312.8 -55.7001 349.167 -70 364 -78"
+                    stroke="url(#paint1_linear_1028_603)">
+                  </path>
+                  <path opacity="0.45"
+                    d="M4 73.9999C11 61.3332 30.7 34.7999 53.5 29.9999C82 23.9999 98 25.9999 109 14.4999C120 2.99986 129 -19.5001 152 -19.5001C175 -19.5001 190 -11.0001 203.5 -24.5001C217 -38.0001 213.5 -62.0001 247 -53.5001C273.8 -46.7001 310.167 -61 325 -69"
+                    stroke="url(#paint2_linear_1028_603)">
+                  </path>
+                  <path opacity="0.45"
+                    d="M41 40.9999C48 28.3332 67.7 1.79986 90.5 -3.00014C119 -9.00014 135 -7.00014 146 -18.5001C157 -30.0001 166 -52.5001 189 -52.5001C212 -52.5001 227 -44.0001 240.5 -57.5001C254 -71.0001 250.5 -95.0001 284 -86.5001C310.8 -79.7001 347.167 -94 362 -102"
+                    stroke="url(#paint3_linear_1028_603)">
+                  </path>
+                </g>
+                <defs>
+                  <linearGradient id="paint0_linear_1028_603" x1="291.35" y1="12.1032" x2="179.211" y2="237.617"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0.328125" stop-color="#fff">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_1028_603" x1="333.35" y1="-12.8968" x2="221.211" y2="212.617"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0.328125" stop-color="#fff">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                  <linearGradient id="paint2_linear_1028_603" x1="294.35" y1="-3.89678" x2="182.211" y2="221.617"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0.328125" stop-color="#fff">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                  <linearGradient id="paint3_linear_1028_603" x1="331.35" y1="-36.8968" x2="219.211" y2="188.617"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0.328125" stop-color="#fff">
+
+                    </stop>
+                    <stop offset="1" stop-color="#fff" stop-opacity="0">
+
+                    </stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+          </div>
+
+          <!-- CTA Content -->
+          <div class="flex items-center justify-evenly max-sm:flex-col">
+            <div class="wow animate__animated animate__fadeInUp w-[50%] max-sm:w-full px-4 max-sm:px-0 text-center">
+              <h2 class="mb-8 text-5xl font-bold text-black dark:text-white xl:text-5xl">Trusted by Global
+                Companies.</h2>
+              <p class="mx-auto lg:w-11/12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In convallis
+                tortor
+                eros. Donec
+                vitae tortor lacus. Phasellus aliquam ante in maximus.</p>
+            </div>
+
+            <!-- Right -->
+            <div class="mt-10 flex items-center justify-center gap-x-6">
+              <a class="flex items-center text-center dc-button-hover-outline-white rounded-full leading-none
+          dc-bg-blue px-10 py-5 text-[13px] md:text-[16px] text-white shadow-xs cursor-pointer">
+                <div class="w-30 h-[20px] leading-[20px]">
+                  Try Now
+                </div>
+                <span
+                  class="inline-block ml-2 wow animate__animated animate__wobble animate__slow animate__infinite animated">
+                  <img src="./assets/img/other/icon-arrow-light.svg" alt="Arrow" class="hidden dark:block">
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== CTA End ===== -->
+  </main>
+
+  <!-- ===== Footer Start ===== -->
+  <footer class="relative z-10 bg-white pt-16 dark:bg-[#1c2136] md:pt-20 lg:pt-24">
+    <div class="container mx-auto">
+      <div class="flex flex-wrap">
+        <div class="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
+          <div class="mb-12 max-w-[360px] lg:mb-16">
+
+            <a class="navbar-brand shrink-0 text-5xl font-bold" href="/">
+              LOGO
+              <!-- <img src="./assets/img/other/logo-dark.svg" alt="Logo" class="hidden dark:block"> -->
+            </a>
+            <p class="mt-5 mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">Upload an image of
+              anyone and generate a stunning video that showcases a bulked-upt.</p>
+            <div class="flex items-center">
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  class="fill-current">
+                  <path
+                    d="M12.1 10.4939V7.42705C12.1 6.23984 13.085 5.27741 14.3 5.27741H16.5V2.05296L13.5135 1.84452C10.9664 1.66676 8.8 3.63781 8.8 6.13287V10.4939H5.5V13.7183H8.8V20.1667H12.1V13.7183H15.4L16.5 10.4939H12.1Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  class="fill-current">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="18" height="14" viewBox="0 0 18 14" class="fill-current">
+                  <path
+                    d="M17.5058 2.07119C17.3068 1.2488 16.7099 0.609173 15.9423 0.395963C14.5778 7.26191e-08 9.0627 0 9.0627 0C9.0627 0 3.54766 7.26191e-08 2.18311 0.395963C1.41555 0.609173 0.818561 1.2488 0.619565 2.07119C0.25 3.56366 0.25 6.60953 0.25 6.60953C0.25 6.60953 0.25 9.68585 0.619565 11.1479C0.818561 11.9703 1.41555 12.6099 2.18311 12.8231C3.54766 13.2191 9.0627 13.2191 9.0627 13.2191C9.0627 13.2191 14.5778 13.2191 15.9423 12.8231C16.7099 12.6099 17.3068 11.9703 17.5058 11.1479C17.8754 9.68585 17.8754 6.60953 17.8754 6.60953C17.8754 6.60953 17.8754 3.56366 17.5058 2.07119ZM7.30016 9.44218V3.77687L11.8771 6.60953L7.30016 9.44218Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="17" height="16" viewBox="0 0 17 16" class="fill-current">
+                  <path
+                    d="M15.2196 0H1.99991C1.37516 0 0.875366 0.497491 0.875366 1.11936V14.3029C0.875366 14.8999 1.37516 15.4222 1.99991 15.4222H15.1696C15.7943 15.4222 16.2941 14.9247 16.2941 14.3029V1.09448C16.3441 0.497491 15.8443 0 15.2196 0ZM5.44852 13.1089H3.17444V5.7709H5.44852V13.1089ZM4.29899 4.75104C3.54929 4.75104 2.97452 4.15405 2.97452 3.43269C2.97452 2.71133 3.57428 2.11434 4.29899 2.11434C5.02369 2.11434 5.62345 2.71133 5.62345 3.43269C5.62345 4.15405 5.07367 4.75104 4.29899 4.75104ZM14.07 13.1089H11.796V9.55183C11.796 8.7061 11.771 7.58674 10.5964 7.58674C9.39693 7.58674 9.222 8.53198 9.222 9.47721V13.1089H6.94792V5.7709H9.17202V6.79076H9.19701C9.52188 6.19377 10.2466 5.59678 11.3711 5.59678C13.6952 5.59678 14.12 7.08925 14.12 9.12897V13.1089H14.07Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
+          <div class="mb-12 lg:mb-16">
+            <h2 class="mb-10 text-xl font-bold text-black dark:text-white">Useful Links</h2>
+            <ul>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/blog">Api</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/">Pricing</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
+          <div class="mb-12 lg:mb-16">
+            <h2 class="mb-10 text-xl font-bold text-black dark:text-white">Terms</h2>
+            <ul>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/">TOS</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/">Privacy Policy</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/">Refund Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
+          <div class="mb-12 lg:mb-16">
+            <h2 class="mb-10 text-xl font-bold text-black dark:text-white">Support &amp; Help</h2>
+            <ul>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/contact">Open Support Ticket</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/">Terms of Use</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分割线 -->
+      <div class="h-px w-full bg-gradient-to-r from-transparent via-[#D2D8E183] to-transparent dark:via-[#959CB183]">
+      </div>
+
+      <div class="py-8 text-center">
+        <p>&copy; 2025 DCWorks. All rights reserved</p>
+      </div>
+    </div>
+
+    <div class="absolute right-0 top-14 z-[-1] opacity-20 lg:opacity-20">
+      <svg width="55" height="99" viewBox="0 0 55 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle opacity="0.8" cx="49.5" cy="49.5" r="49.5" fill="#959CB1">
+
+        </circle>
+        <mask id="mask0_94:899" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="99" height="99">
+          <circle opacity="0.8" cx="49.5" cy="49.5" r="49.5" fill="#4A6CF7">
+
+          </circle>
+        </mask>
+        <g mask="url(#mask0_94:899)">
+          <circle opacity="0.8" cx="49.5" cy="49.5" r="49.5" fill="url(#paint0_radial_94:899)">
+
+          </circle>
+          <g opacity="0.8" filter="url(#filter0_f_94:899)">
+            <circle cx="53.8676" cy="26.2061" r="20.3824" fill="white">
+
+            </circle>
+          </g>
+        </g>
+        <defs>
+          <filter id="filter0_f_94:899" x="12.4852" y="-15.1763" width="82.7646" height="82.7646"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix">
+
+            </feFlood>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape">
+
+            </feBlend>
+            <feGaussianBlur stdDeviation="10.5" result="effect1_foregroundBlur_94:899">
+
+            </feGaussianBlur>
+          </filter>
+          <radialGradient id="paint0_radial_94:899" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+            gradientTransform="translate(49.5 49.5) rotate(90) scale(53.1397)">
+            <stop stop-opacity="0.47">
+
+            </stop>
+            <stop offset="1" stop-opacity="0">
+
+            </stop>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="absolute bottom-24 left-0 z-[-1]">
+      <svg width="79" height="94" viewBox="0 0 79 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.3" x="-41" y="26.9426" width="66.6675" height="66.6675"
+          transform="rotate(-22.9007 -41 26.9426)" fill="url(#paint0_linear_94:889)">
+        </rect>
+        <rect x="-41" y="26.9426" width="66.6675" height="66.6675" transform="rotate(-22.9007 -41 26.9426)"
+          stroke="url(#paint1_linear_94:889)" stroke-width="0.7">
+        </rect>
+        <path opacity="0.3" d="M50.5215 7.42229L20.325 1.14771L46.2077 62.3249L77.1885 68.2073L50.5215 7.42229Z"
+          fill="url(#paint2_linear_94:889)">
+        </path>
+        <path d="M50.5215 7.42229L20.325 1.14771L46.2077 62.3249L76.7963 68.2073L50.5215 7.42229Z"
+          stroke="url(#paint3_linear_94:889)" stroke-width="0.7">
+        </path>
+        <path opacity="0.3" d="M17.9721 93.3057L-14.9695 88.2076L46.2077 62.325L77.1885 68.2074L17.9721 93.3057Z"
+          fill="url(#paint4_linear_94:889)">
+        </path>
+        <path d="M17.972 93.3057L-14.1852 88.2076L46.2077 62.325L77.1884 68.2074L17.972 93.3057Z"
+          stroke="url(#paint5_linear_94:889)" stroke-width="0.7">
+        </path>
+        <defs>
+          <linearGradient id="paint0_linear_94:889" x1="-41" y1="21.8445" x2="36.9671" y2="59.8878"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint1_linear_94:889" x1="25.6675" y1="95.9631" x2="-42.9608" y2="20.668"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.51">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint2_linear_94:889" x1="20.325" y1="-3.98039" x2="90.6248" y2="25.1062"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint3_linear_94:889" x1="18.3642" y1="-1.59742" x2="113.9" y2="80.6826"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.51">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint4_linear_94:889" x1="61.1098" y1="62.3249" x2="-8.82468" y2="58.2156"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint5_linear_94:889" x1="65.4236" y1="65.0701" x2="24.0178" y2="41.6598"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.51">
+
+            </stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </footer>
+  <!-- ===== Footer End ===== -->
+
+  <!-- ====== Back To Top Start ===== -->
+  <div x-data="{scrollTop: false}" class="fixed bottom-8 right-8 z-[99]"
+    @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+    @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'rb' : scrollTop }">
+    <div aria-label="scroll to top"
+      class="hover:shadow-signUp flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#252a42] text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 select-none">
+      <span class="mt-[6px] h-3 w-3 rotate-45 border-l border-t border-white">
+
+      </span>
+    </div>
+  </div>
+  <!-- ====== Back To Top End ===== -->
+
+  <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+  <div id="sign-dialog" class="zoom-anim-dialog mfp-hide rounded-xl overflow-hidden max-sm:w-[90%]"
+    x-data="{signTab: 0, signInTab: 'password'}">
+    <!-- Sign In -->
+    <div x-show="signTab === 0">
+      <h2 class="py-6 font-bold text-2xl text-center text-white bg-[#252a42]">Sign In</h2>
+      <form class="py-10 px-5 md:px-15 bg-[#181c31]">
+        <!-- Google Login -->
+        <div id="custom-google-login-btn" @click="googleLoginBtn"
+          class="w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_132_14584)">
+              <path
+                d="M22.5001 11.2438C22.5134 10.4876 22.4338 9.73256 22.2629 8.995H11.7246V13.0771H17.9105C17.7933 13.7929 17.5296 14.478 17.1352 15.0914C16.7409 15.7047 16.224 16.2335 15.6158 16.646L15.5942 16.7827L18.9264 19.3124L19.1571 19.335C21.2772 17.4161 22.4997 14.5926 22.4997 11.2438"
+                fill="#4285F4" />
+              <path
+                d="M11.7245 22C14.755 22 17.2992 21.0221 19.1577 19.3355L15.6156 16.6464C14.6679 17.2944 13.3958 17.7467 11.7245 17.7467C10.3051 17.7385 8.92433 17.2926 7.77814 16.472C6.63195 15.6515 5.77851 14.4981 5.33892 13.1755L5.20737 13.1865L1.74255 15.8142L1.69727 15.9376C2.63043 17.7602 4.06252 19.2925 5.83341 20.3631C7.60429 21.4337 9.64416 22.0005 11.7249 22"
+                fill="#34A853" />
+              <path
+                d="M5.33889 13.1755C5.09338 12.4753 4.96669 11.7404 4.96388 11C4.9684 10.2608 5.09041 9.52685 5.32552 8.8245L5.31927 8.67868L1.81196 6.00867L1.69724 6.06214C0.910039 7.5938 0.5 9.28491 0.5 10.9999C0.5 12.7148 0.910039 14.406 1.69724 15.9376L5.33889 13.1755Z"
+                fill="#FBBC05" />
+              <path
+                d="M11.7249 4.25337C13.3333 4.22889 14.8888 4.8159 16.065 5.89121L19.2329 2.86003C17.2011 0.992106 14.5106 -0.0328008 11.7249 3.27798e-05C9.64418 -0.000452376 7.60433 0.566279 5.83345 1.63686C4.06256 2.70743 2.63046 4.23965 1.69727 6.06218L5.32684 8.82455C5.77077 7.50213 6.62703 6.34962 7.77491 5.5295C8.9228 4.70938 10.3044 4.26302 11.7249 4.25337Z"
+                fill="#EB4335" />
+            </g>
+            <defs>
+              <clipPath id="clip0_132_14584">
+                <rect width="22" height="22" fill="black" transform="translate(0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Sign in with Google
+        </div>
+
+        <!-- Apple Login -->
+        <div
+          class="mt-4 w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.1223 7.66195C18.9986 7.75638 16.816 8.9673 16.816 11.6599C16.816 14.7743 19.5933 15.8761 19.6764 15.9034C19.6636 15.9706 19.2352 17.4124 18.2121 18.8814C17.2999 20.1742 16.3471 21.4649 14.8977 21.4649C13.4483 21.4649 13.0753 20.6359 11.4021 20.6359C9.77152 20.6359 9.19179 21.4922 7.86601 21.4922C6.54024 21.4922 5.61517 20.2959 4.55157 18.8269C3.31961 17.1018 2.32422 14.4218 2.32422 11.8782C2.32422 7.79838 5.01839 5.63461 7.6699 5.63461C9.0788 5.63461 10.2533 6.54545 11.1378 6.54545C11.9797 6.54545 13.2927 5.58006 14.8956 5.58006C15.503 5.58006 17.6856 5.63461 19.1223 7.66195ZM14.1346 3.85285C14.7975 3.07844 15.2664 2.00392 15.2664 0.929401C15.2664 0.780396 15.2536 0.629294 15.2259 0.507568C14.1474 0.547443 12.8643 1.21482 12.0906 2.09836C11.4831 2.77833 10.9161 3.85285 10.9161 4.94206C10.9161 5.10579 10.9438 5.26945 10.9566 5.3219C11.0248 5.33452 11.1357 5.3492 11.2465 5.3492C12.2142 5.3492 13.4313 4.7112 14.1346 3.85285Z"
+              fill="black" />
+          </svg>
+          Sign in with Apple
+        </div>
+
+        <!-- Divider -->
+        <span class="relative block font-medium text-sm text-center my-7.5">
+          <span class="block absolute left-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+          <span class="block absolute right-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+
+          Or sign in with email
+        </span>
+
+        <!-- signInTab -->
+        <div id="Tab_Title" class="flex items-center justify-center gap-5 px-4 pb-8">
+          <button @click.prevent="signInTab = 'password'" id="Tab_Title_1"
+            :class="{'text-white border-b border-gary-500': signInTab === 'password'}">
+            Password
+          </button>
+          <button @click.prevent="signInTab = 'captcha'" id="Tab_Title_2"
+            :class="{'text-white border-b border-gary-500': signInTab === 'captcha'}">
+            Captcha
+          </button>
+        </div>
+
+        <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
+          <!-- 错误信息将显示在这里 -->
+        </div>
+
+        <!-- Tab Content -->
+        <div class="Tab-Content">
+          <!-- Email Tab -->
+          <div x-show="signInTab === 'password'">
+            <div class="mb-4 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                    fill="#918EA0" />
+                </svg>
+              </span>
+              <input type="email" placeholder="Enter your email" id="tab_1_email" value="aaa@aaa.com"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div class="mb-5 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_368_6544)">
+                    <path
+                      d="M14.0752 1.92501C13.1252 0.975012 11.8502 0.450012 10.5002 0.450012C9.1502 0.450012 7.8502 0.975012 6.9002 1.92501C5.6252 3.20001 5.1252 5.00001 5.5752 6.75001L0.725195 11.575C0.550195 11.75 0.450195 12 0.450195 12.275V14.6C0.450195 15.125 0.875195 15.575 1.4252 15.575H3.7502C4.0002 15.575 4.2502 15.475 4.4502 15.3L5.0252 14.725C5.2252 14.525 5.3502 14.225 5.3002 13.925V13.875L5.6002 13.85C6.0752 13.8 6.4252 13.45 6.4752 12.975L6.5002 12.675H6.5502C6.8252 12.7 7.1002 12.625 7.3252 12.425C7.5252 12.25 7.6502 11.975 7.6502 11.7V11.5H7.8252C8.0752 11.5 8.3252 11.4 8.5002 11.225L9.3252 10.425C11.0502 10.85 12.8502 10.375 14.1002 9.12501C16.0502 7.12501 16.0502 3.90001 14.0752 1.92501ZM13.2752 8.30001C12.2502 9.32501 10.7252 9.70001 9.3002 9.22501C9.1002 9.15001 8.8752 9.20001 8.7252 9.35001L7.7252 10.35H7.0502C6.7502 10.35 6.4752 10.6 6.4752 10.925V11.525L6.0252 11.475C5.8752 11.45 5.7252 11.5 5.6002 11.6C5.4752 11.7 5.4002 11.825 5.4002 11.975L5.3252 12.725L4.5752 12.8C4.4252 12.825 4.2752 12.9 4.2002 13C4.1002 13.125 4.0502 13.275 4.0752 13.425L4.1502 13.975L3.6752 14.45H1.5752V12.35L6.6002 7.32501C6.7502 7.17501 6.8002 6.95001 6.7252 6.75001C6.2752 5.32501 6.6252 3.80001 7.6752 2.75001C8.4252 2.00001 9.4002 1.60001 10.4752 1.60001C11.5252 1.60001 12.5252 2.00001 13.2752 2.75001C14.8252 4.25001 14.8252 6.75001 13.2752 8.30001Z"
+                      fill="#918EA0" />
+                    <path
+                      d="M11.3498 2.875C10.8748 2.875 10.4248 3.05 10.0748 3.4C9.3748 4.1 9.3748 5.225 10.0748 5.925C10.4248 6.275 10.8748 6.45 11.3498 6.45C11.8248 6.45 12.2748 6.275 12.6248 5.925C12.9748 5.575 13.1498 5.125 13.1498 4.65C13.1498 4.175 12.9748 3.725 12.6248 3.375C12.2748 3.05 11.8248 2.875 11.3498 2.875ZM11.8248 5.125C11.5748 5.375 11.1248 5.375 10.8748 5.125C10.6248 4.875 10.6248 4.45 10.8748 4.175C10.9998 4.05 11.1748 3.975 11.3498 3.975C11.5248 3.975 11.6998 4.05 11.8248 4.175C11.9498 4.3 12.0248 4.475 12.0248 4.65C12.0248 4.825 11.9498 5 11.8248 5.125Z"
+                      fill="#918EA0" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_368_6544">
+                      <rect width="16" height="16" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </span>
+              <input type="password" placeholder="Password" id="tab_1_password" value="123123"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div id="tab_1_signInBtn" @click="tab_1_signInBtn"
+              class="dc-bg-blue flex justify-center w-full rounded-full my-10 py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+              Sign in
+            </div>
+          </div>
+
+          <!-- Captcha signInTab -->
+          <div x-show="signInTab === 'captcha'">
+            <div class="mb-4 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                    fill="#918EA0" />
+                </svg>
+              </span>
+              <input type="email" placeholder="Enter your email" id="tab_2_email" value="aaa@aaa.com"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div class="mb-5 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+              </span>
+              <input type="captcha" placeholder="Captcha" id="tab_2_captcha"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+              <div @click="sendButton"
+                class="send !absolute top-1 right-1 bottom-1 flex items-center px-5 text-white dc-bg-blue hover:bg-blue-500 rounded-full cursor-pointer select-none">
+                Send
+              </div>
+            </div>
+
+            <div id="tab_2_signInBtn" @click="tab_2_signInBtn()"
+              class="text-white dc-bg-blue flex justify-center w-full rounded-full my-10 py-3 px-7 font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+              Sign in
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p class="text-center font-medium text-gray-600 mt-5">
+            Don't have an account?
+            <a class="text-gray-400 border-b border-gary-500 cursor-pointer" @click="signTab = 1">Sign Up</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign Up -->
+    <div x-show="signTab === 1">
+      <h2 class="py-6 font-bold text-2xl text-center text-white bg-[#252a42]">Sign Up</h2>
+      <form class="py-10 px-5 md:px-15 bg-[#181c31]">
+        <!-- Google Login -->
+        <div id="custom-google-login-btn" @click="googleLoginBtn"
+          class="w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_132_14584)">
+              <path
+                d="M22.5001 11.2438C22.5134 10.4876 22.4338 9.73256 22.2629 8.995H11.7246V13.0771H17.9105C17.7933 13.7929 17.5296 14.478 17.1352 15.0914C16.7409 15.7047 16.224 16.2335 15.6158 16.646L15.5942 16.7827L18.9264 19.3124L19.1571 19.335C21.2772 17.4161 22.4997 14.5926 22.4997 11.2438"
+                fill="#4285F4" />
+              <path
+                d="M11.7245 22C14.755 22 17.2992 21.0221 19.1577 19.3355L15.6156 16.6464C14.6679 17.2944 13.3958 17.7467 11.7245 17.7467C10.3051 17.7385 8.92433 17.2926 7.77814 16.472C6.63195 15.6515 5.77851 14.4981 5.33892 13.1755L5.20737 13.1865L1.74255 15.8142L1.69727 15.9376C2.63043 17.7602 4.06252 19.2925 5.83341 20.3631C7.60429 21.4337 9.64416 22.0005 11.7249 22"
+                fill="#34A853" />
+              <path
+                d="M5.33889 13.1755C5.09338 12.4753 4.96669 11.7404 4.96388 11C4.9684 10.2608 5.09041 9.52685 5.32552 8.8245L5.31927 8.67868L1.81196 6.00867L1.69724 6.06214C0.910039 7.5938 0.5 9.28491 0.5 10.9999C0.5 12.7148 0.910039 14.406 1.69724 15.9376L5.33889 13.1755Z"
+                fill="#FBBC05" />
+              <path
+                d="M11.7249 4.25337C13.3333 4.22889 14.8888 4.8159 16.065 5.89121L19.2329 2.86003C17.2011 0.992106 14.5106 -0.0328008 11.7249 3.27798e-05C9.64418 -0.000452376 7.60433 0.566279 5.83345 1.63686C4.06256 2.70743 2.63046 4.23965 1.69727 6.06218L5.32684 8.82455C5.77077 7.50213 6.62703 6.34962 7.77491 5.5295C8.9228 4.70938 10.3044 4.26302 11.7249 4.25337Z"
+                fill="#EB4335" />
+            </g>
+            <defs>
+              <clipPath id="clip0_132_14584">
+                <rect width="22" height="22" fill="white" transform="translate(0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Sign in with Google
+        </div>
+
+        <!-- Apple Login -->
+        <div
+          class="mt-4 w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.1223 7.66195C18.9986 7.75638 16.816 8.9673 16.816 11.6599C16.816 14.7743 19.5933 15.8761 19.6764 15.9034C19.6636 15.9706 19.2352 17.4124 18.2121 18.8814C17.2999 20.1742 16.3471 21.4649 14.8977 21.4649C13.4483 21.4649 13.0753 20.6359 11.4021 20.6359C9.77152 20.6359 9.19179 21.4922 7.86601 21.4922C6.54024 21.4922 5.61517 20.2959 4.55157 18.8269C3.31961 17.1018 2.32422 14.4218 2.32422 11.8782C2.32422 7.79838 5.01839 5.63461 7.6699 5.63461C9.0788 5.63461 10.2533 6.54545 11.1378 6.54545C11.9797 6.54545 13.2927 5.58006 14.8956 5.58006C15.503 5.58006 17.6856 5.63461 19.1223 7.66195ZM14.1346 3.85285C14.7975 3.07844 15.2664 2.00392 15.2664 0.929401C15.2664 0.780396 15.2536 0.629294 15.2259 0.507568C14.1474 0.547443 12.8643 1.21482 12.0906 2.09836C11.4831 2.77833 10.9161 3.85285 10.9161 4.94206C10.9161 5.10579 10.9438 5.26945 10.9566 5.3219C11.0248 5.33452 11.1357 5.3492 11.2465 5.3492C12.2142 5.3492 13.4313 4.7112 14.1346 3.85285Z"
+              fill="white" />
+          </svg>
+          Sign in with Apple
+        </div>
+
+        <!-- Divider -->
+        <span class="relative block font-medium text-sm text-center my-7.5">
+          <span class="block absolute left-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+          <span class="block absolute right-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+
+          Or sign in with email
+        </span>
+
+        <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
+          <!-- 错误信息将显示在这里 -->
+        </div>
+
+        <!-- 邮箱 -->
+        <div class="mb-4 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                fill="#918EA0" />
+            </svg>
+          </span>
+          <input id="tab_2_email" type="email" placeholder="Enter your email" value="aaa@aaa.com"
+            class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+        </div>
+
+        <!-- 密码 -->
+        <div class="mb-5 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_368_6544)">
+                <path
+                  d="M14.0752 1.92501C13.1252 0.975012 11.8502 0.450012 10.5002 0.450012C9.1502 0.450012 7.8502 0.975012 6.9002 1.92501C5.6252 3.20001 5.1252 5.00001 5.5752 6.75001L0.725195 11.575C0.550195 11.75 0.450195 12 0.450195 12.275V14.6C0.450195 15.125 0.875195 15.575 1.4252 15.575H3.7502C4.0002 15.575 4.2502 15.475 4.4502 15.3L5.0252 14.725C5.2252 14.525 5.3502 14.225 5.3002 13.925V13.875L5.6002 13.85C6.0752 13.8 6.4252 13.45 6.4752 12.975L6.5002 12.675H6.5502C6.8252 12.7 7.1002 12.625 7.3252 12.425C7.5252 12.25 7.6502 11.975 7.6502 11.7V11.5H7.8252C8.0752 11.5 8.3252 11.4 8.5002 11.225L9.3252 10.425C11.0502 10.85 12.8502 10.375 14.1002 9.12501C16.0502 7.12501 16.0502 3.90001 14.0752 1.92501ZM13.2752 8.30001C12.2502 9.32501 10.7252 9.70001 9.3002 9.22501C9.1002 9.15001 8.8752 9.20001 8.7252 9.35001L7.7252 10.35H7.0502C6.7502 10.35 6.4752 10.6 6.4752 10.925V11.525L6.0252 11.475C5.8752 11.45 5.7252 11.5 5.6002 11.6C5.4752 11.7 5.4002 11.825 5.4002 11.975L5.3252 12.725L4.5752 12.8C4.4252 12.825 4.2752 12.9 4.2002 13C4.1002 13.125 4.0502 13.275 4.0752 13.425L4.1502 13.975L3.6752 14.45H1.5752V12.35L6.6002 7.32501C6.7502 7.17501 6.8002 6.95001 6.7252 6.75001C6.2752 5.32501 6.6252 3.80001 7.6752 2.75001C8.4252 2.00001 9.4002 1.60001 10.4752 1.60001C11.5252 1.60001 12.5252 2.00001 13.2752 2.75001C14.8252 4.25001 14.8252 6.75001 13.2752 8.30001Z"
+                  fill="#918EA0" />
+                <path
+                  d="M11.3498 2.875C10.8748 2.875 10.4248 3.05 10.0748 3.4C9.3748 4.1 9.3748 5.225 10.0748 5.925C10.4248 6.275 10.8748 6.45 11.3498 6.45C11.8248 6.45 12.2748 6.275 12.6248 5.925C12.9748 5.575 13.1498 5.125 13.1498 4.65C13.1498 4.175 12.9748 3.725 12.6248 3.375C12.2748 3.05 11.8248 2.875 11.3498 2.875ZM11.8248 5.125C11.5748 5.375 11.1248 5.375 10.8748 5.125C10.6248 4.875 10.6248 4.45 10.8748 4.175C10.9998 4.05 11.1748 3.975 11.3498 3.975C11.5248 3.975 11.6998 4.05 11.8248 4.175C11.9498 4.3 12.0248 4.475 12.0248 4.65C12.0248 4.825 11.9498 5 11.8248 5.125Z"
+                  fill="#918EA0" />
+              </g>
+              <defs>
+                <clipPath id="clip0_368_6544">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <input id="password" type="password" placeholder="Confirm password" value="123123"
+            class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+        </div>
+
+        <!-- 验证码 -->
+        <div class="mb-5 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+          </span>
+          <input type="captcha" placeholder="Captcha" id="signUp_captcha"
+            class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+          <div @click="sendButton"
+            class="send !absolute top-1 right-1 bottom-1 flex items-center px-5 text-white dc-bg-blue hover:bg-blue-500 rounded-full cursor-pointer select-none">
+            Send
+          </div>
+        </div>
+
+        <div id="tab_2_signInBtn" @click="tab_2_signInBtn()"
+          class="text-white dc-bg-blue flex justify-center w-full rounded-full my-10 py-3 px-7 font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+          Sign Up
+        </div>
+
+        <p class="text-center font-medium text-gray-600 mt-5">
+          Already have an account?
+          <a class="text-gray-400 border-b border-gary-500 cursor-pointer" @click="signTab = 0">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- All JS Links -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js">
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+
+  </script>
+  <script src="./assets/js/wow.min.js">
+
+  </script>
+  <script src="./assets/js/jquery.min.js">
+
+  </script>
+  <script src="./assets/js/magnific-popup.min.js">
+
+  </script>
+  <script src="./assets/js/main.js">
+
+  </script>
+</body>
+
+</html>

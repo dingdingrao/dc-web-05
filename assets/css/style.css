@@ -1432,3 +1432,24 @@ img[src*='icon-arrow-light.svg'] {
 .fill-current {
   fill: #4a6cf7;
 }
+
+.dc-gradient-text {
+  display: inline-block;
+  /* background: linear-gradient(98deg, #a570ff 0%, #ff6eb2 50%, #ffad66 100%); */
+  background: linear-gradient(98deg, #5274fc 0%, #ffbbdb 50%, #ffee00 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar li.on {
+  background-color: color-mix(in oklab, #5072fb 10%, transparent);
+}
+
+.navbar li.on a {
+  display: inline-block;
+  background: linear-gradient(98deg, #5274fc 0%, #ffbbdb 50%, #ffee00 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

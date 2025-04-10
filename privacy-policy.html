@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" x-data="{ page: 'home', 'loaded': true, 'darkMode': true }" x-init="
+       darkMode = JSON.parse(localStorage.getItem('darkMode'));
+       $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+  :class="{'dark': darkMode === true}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <title>AI Tools - DCWorks</title>
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+
+
+  <!-- All CSS Links -->
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/dialog.css">
+
+  <!-- Tailwind -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4">
+
+  </script>
+</head>
+
+<body class="bg-[#121723] overflow-x-hidden">
+  <!-- <body class="bg-[#080321]"> -->
+
+  <!-- Navbar Area -->
+  <header
+    x-data="{stickyMenu: false, navigationOpen: false, isLogin: false, showProfileDropdown: false, userInfo: JSON.parse(localStorage.getItem('user'))}"
+    @click.outside="showProfileDropdown = false" @scroll.window="stickyMenu = (window.scrollY > 0) ? true : false"
+    class="navbar-area fixed z-100 top-0 w-full shadow-navbar z-2 backdrop-blur-md bg-[#181c31]/50"
+    :class="{ 'is-sticky': stickyMenu }">
+    <!-- H5 -->
+    <div class="dc-responsive-nav lg:hidden">
+      <div class="container">
+        <nav class="navbar w-full h-[60px] flex justify-between items-center">
+          <div class="flex gap-3">
+            <!-- Hamburger Toggle BTN -->
+            <button class="lg:hidden block shrink-0" @click="navigationOpen = !navigationOpen">
+              <span class="block relative cursor-pointer w-5.5 h-5.5">
+                <span class="absolute right-0 w-full h-full">
+                  <span
+                    class="block relative top-0 left-0 dc-bg-blue rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-[0]"
+                    :class="{ '!w-full delay-300': !navigationOpen }">
+                  </span>
+                  <span
+                    class="block relative top-0 left-0 dc-bg-blue rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-150"
+                    :class="{ '!w-full delay-400': !navigationOpen }">
+                  </span>
+                  <span
+                    class="block relative top-0 left-0 dc-bg-blue rounded-sm w-0 h-0.5 my-1 ease-in-out duration-200 delay-200"
+                    :class="{ '!w-full delay-500': !navigationOpen }">
+                  </span>
+                </span>
+                <span class="opacity-0 absolute right-0 w-full h-full rotate-45"
+                  :class="{ '!opacity-100': navigationOpen }">
+                  <span
+                    class="block dc-bg-blue unded-sm ease-in-out duration-200 delay-300 absolute left-2.5 top-0 w-0.5 h-full"
+                    :class="{ '!h-0 delay-[0]': !navigationOpen }">
+                  </span>
+                  <span
+                    class="block dc-bg-blue rounded-sm ease-in-out duration-200 delay-400 absolute left-0 top-2.5 w-full h-0.5"
+                    :class="{ '!h-0 dealy-200': !navigationOpen }">
+                  </span>
+                </span>
+              </span>
+            </button>
+            <!-- Hamburger Toggle BTN -->
+
+            <a class="navbar-brand shrink-0 text-xl font-bold" href="./index.html">
+              <!-- LOGO -->
+              <img src="./assets/img/logo.svg" alt="Logo" class="w-25 hidden dark:block">
+            </a>
+          </div>
+
+          <div class="flex gap-10 text-white">
+            <ul x-show="navigationOpen" x-transition:enter="animate__fadeInDown" x-transition:leave="animate__fadeOut"
+              class="hidden absolute top-[60px] left-0 w-full self-center flex flex-col justify-between p-10 animate__animated animate__faster bg-[#181c31]"
+              :class="{ '!block': navigationOpen }">
+              <li class="border-b border-gray-700">
+                <a href="./index.html"
+                  class="block text-[16px] ease-in duration-300 hover:text-primary-color py-5">Image
+                  to Video</a>
+              </li>
+              <li class="border-b border-gray-700">
+                <a href="./text2video.html"
+                  class="block text-[16px] ease-in duration-300 hover:text-primary-color py-5">Text
+                  to Video</a>
+              </li>
+            </ul>
+
+            <div class="self-center flex gap-2">
+              <a x-show="!isLogin" href="#sign-dialog"
+                class="signIn inline-block text-[13px] rounded-full dc-bg-blue py-1 px-5 shadow-custom-box-shadow hover:shadow-secondary-btn ease-in duration-300">
+                Sign In
+              </a>
+
+              <!-- 语言 -->
+              <div x-data="{ isOpen: false }" @click="isOpen = !isOpen" @click.away="isOpen = false"
+                class="group/item peer relative rounded-lg border border-gray-600 bg-[#252a42]">
+
+                <div
+                  class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
+                  <div class="flex flex-1 items-center justify-between gap-3 pr-2">
+                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <p class="text-sm leading-5 text-gray-300">English</p>
+                  </div>
+                </div>
+                <div :class="{ 'z-10 translate-y-0 scale-y-100 opacity-100': isOpen }"
+                  class="bg-[#181c31] absolute top-9 start-1/2 -translate-x-3/5 xl:end-0 max-sm:start-5 xl:start-0 2xl:start-1/2 2xl:-translate-x-1/2 -z-10 flex w-full min-w-fit origin-top scale-y-0 flex-col overflow-hidden rounded-xl border border-gray-600 p-4 opacity-0 shadow-[0_20px_38px_0_rgba(0,0,0,0.48)] transition-all group-hover/item:z-10 group-hover/item:translate-y-0 group-hover/item:scale-y-100 group-hover/item:opacity-100">
+                  <ul class="grid grid-cols-[max-content_max-content] gap-x-6 gap-y-[2px]">
+                    <li>
+                      <a class="hover:text-f-primary inline-flex rounded px-2 py-1.5 bg-f-bg-hover"
+                        href="/image-to-video">English</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ja/image-to-video">日本語</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ko/image-to-video">한국어</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/tw/image-to-video">繁體中文</a>
+                    </li>
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/zh/image-to-video">简体中文</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- My Account -->
+              <div x-show="isLogin">
+                <!-- Profile dropdown -->
+                <div @click="showProfileDropdown = !showProfileDropdown" @click.away="showProfileDropdown = false"
+                  class="avatar relative flex max-w-xs items-center rounded-full bg-indigo-600 text-sm text-white ring-1 ring-white/50 hover:outline-none hover:ring-2 hover:ring-white/80 hover:ring-offset-2 hover:ring-offset-indigo-600">
+                  <span class="absolute -inset-1.5">
+
+                  </span>
+                  <img class="size-8 rounded-full object-cover" src="./assets/img/user/user3.jpg" alt="Avatar">
+                </div>
+
+                <div id="profile_dropdown" :class="{'!block': showProfileDropdown}"
+                  class="profile_dropdown hidden hover:block absolute right-0 z-10 mt-1 mr-3 w-48 origin-top-right rounded-xl bg-[#181c31] backdrop-blur-lg py-1 shadow-lg ring-1 ring-black/5 hover:outline-none item-border border border-gray-600 bg-[#181c31]">
+                  <div x-text="userInfo?.user_name || 'simmons@gmail.com'"
+                    class="block px-4 py-2 text-sm text-gray-300">
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <div class="flex items-center justify-between px-4 py-2 text-sm text-gray-300">
+                    <div class="flex items-center gap-2">
+                      <span class="inline-block w-4">
+                        <img src="./assets/img/header/gold_coins.svg" alt="">
+                      </span>
+                      <span x-text="userInfo?.credit || '0'">
+
+                      </span>
+                    </div>
+                    <a class="dc-bg-blue px-2 text-[12px] text-white rounded-full cursor-pointer">Buy</a>
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer">Credit
+                    History</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-blue-500/20 cursor-pointer">Delete
+                    Account</a>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer" @click="
+                localStorage.clear()
+                isLogin = false;
+              ">Sign out</a>
+                  <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
+                  <span class="absolute left-0 bottom-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                  <span class="absolute left-0 top-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- PC -->
+    <div class="hidden lg:block">
+      <div class="container xl:max-w-full 3xl:max-w-[1700px]">
+        <nav class="navbar flex gap-20 justify-between items-center">
+          <!-- Left -->
+          <div class="flex items-center">
+            <!-- Logo -->
+            <a class="navbar-brand shrink-0 w-[150px] mr-5 text-4xl font-bold text-white" href="./index.html">
+              <!-- LOGO -->
+              <img class="w-full" src="./assets/img/logo.svg" alt="logo">
+              <!-- <img class="w-100" src="assets/img/logo.png" alt="logo"> -->
+            </a>
+            <!-- Menu -->
+            <ul class="self-center flex text-center">
+              <li>
+                <a href="./index.html"
+                  class="block px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">Image
+                  to Video</a>
+              </li>
+              <li>
+                <a href="./text2video.html"
+                  class="block px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">Text
+                  to Video</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right -->
+          <div class="flex gap-20">
+            <div class="self-center flex items-center gap-5">
+              <!-- Sign In -->
+              <!-- <a href="#sign-dialog" class="signIn text-regular font-medium text-lg hover:text-blue-500">Sign
+              Up</a> -->
+
+              <!-- Sign In -->
+              <a x-show="!isLogin" href="#sign-dialog"
+                class="signIn flex items-center justify-center rounded-full dc-bg-blue px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out dc-button-hover-shadow dc-button-hover-outline-white"
+                href="#">Sign In</a>
+
+              <!-- 语言 -->
+              <div class="group/item peer relative rounded-lg border border-gray-600 bg-[#252a42]">
+                <div
+                  class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
+                  <div class="flex flex-1 items-center justify-between gap-3 pr-2">
+                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <p class="text-sm leading-5 text-gray-300">English</p>
+                  </div>
+                </div>
+                <div
+                  class="bg-[#181c31] absolute top-9 start-1/2 -translate-x-1/2 xl:end-0 xl:start-0 2xl:start-1/2 2xl:-translate-x-1/2 -z-10 flex w-full min-w-fit origin-top scale-y-0 flex-col overflow-hidden rounded-xl border border-gray-600 p-4 opacity-0 shadow-[0_20px_38px_0_rgba(0,0,0,0.48)] transition-all group-hover/item:z-10 group-hover/item:translate-y-0 group-hover/item:scale-y-100 group-hover/item:opacity-100">
+                  <ul class="grid grid-cols-[max-content_max-content] gap-x-6 gap-y-[2px]">
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/image-to-video">English</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ja/image-to-video">日本語</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/ko/image-to-video">한국어</a>
+                    </li>
+
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/tw/image-to-video">繁體中文</a>
+                    </li>
+                    <li>
+                      <a class="text-gray-400 hover:text-gray-300 inline-flex rounded px-2 py-1.5"
+                        href="/zh/image-to-video">简体中文</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- My Account -->
+              <div x-show="isLogin">
+                <!-- Profile dropdown -->
+                <div @click="showProfileDropdown = !showProfileDropdown" @click.away="showProfileDropdown = false"
+                  class="avatar relative flex max-w-xs items-center rounded-full bg-indigo-600 text-sm text-white ring-1 ring-white/50 hover:outline-none hover:ring-2 hover:ring-white/80 hover:ring-offset-2 hover:ring-offset-indigo-600">
+                  <span class="absolute -inset-1.5">
+
+                  </span>
+                  <img class="size-8 rounded-full object-cover" src="./assets/img/user/user3.jpg" alt="Avatar">
+                </div>
+
+                <div id="profile_dropdown" :class="{'!block': showProfileDropdown}"
+                  class="profile_dropdown hidden hover:block absolute right-0 z-10 mt-1 mr-3 w-48 origin-top-right rounded-xl bg-[#181c31] backdrop-blur-lg py-1 shadow-lg ring-1 ring-black/5 hover:outline-none item-border border border-gray-600 bg-[#181c31]">
+                  <div x-text="userInfo?.user_name || 'simmons@gmail.com'"
+                    class="block px-4 py-2 text-sm text-gray-300">
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <div class="flex items-center justify-between px-4 py-2 text-sm text-gray-300">
+                    <div class="flex items-center gap-2">
+                      <span class="inline-block w-4">
+                        <img src="./assets/img/header/gold_coins.svg" alt="">
+                      </span>
+                      <span x-text="userInfo?.credit || '0'">
+
+                      </span>
+                    </div>
+                    <a class="dc-bg-blue px-2 text-[12px] text-white rounded-full cursor-pointer">Buy</a>
+                  </div>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer">Credit
+                    History</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-blue-500/20 cursor-pointer">Delete
+                    Account</a>
+                  <div class="w-full h-[1px] m-2 gradient-divider">
+
+                  </div>
+                  <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer" @click="
+                localStorage.clear()
+                isLogin = false;
+              ">Sign out</a>
+                  <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
+                  <span class="absolute left-0 bottom-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                  <span class="absolute left-0 top-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <!-- End Navbar Area -->
+
+  <main>
+    <section class="relative py-16 md:py-20 lg:py-28">
+      <div class="container relative">
+        <div
+          class="[&_h2]:mb-3 [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-white [&_h2]:md:text-2xl  [&_h3]:my-3 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-white [&_h3]:md:text-lg  [&_h4]:my-3 [&_h4]:text-sm [&_h4]:font-semibold [&_h4]:text-white [&_h4]:md:text-base  [&_li]:mb-2 [&_li]:md:text-sm  [&_ol]:list-decimal [&_ol]:ps-5 [&_ol]:text-sm [&_ol]:text-white [&_ol]:opacity-80 [&_p]:mb-2 [&_p]:text-sm [&_p]:text-white [&_p]:opacity-80 [&_p]:md:text-sm  [&_ul]:list-disc [&_ul]:ps-5 [&_ul]:text-sm [&_ul]:text-white [&_ul]:opacity-80 ">
+          <h1 class="mt-2 text-[24px] font-bold leading-[36px] text-white sm:text-4xl sm:leading-[72px] md:mt-4">
+            Privacy Policy</h1>
+          <div class="mt-2 mb-10 h-[1px] w-full md:mb-16 bg-gray-500/50"></div>
+          <h2>Introduction</h2>
+          <p>Welcome to Vider.ai. We respect your privacy and are committed to protecting your personal data. This
+            Privacy Policy will inform you how we handle your data when you use our AI video generation services.</p>
+
+          <h2>1. Information We Collect</h2>
+          <ul>
+            <li>
+              <h4>Personal Data</h4>
+              <p>
+                We do not require users to create an account or provide personal information to use our services.
+                Therefore, we do not collect personal data such as names, email addresses, or payment information.
+              </p>
+            </li>
+            <li>
+              <h4>Uploaded Content</h4>
+              <p>
+                When you use our service, you may upload images or text to generate videos. These files are temporarily
+                stored for processing and are automatically deleted within 1 day after generation. We do not retain,
+                analyze, or use your uploaded content for any other purpose.
+              </p>
+            </li>
+            <li>
+              <h4>Usage Dat</h4>
+              <p>
+                We may collect non-personally identifiable information such as device type, browser version, and usage
+                statistics to improve our services. This data is anonymized and used solely for performance enhancement.
+              </p>
+            </li>
+          </ul>
+
+          <h2>2. How We Use Your Data</h2>
+          <p>- To generate videos from your uploaded content.</p>
+          <p>- To improve the performance and reliability of our services.</p>
+          <p>- To analyze aggregate, non-personal usage patterns for optimization.</p>
+
+          <h2>3. Data Retention</h2>
+          <p>- Generated videos and uploaded content are stored for a maximum of 1 day and are then permanently deleted.
+          </p>
+          <p>- Usage data is retained in aggregate form for performance analysis.</p>
+
+          <h2>4. Data Security</h2>
+          <p>We implement robust security measures to protect your data from unauthorized access, alteration, or
+            disclosure. However, no method of transmission over the Internet is completely secure.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer Start ===== -->
+  <footer class="relative z-10 bg-white pt-16 dark:bg-[#1c2136] md:pt-20 lg:pt-24">
+    <div class="container mx-auto">
+      <div class="flex flex-wrap">
+        <div class="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
+          <div class="mb-12 max-w-[360px] lg:mb-16">
+
+            <a class="navbar-brand shrink-0 text-5xl font-bold" href="/">
+              LOGO
+              <!-- <img src="./assets/img/other/logo-dark.svg" alt="Logo" class="hidden dark:block"> -->
+            </a>
+            <p class="mt-5 mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
+              Create stunning AI videos with Vider.ai, free, fast, and limitless.</p>
+            <!-- <div class="hidden flex items-center">
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  class="fill-current">
+                  <path
+                    d="M12.1 10.4939V7.42705C12.1 6.23984 13.085 5.27741 14.3 5.27741H16.5V2.05296L13.5135 1.84452C10.9664 1.66676 8.8 3.63781 8.8 6.13287V10.4939H5.5V13.7183H8.8V20.1667H12.1V13.7183H15.4L16.5 10.4939H12.1Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"
+                  class="fill-current">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M13.9831 19.25L9.82094 13.3176L4.61058 19.25H2.40625L8.843 11.9233L2.40625 2.75H8.06572L11.9884 8.34127L16.9034 2.75H19.1077L12.9697 9.73737L19.6425 19.25H13.9831ZM16.4378 17.5775H14.9538L5.56249 4.42252H7.04674L10.808 9.6899L11.4584 10.6039L16.4378 17.5775Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="mr-6 text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="18" height="14" viewBox="0 0 18 14" class="fill-current">
+                  <path
+                    d="M17.5058 2.07119C17.3068 1.2488 16.7099 0.609173 15.9423 0.395963C14.5778 7.26191e-08 9.0627 0 9.0627 0C9.0627 0 3.54766 7.26191e-08 2.18311 0.395963C1.41555 0.609173 0.818561 1.2488 0.619565 2.07119C0.25 3.56366 0.25 6.60953 0.25 6.60953C0.25 6.60953 0.25 9.68585 0.619565 11.1479C0.818561 11.9703 1.41555 12.6099 2.18311 12.8231C3.54766 13.2191 9.0627 13.2191 9.0627 13.2191C9.0627 13.2191 14.5778 13.2191 15.9423 12.8231C16.7099 12.6099 17.3068 11.9703 17.5058 11.1479C17.8754 9.68585 17.8754 6.60953 17.8754 6.60953C17.8754 6.60953 17.8754 3.56366 17.5058 2.07119ZM7.30016 9.44218V3.77687L11.8771 6.60953L7.30016 9.44218Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+              <a href="/" aria-label="social-link" target="_blank" rel="noopener noreferrer"
+                class="text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary">
+                <svg width="17" height="16" viewBox="0 0 17 16" class="fill-current">
+                  <path
+                    d="M15.2196 0H1.99991C1.37516 0 0.875366 0.497491 0.875366 1.11936V14.3029C0.875366 14.8999 1.37516 15.4222 1.99991 15.4222H15.1696C15.7943 15.4222 16.2941 14.9247 16.2941 14.3029V1.09448C16.3441 0.497491 15.8443 0 15.2196 0ZM5.44852 13.1089H3.17444V5.7709H5.44852V13.1089ZM4.29899 4.75104C3.54929 4.75104 2.97452 4.15405 2.97452 3.43269C2.97452 2.71133 3.57428 2.11434 4.29899 2.11434C5.02369 2.11434 5.62345 2.71133 5.62345 3.43269C5.62345 4.15405 5.07367 4.75104 4.29899 4.75104ZM14.07 13.1089H11.796V9.55183C11.796 8.7061 11.771 7.58674 10.5964 7.58674C9.39693 7.58674 9.222 8.53198 9.222 9.47721V13.1089H6.94792V5.7709H9.17202V6.79076H9.19701C9.52188 6.19377 10.2466 5.59678 11.3711 5.59678C13.6952 5.59678 14.12 7.08925 14.12 9.12897V13.1089H14.07Z"
+                    fill="currentColor">
+                  </path>
+                </svg>
+              </a>
+            </div> -->
+          </div>
+        </div>
+        <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-3/12 xl:w-3/12">
+          <div class="mb-12 lg:mb-16">
+            <h2 class="mb-10 text-xl font-bold text-black dark:text-white">AI Video Generators</h2>
+            <ul>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/index.html">Image to Video</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/text2video.html">Text to Video</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="w-full px-4 sm:w-1/2 md:w-1/2 lg:w-2/12 xl:w-2/12">
+          <div class="mb-12 lg:mb-16">
+            <h2 class="mb-10 text-xl font-bold text-black dark:text-white">
+              Terms & Policies</h2>
+            <ul>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="./privacy-policy.html">
+                  Privacy Policy</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="./terms-of-service.html">Terms of Service</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="./content-policy.html">Content Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-3/12">
+          <div class="mb-12 lg:mb-16">
+            <h2 class="mb-10 text-xl font-bold text-black dark:text-white">Support &amp; Help</h2>
+            <ul>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/contact">Open Support Ticket</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/">Terms of Use</a>
+              </li>
+              <li>
+                <a class="mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:text-body-color-dark dark:hover:text-primary"
+                  href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- 分割线 -->
+      <div class="h-px w-full bg-gradient-to-r from-transparent via-[#D2D8E183] to-transparent dark:via-[#959CB183]">
+      </div>
+
+      <div class="py-8 text-center">
+        <p>&copy; 2025 Vider.ai. All rights reserved.</p>
+      </div>
+    </div>
+
+    <div class="absolute right-0 top-14 z-[-1] opacity-20 lg:opacity-20">
+      <svg width="55" height="99" viewBox="0 0 55 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle opacity="0.8" cx="49.5" cy="49.5" r="49.5" fill="#959CB1">
+
+        </circle>
+        <mask id="mask0_94:899" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="99" height="99">
+          <circle opacity="0.8" cx="49.5" cy="49.5" r="49.5" fill="#4A6CF7">
+
+          </circle>
+        </mask>
+        <g mask="url(#mask0_94:899)">
+          <circle opacity="0.8" cx="49.5" cy="49.5" r="49.5" fill="url(#paint0_radial_94:899)">
+
+          </circle>
+          <g opacity="0.8" filter="url(#filter0_f_94:899)">
+            <circle cx="53.8676" cy="26.2061" r="20.3824" fill="white">
+
+            </circle>
+          </g>
+        </g>
+        <defs>
+          <filter id="filter0_f_94:899" x="12.4852" y="-15.1763" width="82.7646" height="82.7646"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix">
+
+            </feFlood>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape">
+
+            </feBlend>
+            <feGaussianBlur stdDeviation="10.5" result="effect1_foregroundBlur_94:899">
+
+            </feGaussianBlur>
+          </filter>
+          <radialGradient id="paint0_radial_94:899" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+            gradientTransform="translate(49.5 49.5) rotate(90) scale(53.1397)">
+            <stop stop-opacity="0.47">
+
+            </stop>
+            <stop offset="1" stop-opacity="0">
+
+            </stop>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="absolute bottom-24 left-0 z-[-1]">
+      <svg width="79" height="94" viewBox="0 0 79 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect opacity="0.3" x="-41" y="26.9426" width="66.6675" height="66.6675"
+          transform="rotate(-22.9007 -41 26.9426)" fill="url(#paint0_linear_94:889)">
+        </rect>
+        <rect x="-41" y="26.9426" width="66.6675" height="66.6675" transform="rotate(-22.9007 -41 26.9426)"
+          stroke="url(#paint1_linear_94:889)" stroke-width="0.7">
+        </rect>
+        <path opacity="0.3" d="M50.5215 7.42229L20.325 1.14771L46.2077 62.3249L77.1885 68.2073L50.5215 7.42229Z"
+          fill="url(#paint2_linear_94:889)">
+        </path>
+        <path d="M50.5215 7.42229L20.325 1.14771L46.2077 62.3249L76.7963 68.2073L50.5215 7.42229Z"
+          stroke="url(#paint3_linear_94:889)" stroke-width="0.7">
+        </path>
+        <path opacity="0.3" d="M17.9721 93.3057L-14.9695 88.2076L46.2077 62.325L77.1885 68.2074L17.9721 93.3057Z"
+          fill="url(#paint4_linear_94:889)">
+        </path>
+        <path d="M17.972 93.3057L-14.1852 88.2076L46.2077 62.325L77.1884 68.2074L17.972 93.3057Z"
+          stroke="url(#paint5_linear_94:889)" stroke-width="0.7">
+        </path>
+        <defs>
+          <linearGradient id="paint0_linear_94:889" x1="-41" y1="21.8445" x2="36.9671" y2="59.8878"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint1_linear_94:889" x1="25.6675" y1="95.9631" x2="-42.9608" y2="20.668"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.51">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint2_linear_94:889" x1="20.325" y1="-3.98039" x2="90.6248" y2="25.1062"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint3_linear_94:889" x1="18.3642" y1="-1.59742" x2="113.9" y2="80.6826"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.51">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint4_linear_94:889" x1="61.1098" y1="62.3249" x2="-8.82468" y2="58.2156"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0.62">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+          </linearGradient>
+          <linearGradient id="paint5_linear_94:889" x1="65.4236" y1="65.0701" x2="24.0178" y2="41.6598"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4A6CF7" stop-opacity="0">
+
+            </stop>
+            <stop offset="1" stop-color="#4A6CF7" stop-opacity="0.51">
+
+            </stop>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </footer>
+  <!-- ===== Footer End ===== -->
+
+  <!-- ====== Back To Top Start ===== -->
+  <div x-data="{scrollTop: false}" class="fixed bottom-8 right-8 z-[99]"
+    @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+    @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'rb' : scrollTop }">
+    <div aria-label="scroll to top"
+      class="hover:shadow-signUp flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#252a42] text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 select-none">
+      <span class="mt-[6px] h-3 w-3 rotate-45 border-l border-t border-white">
+
+      </span>
+    </div>
+  </div>
+  <!-- ====== Back To Top End ===== -->
+
+  <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+  <div id="sign-dialog" class="zoom-anim-dialog mfp-hide rounded-xl overflow-hidden max-sm:w-[90%]"
+    x-data="{signTab: 0, signInTab: 'password'}">
+    <!-- Sign In -->
+    <div x-show="signTab === 0">
+      <h2 class="py-6 font-bold text-2xl text-center text-white bg-[#252a42]">Sign In</h2>
+      <form class="py-10 px-5 md:px-15 bg-[#181c31]">
+        <!-- Google Login -->
+        <div id="custom-google-login-btn" @click="googleLoginBtn"
+          class="w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_132_14584)">
+              <path
+                d="M22.5001 11.2438C22.5134 10.4876 22.4338 9.73256 22.2629 8.995H11.7246V13.0771H17.9105C17.7933 13.7929 17.5296 14.478 17.1352 15.0914C16.7409 15.7047 16.224 16.2335 15.6158 16.646L15.5942 16.7827L18.9264 19.3124L19.1571 19.335C21.2772 17.4161 22.4997 14.5926 22.4997 11.2438"
+                fill="#4285F4" />
+              <path
+                d="M11.7245 22C14.755 22 17.2992 21.0221 19.1577 19.3355L15.6156 16.6464C14.6679 17.2944 13.3958 17.7467 11.7245 17.7467C10.3051 17.7385 8.92433 17.2926 7.77814 16.472C6.63195 15.6515 5.77851 14.4981 5.33892 13.1755L5.20737 13.1865L1.74255 15.8142L1.69727 15.9376C2.63043 17.7602 4.06252 19.2925 5.83341 20.3631C7.60429 21.4337 9.64416 22.0005 11.7249 22"
+                fill="#34A853" />
+              <path
+                d="M5.33889 13.1755C5.09338 12.4753 4.96669 11.7404 4.96388 11C4.9684 10.2608 5.09041 9.52685 5.32552 8.8245L5.31927 8.67868L1.81196 6.00867L1.69724 6.06214C0.910039 7.5938 0.5 9.28491 0.5 10.9999C0.5 12.7148 0.910039 14.406 1.69724 15.9376L5.33889 13.1755Z"
+                fill="#FBBC05" />
+              <path
+                d="M11.7249 4.25337C13.3333 4.22889 14.8888 4.8159 16.065 5.89121L19.2329 2.86003C17.2011 0.992106 14.5106 -0.0328008 11.7249 3.27798e-05C9.64418 -0.000452376 7.60433 0.566279 5.83345 1.63686C4.06256 2.70743 2.63046 4.23965 1.69727 6.06218L5.32684 8.82455C5.77077 7.50213 6.62703 6.34962 7.77491 5.5295C8.9228 4.70938 10.3044 4.26302 11.7249 4.25337Z"
+                fill="#EB4335" />
+            </g>
+            <defs>
+              <clipPath id="clip0_132_14584">
+                <rect width="22" height="22" fill="black" transform="translate(0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Sign in with Google
+        </div>
+
+        <!-- Apple Login -->
+        <div
+          class="mt-4 w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.1223 7.66195C18.9986 7.75638 16.816 8.9673 16.816 11.6599C16.816 14.7743 19.5933 15.8761 19.6764 15.9034C19.6636 15.9706 19.2352 17.4124 18.2121 18.8814C17.2999 20.1742 16.3471 21.4649 14.8977 21.4649C13.4483 21.4649 13.0753 20.6359 11.4021 20.6359C9.77152 20.6359 9.19179 21.4922 7.86601 21.4922C6.54024 21.4922 5.61517 20.2959 4.55157 18.8269C3.31961 17.1018 2.32422 14.4218 2.32422 11.8782C2.32422 7.79838 5.01839 5.63461 7.6699 5.63461C9.0788 5.63461 10.2533 6.54545 11.1378 6.54545C11.9797 6.54545 13.2927 5.58006 14.8956 5.58006C15.503 5.58006 17.6856 5.63461 19.1223 7.66195ZM14.1346 3.85285C14.7975 3.07844 15.2664 2.00392 15.2664 0.929401C15.2664 0.780396 15.2536 0.629294 15.2259 0.507568C14.1474 0.547443 12.8643 1.21482 12.0906 2.09836C11.4831 2.77833 10.9161 3.85285 10.9161 4.94206C10.9161 5.10579 10.9438 5.26945 10.9566 5.3219C11.0248 5.33452 11.1357 5.3492 11.2465 5.3492C12.2142 5.3492 13.4313 4.7112 14.1346 3.85285Z"
+              fill="black" />
+          </svg>
+          Sign in with Apple
+        </div>
+
+        <!-- Divider -->
+        <span class="relative block font-medium text-sm text-center my-7.5">
+          <span class="block absolute left-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+          <span class="block absolute right-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+
+          Or sign in with email
+        </span>
+
+        <!-- signInTab -->
+        <div id="Tab_Title" class="flex items-center justify-center gap-5 px-4 pb-8">
+          <button @click.prevent="signInTab = 'password'" id="Tab_Title_1"
+            :class="{'text-white border-b border-gary-500': signInTab === 'password'}">
+            Password
+          </button>
+          <button @click.prevent="signInTab = 'captcha'" id="Tab_Title_2"
+            :class="{'text-white border-b border-gary-500': signInTab === 'captcha'}">
+            Captcha
+          </button>
+        </div>
+
+        <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
+          <!-- 错误信息将显示在这里 -->
+        </div>
+
+        <!-- Tab Content -->
+        <div class="Tab-Content">
+          <!-- Email Tab -->
+          <div x-show="signInTab === 'password'">
+            <div class="mb-4 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                    fill="#918EA0" />
+                </svg>
+              </span>
+              <input type="email" placeholder="Enter your email" id="tab_1_email" value="aaa@aaa.com"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div class="mb-5 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_368_6544)">
+                    <path
+                      d="M14.0752 1.92501C13.1252 0.975012 11.8502 0.450012 10.5002 0.450012C9.1502 0.450012 7.8502 0.975012 6.9002 1.92501C5.6252 3.20001 5.1252 5.00001 5.5752 6.75001L0.725195 11.575C0.550195 11.75 0.450195 12 0.450195 12.275V14.6C0.450195 15.125 0.875195 15.575 1.4252 15.575H3.7502C4.0002 15.575 4.2502 15.475 4.4502 15.3L5.0252 14.725C5.2252 14.525 5.3502 14.225 5.3002 13.925V13.875L5.6002 13.85C6.0752 13.8 6.4252 13.45 6.4752 12.975L6.5002 12.675H6.5502C6.8252 12.7 7.1002 12.625 7.3252 12.425C7.5252 12.25 7.6502 11.975 7.6502 11.7V11.5H7.8252C8.0752 11.5 8.3252 11.4 8.5002 11.225L9.3252 10.425C11.0502 10.85 12.8502 10.375 14.1002 9.12501C16.0502 7.12501 16.0502 3.90001 14.0752 1.92501ZM13.2752 8.30001C12.2502 9.32501 10.7252 9.70001 9.3002 9.22501C9.1002 9.15001 8.8752 9.20001 8.7252 9.35001L7.7252 10.35H7.0502C6.7502 10.35 6.4752 10.6 6.4752 10.925V11.525L6.0252 11.475C5.8752 11.45 5.7252 11.5 5.6002 11.6C5.4752 11.7 5.4002 11.825 5.4002 11.975L5.3252 12.725L4.5752 12.8C4.4252 12.825 4.2752 12.9 4.2002 13C4.1002 13.125 4.0502 13.275 4.0752 13.425L4.1502 13.975L3.6752 14.45H1.5752V12.35L6.6002 7.32501C6.7502 7.17501 6.8002 6.95001 6.7252 6.75001C6.2752 5.32501 6.6252 3.80001 7.6752 2.75001C8.4252 2.00001 9.4002 1.60001 10.4752 1.60001C11.5252 1.60001 12.5252 2.00001 13.2752 2.75001C14.8252 4.25001 14.8252 6.75001 13.2752 8.30001Z"
+                      fill="#918EA0" />
+                    <path
+                      d="M11.3498 2.875C10.8748 2.875 10.4248 3.05 10.0748 3.4C9.3748 4.1 9.3748 5.225 10.0748 5.925C10.4248 6.275 10.8748 6.45 11.3498 6.45C11.8248 6.45 12.2748 6.275 12.6248 5.925C12.9748 5.575 13.1498 5.125 13.1498 4.65C13.1498 4.175 12.9748 3.725 12.6248 3.375C12.2748 3.05 11.8248 2.875 11.3498 2.875ZM11.8248 5.125C11.5748 5.375 11.1248 5.375 10.8748 5.125C10.6248 4.875 10.6248 4.45 10.8748 4.175C10.9998 4.05 11.1748 3.975 11.3498 3.975C11.5248 3.975 11.6998 4.05 11.8248 4.175C11.9498 4.3 12.0248 4.475 12.0248 4.65C12.0248 4.825 11.9498 5 11.8248 5.125Z"
+                      fill="#918EA0" />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_368_6544">
+                      <rect width="16" height="16" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </span>
+              <input type="password" placeholder="Password" id="tab_1_password" value="123123"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div id="tab_1_signInBtn" @click="tab_1_signInBtn"
+              class="dc-bg-blue flex justify-center w-full rounded-full my-10 py-3 px-7 text-white font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+              Sign in
+            </div>
+          </div>
+
+          <!-- Captcha signInTab -->
+          <div x-show="signInTab === 'captcha'">
+            <div class="mb-4 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                    fill="#918EA0" />
+                </svg>
+              </span>
+              <input type="email" placeholder="Enter your email" id="signIn_tab_2_email" value="aaa@aaa.com"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+            </div>
+
+            <div class="mb-5 relative">
+              <span class="absolute top-1/2 -translate-y-1/2 left-6">
+                <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+              </span>
+              <input type="captcha" placeholder="Captcha" id="tab_2_captcha"
+                class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+              <div @click="sendButton"
+                class="send !absolute top-1 right-1 bottom-1 flex items-center px-5 text-white dc-bg-blue hover:bg-blue-500 rounded-full cursor-pointer select-none">
+                Send
+              </div>
+            </div>
+
+            <div id="tab_2_signInBtn" @click="tab_2_signInBtn()"
+              class="text-white dc-bg-blue flex justify-center w-full rounded-full my-10 py-3 px-7 font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+              Sign in
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p class="text-center font-medium text-gray-600 mt-5">
+            Don't have an account?
+            <a class="text-gray-400 border-b border-gary-500 cursor-pointer" @click="signTab = 1">Sign Up</a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Sign Up -->
+    <div x-show="signTab === 1">
+      <h2 class="py-6 font-bold text-2xl text-center text-white bg-[#252a42]">Sign Up</h2>
+      <form class="py-10 px-5 md:px-15 bg-[#181c31]">
+        <!-- Google Login -->
+        <div id="custom-google-login-btn" @click="googleLoginBtn"
+          class="w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_132_14584)">
+              <path
+                d="M22.5001 11.2438C22.5134 10.4876 22.4338 9.73256 22.2629 8.995H11.7246V13.0771H17.9105C17.7933 13.7929 17.5296 14.478 17.1352 15.0914C16.7409 15.7047 16.224 16.2335 15.6158 16.646L15.5942 16.7827L18.9264 19.3124L19.1571 19.335C21.2772 17.4161 22.4997 14.5926 22.4997 11.2438"
+                fill="#4285F4" />
+              <path
+                d="M11.7245 22C14.755 22 17.2992 21.0221 19.1577 19.3355L15.6156 16.6464C14.6679 17.2944 13.3958 17.7467 11.7245 17.7467C10.3051 17.7385 8.92433 17.2926 7.77814 16.472C6.63195 15.6515 5.77851 14.4981 5.33892 13.1755L5.20737 13.1865L1.74255 15.8142L1.69727 15.9376C2.63043 17.7602 4.06252 19.2925 5.83341 20.3631C7.60429 21.4337 9.64416 22.0005 11.7249 22"
+                fill="#34A853" />
+              <path
+                d="M5.33889 13.1755C5.09338 12.4753 4.96669 11.7404 4.96388 11C4.9684 10.2608 5.09041 9.52685 5.32552 8.8245L5.31927 8.67868L1.81196 6.00867L1.69724 6.06214C0.910039 7.5938 0.5 9.28491 0.5 10.9999C0.5 12.7148 0.910039 14.406 1.69724 15.9376L5.33889 13.1755Z"
+                fill="#FBBC05" />
+              <path
+                d="M11.7249 4.25337C13.3333 4.22889 14.8888 4.8159 16.065 5.89121L19.2329 2.86003C17.2011 0.992106 14.5106 -0.0328008 11.7249 3.27798e-05C9.64418 -0.000452376 7.60433 0.566279 5.83345 1.63686C4.06256 2.70743 2.63046 4.23965 1.69727 6.06218L5.32684 8.82455C5.77077 7.50213 6.62703 6.34962 7.77491 5.5295C8.9228 4.70938 10.3044 4.26302 11.7249 4.25337Z"
+                fill="#EB4335" />
+            </g>
+            <defs>
+              <clipPath id="clip0_132_14584">
+                <rect width="22" height="22" fill="white" transform="translate(0.5)" />
+              </clipPath>
+            </defs>
+          </svg>
+          Sign in with Google
+        </div>
+
+        <!-- Apple Login -->
+        <div
+          class="mt-4 w-full flex items-center justify-center gap-3 p-3.5 font-medium text-white rounded-full border border-white/[0.12] ease-in duration-300 hover:border-white cursor-pointer">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M19.1223 7.66195C18.9986 7.75638 16.816 8.9673 16.816 11.6599C16.816 14.7743 19.5933 15.8761 19.6764 15.9034C19.6636 15.9706 19.2352 17.4124 18.2121 18.8814C17.2999 20.1742 16.3471 21.4649 14.8977 21.4649C13.4483 21.4649 13.0753 20.6359 11.4021 20.6359C9.77152 20.6359 9.19179 21.4922 7.86601 21.4922C6.54024 21.4922 5.61517 20.2959 4.55157 18.8269C3.31961 17.1018 2.32422 14.4218 2.32422 11.8782C2.32422 7.79838 5.01839 5.63461 7.6699 5.63461C9.0788 5.63461 10.2533 6.54545 11.1378 6.54545C11.9797 6.54545 13.2927 5.58006 14.8956 5.58006C15.503 5.58006 17.6856 5.63461 19.1223 7.66195ZM14.1346 3.85285C14.7975 3.07844 15.2664 2.00392 15.2664 0.929401C15.2664 0.780396 15.2536 0.629294 15.2259 0.507568C14.1474 0.547443 12.8643 1.21482 12.0906 2.09836C11.4831 2.77833 10.9161 3.85285 10.9161 4.94206C10.9161 5.10579 10.9438 5.26945 10.9566 5.3219C11.0248 5.33452 11.1357 5.3492 11.2465 5.3492C12.2142 5.3492 13.4313 4.7112 14.1346 3.85285Z"
+              fill="white" />
+          </svg>
+          Sign in with Apple
+        </div>
+
+        <!-- Divider -->
+        <span class="relative block font-medium text-sm text-center my-7.5">
+          <span class="block absolute left-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+          <span class="block absolute right-0 top-1/2 h-[1px] w-22.5 bg-white/[0.12]">
+
+          </span>
+
+          Or sign in with email
+        </span>
+
+        <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
+          <!-- 错误信息将显示在这里 -->
+        </div>
+
+        <!-- 邮箱 -->
+        <div class="mb-4 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.9998 0.399994H1.9998C1.1498 0.399994 0.424805 1.09999 0.424805 1.97499V10.075C0.424805 10.925 1.1248 11.65 1.9998 11.65H13.9998C14.8498 11.65 15.5748 10.95 15.5748 10.075V1.94999C15.5748 1.09999 14.8498 0.399994 13.9998 0.399994ZM13.9998 1.52499C14.0248 1.52499 14.0498 1.52499 14.0748 1.52499L7.9998 5.42499L1.9248 1.52499C1.9498 1.52499 1.9748 1.52499 1.9998 1.52499H13.9998ZM13.9998 10.475H1.9998C1.7498 10.475 1.5498 10.275 1.5498 10.025V2.62499L7.3998 6.37499C7.5748 6.49999 7.7748 6.54999 7.9748 6.54999C8.1748 6.54999 8.3748 6.49999 8.5498 6.37499L14.3998 2.62499V10.05C14.4498 10.3 14.2498 10.475 13.9998 10.475Z"
+                fill="#918EA0" />
+            </svg>
+          </span>
+          <input id="signUp_tab_2_email" type="email" placeholder="Enter your email" value="aaa@aaa.com"
+            class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+        </div>
+
+        <!-- 密码 -->
+        <div class="mb-5 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_368_6544)">
+                <path
+                  d="M14.0752 1.92501C13.1252 0.975012 11.8502 0.450012 10.5002 0.450012C9.1502 0.450012 7.8502 0.975012 6.9002 1.92501C5.6252 3.20001 5.1252 5.00001 5.5752 6.75001L0.725195 11.575C0.550195 11.75 0.450195 12 0.450195 12.275V14.6C0.450195 15.125 0.875195 15.575 1.4252 15.575H3.7502C4.0002 15.575 4.2502 15.475 4.4502 15.3L5.0252 14.725C5.2252 14.525 5.3502 14.225 5.3002 13.925V13.875L5.6002 13.85C6.0752 13.8 6.4252 13.45 6.4752 12.975L6.5002 12.675H6.5502C6.8252 12.7 7.1002 12.625 7.3252 12.425C7.5252 12.25 7.6502 11.975 7.6502 11.7V11.5H7.8252C8.0752 11.5 8.3252 11.4 8.5002 11.225L9.3252 10.425C11.0502 10.85 12.8502 10.375 14.1002 9.12501C16.0502 7.12501 16.0502 3.90001 14.0752 1.92501ZM13.2752 8.30001C12.2502 9.32501 10.7252 9.70001 9.3002 9.22501C9.1002 9.15001 8.8752 9.20001 8.7252 9.35001L7.7252 10.35H7.0502C6.7502 10.35 6.4752 10.6 6.4752 10.925V11.525L6.0252 11.475C5.8752 11.45 5.7252 11.5 5.6002 11.6C5.4752 11.7 5.4002 11.825 5.4002 11.975L5.3252 12.725L4.5752 12.8C4.4252 12.825 4.2752 12.9 4.2002 13C4.1002 13.125 4.0502 13.275 4.0752 13.425L4.1502 13.975L3.6752 14.45H1.5752V12.35L6.6002 7.32501C6.7502 7.17501 6.8002 6.95001 6.7252 6.75001C6.2752 5.32501 6.6252 3.80001 7.6752 2.75001C8.4252 2.00001 9.4002 1.60001 10.4752 1.60001C11.5252 1.60001 12.5252 2.00001 13.2752 2.75001C14.8252 4.25001 14.8252 6.75001 13.2752 8.30001Z"
+                  fill="#918EA0" />
+                <path
+                  d="M11.3498 2.875C10.8748 2.875 10.4248 3.05 10.0748 3.4C9.3748 4.1 9.3748 5.225 10.0748 5.925C10.4248 6.275 10.8748 6.45 11.3498 6.45C11.8248 6.45 12.2748 6.275 12.6248 5.925C12.9748 5.575 13.1498 5.125 13.1498 4.65C13.1498 4.175 12.9748 3.725 12.6248 3.375C12.2748 3.05 11.8248 2.875 11.3498 2.875ZM11.8248 5.125C11.5748 5.375 11.1248 5.375 10.8748 5.125C10.6248 4.875 10.6248 4.45 10.8748 4.175C10.9998 4.05 11.1748 3.975 11.3498 3.975C11.5248 3.975 11.6998 4.05 11.8248 4.175C11.9498 4.3 12.0248 4.475 12.0248 4.65C12.0248 4.825 11.9498 5 11.8248 5.125Z"
+                  fill="#918EA0" />
+              </g>
+              <defs>
+                <clipPath id="clip0_368_6544">
+                  <rect width="16" height="16" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <input id="password" type="password" placeholder="Confirm password" value="123123"
+            class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+        </div>
+
+        <!-- 验证码 -->
+        <div class="mb-5 relative">
+          <span class="absolute top-1/2 -translate-y-1/2 left-6">
+            <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+          </span>
+          <input type="captcha" placeholder="Captcha" id="signUp_captcha"
+            class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
+          <div @click="sendButton"
+            class="send !absolute top-1 right-1 bottom-1 flex items-center px-5 text-white dc-bg-blue hover:bg-blue-500 rounded-full cursor-pointer select-none">
+            Send
+          </div>
+        </div>
+
+        <div id="tab_2_signInBtn" @click="tab_2_signInBtn()"
+          class="text-white dc-bg-blue flex justify-center w-full rounded-full my-10 py-3 px-7 font-medium ease-in duration-300 hover:opacity-80 cursor-pointer">
+          Sign Up
+        </div>
+
+        <p class="text-center font-medium text-gray-600 mt-5">
+          Already have an account?
+          <a class="text-gray-400 border-b border-gary-500 cursor-pointer" @click="signTab = 0">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- dialog itself, mfp-hide class is required to make dialog hidden -->
+  <div id="prompt-dialog"
+    class="mx-auto zoom-anim-dialog mfp-hide rounded-xl overflow-hidden w-[80%] max-w-[600px] max-sm:w-[90%] bg-[#201e2a] border border-[#343340] rounded-xl"
+    x-data="{step: 1, selected: 1}">
+    <div class="p-8">
+      <!-- prompt form -->
+      <div <div x-show="step === 1" class="flex flex-col justify-center items-center">
+        <div class="w-full mb-2 text-base font-semibold md:text-lg">Tell us anything about your video</div>
+        <div class="w-full border-f-border inline-block py-0 pl-0">
+          <div class="relative">
+            <textarea rows="4" placeholder="Futuristic fantasy video"
+              class="w-full max-h-56 p-3 border border-[#4c4a5b] rounded-lg focus:outline-none focus:ring-0 placeholder-gray-600"></textarea>
+            <span
+              class="inline-flex justify-center items-center bg-f-bg-base pointer-events-none absolute -bottom-px right-0"><span
+                class="inline-flex justify-center items-center i-cus--pol-subscript size-3"></span></span>
+          </div>
+          <div class="flex justify-between gap-2 pb-1.5 pt-1">
+            <div class="scrollbar flex flex-1 items-center overflow-x-auto pl-[11px]"></div>
+            <div class="text-f-text-quaternary pt-1 text-xs">0 / 300</div>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-end gap-5 text-white">
+          <button type="button"
+            class="py-1.5 px-5 hover:bg-[#2b7fff]/20 border border-[#4c4a5b] hover:border-[#2b7fff] rounded-full cursor-pointer">Cancel</button>
+          <button type="button" class="py-1.5 px-5 dc-bg-blue rounded-full cursor-pointer"
+            @click="step = 2">Continue</button>
+        </div>
+      </div>
+
+      <!-- 5 prompts -->
+      <div x-show="step === 2">
+        <div>
+          <div class="mb-3 text-lg font-semibold">Choose a prompt to create your video</div>
+          <div class="">
+            <ul class="scrollbar flex max-h-[300px] flex-col gap-3 overflow-y-auto">
+              <li class="flex items-center gap-2 rounded border border-[#343340] px-3 py-1" @click="selected = 1"
+                :class="selected === 1 ? '!border-blue-500 bg-blue-500/20' : ''">
+                <span>A playful dog gazes up at a super moon, its fur shimmering in
+                  the moonlight, capturing the beauty of the night sky.</span>
+              </li>
+              <li class="flex items-center gap-2 rounded border border-[#343340] px-3 py-1" @click="selected = 2"
+                :class="selected === 2 ? '!border-blue-500 bg-blue-500/20' : ''">
+                <span>A playful dog gazes up at a super moon, its fur shimmering in
+                  the moonlight, capturing the beauty of the night sky.</span>
+              </li>
+              <li class="flex items-center gap-2 rounded border border-[#343340] px-3 py-1" @click="selected = 3"
+                :class="selected === 3 ? '!border-blue-500 bg-blue-500/20' : ''">
+                <span>A playful dog gazes up at a super moon, its fur shimmering in
+                  the moonlight, capturing the beauty of the night sky.</span>
+              </li>
+              <li class="flex items-center gap-2 rounded border border-[#343340] px-3 py-1" @click="selected = 4"
+                :class="selected === 4 ? '!border-blue-500 bg-blue-500/20' : ''">
+                <span>A playful dog gazes up at a super moon, its fur shimmering in
+                  the moonlight, capturing the beauty of the night sky.</span>
+              </li>
+              <li class="flex items-center gap-2 rounded border border-[#343340] px-3 py-1" @click="selected = 5"
+                :class="selected === 5 ? '!border-blue-500 bg-blue-500/20' : ''">
+                <span>A playful dog gazes up at a super moon, its fur shimmering in
+                  the moonlight, capturing the beauty of the night sky.</span>
+              </li>
+            </ul>
+            <div class="mt-3 flex justify-between gap-3 text-white">
+              <button type="button" class="py-1 px-5 bg-white/10 rounded-full cursor-pointer">Generate</button>
+              <div>
+                <button type="button"
+                  class="py-1.5 px-5 max-sm:px-3 dc-bg-blue rounded-full cursor-pointer">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All JS Links -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./assets/js/wow.min.js"></script>
+  <script src="./assets/js/jquery.min.js"></script>
+  <script src="./assets/js/magnific-popup.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

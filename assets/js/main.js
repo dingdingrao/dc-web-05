@@ -61,9 +61,37 @@
       },
     })
   })
+
+  // 提示词弹窗
+  $(document).ready(function () {
+    $('.prompt').magnificPopup({
+      type: 'inline',
+
+      fixedContentPos: false,
+      fixedBgPos: true,
+
+      overflowY: 'auto',
+
+      closeBtnInside: true,
+      preloader: false,
+
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'my-mfp-slide-bottom',
+
+      callbacks: {
+        open: function () {
+          $('body').css('overflow', 'hidden')
+        },
+        close: function () {
+          $('body').css('overflow', '')
+        },
+      },
+    })
+  })
 })(jQuery)
 
-new Swiper('.swiper', {
+new Swiper('.swiper-comment', {
   loop: true, // 开启循环滚动
   autoplay: {
     delay: 0, // 设置为 0 使其无间隔滚动
@@ -73,6 +101,47 @@ new Swiper('.swiper', {
   slidesPerView: 'auto', // 适应内容大小
   spaceBetween: 30, // 幻灯片间距
   centeredSlides: true, // 使当前项居中
+})
+
+new Swiper('.swiper-products', {
+  effect: 'coverflow',
+  loop: true, // 开启循环滚动
+  // autoplay: {
+  //   delay: 0, // 设置为 0 使其无间隔滚动
+  //   disableOnInteraction: true, // 用户交互后是否停止自动滚动
+  // },
+  // speed: 1000, // 滚动速度（ms），调整更流畅
+  // spaceBetween: '1vw', // 幻灯片间距
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  coverflowEffect: {
+    rotate: 50,
+    stretch: 0,
+    depth: 100,
+    modifier: 1,
+    slideShadows: true,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+  },
+})
+
+new Swiper('.swiper-my-products', {
+  grabCursor: true,
+  centeredSlides: true,
+  slidesPerView: 'auto',
+  coverflowEffect: {
+    rotate: 50,
+    stretch: 0,
+    depth: 100,
+    modifier: 1,
+    slideShadows: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
 })
 
 // 视频播放
@@ -144,3 +213,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // 图片容器不需要处理
   })
 })
+
+function downloadVideo(url) {
+  // Create a temporary anchor element
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'video.mp4' // Set the download filename
+
+  // Trigger the download
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+}

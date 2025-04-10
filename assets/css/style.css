@@ -1,4 +1,4 @@
-@import url(./assets/css/font.css);
+/* @import url(./font.css); */
 
 /* 设置滚动条的宽度为10px，并且颜色为红色 */
 ::-webkit-scrollbar {
@@ -23,7 +23,7 @@ body {
   position: relative;
   z-index: 1;
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: 'Lexend Deca', sans-serif;
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
@@ -1309,10 +1309,13 @@ Responsive CSS
   background-color: #262628 !important;
 }
 .dc-bg-yellow {
-  background-image: linear-gradient(165deg, #eb14d7 0%, #5c13ec 100%) !important;
+  background-image: linear-gradient(165deg, #eb14d7 0%, #e8ec13, #13aeec 100%) !important;
 }
 .dc-bg-blue {
   background-image: linear-gradient(165deg, #5678ff 0%, #4a6cf7 100%) !important;
+}
+.dc-bg {
+  background-color: #4e70fa !important;
 }
 
 /* 添加以下CSS */
@@ -1432,6 +1435,15 @@ img[src*='icon-arrow-light.svg'] {
 .fill-current {
   fill: #4a6cf7;
 }
+.icon-images {
+  filter: invert(1);
+}
+.icon-magicWand {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  filter: invert(1);
+}
 
 .dc-gradient-text {
   display: inline-block;
@@ -1452,4 +1464,173 @@ img[src*='icon-arrow-light.svg'] {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+/* .swiper-button-disabled {
+  display: none;
+} */
+.swiper-button-prev,
+.swiper-button-next {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: #5476fe90;
+  border-radius: 50%;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 12px;
+  color: white;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: #5476fe;
+}
+
+/* KEYFRAMES */
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spin3D {
+  from {
+    transform: rotate3d(0.5, 0.5, 0.5, 360deg);
+  }
+  to {
+    transform: rotate3d(0deg);
+  }
+}
+
+@keyframes configure-clockwise {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes configure-xclockwise {
+  0% {
+    transform: rotate(45deg);
+  }
+  25% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(-135deg);
+  }
+  75% {
+    transform: rotate(-225deg);
+  }
+  100% {
+    transform: rotate(-315deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.25;
+    transform: scale(0.75);
+  }
+}
+
+.loader {
+  width: 175px;
+  height: 100px;
+}
+.loader span {
+  display: block;
+  background: #ccc;
+  width: 7px;
+  height: 10%;
+  border-radius: 14px;
+  margin-right: 5px;
+  float: left;
+  margin-top: 25%;
+}
+
+.loader span:last-child {
+  margin-right: 0px;
+}
+.loader span:nth-child(1) {
+  animation: load 2.5s 1.4s infinite linear;
+}
+.loader span:nth-child(2) {
+  animation: load 2.5s 1.2s infinite linear;
+}
+.loader span:nth-child(3) {
+  animation: load 2.5s 1s infinite linear;
+}
+.loader span:nth-child(4) {
+  animation: load 2.5s 0.8s infinite linear;
+}
+.loader span:nth-child(5) {
+  animation: load 2.5s 0.6s infinite linear;
+}
+.loader span:nth-child(6) {
+  animation: load 2.5s 0.4s infinite linear;
+}
+.loader span:nth-child(7) {
+  animation: load 2.5s 0.2s infinite linear;
+}
+.loader span:nth-child(8) {
+  animation: load 2.5s 0s infinite linear;
+}
+.loader span:nth-child(9) {
+  animation: load 2.5s 0.2s infinite linear;
+}
+.loader span:nth-child(10) {
+  animation: load 2.5s 0.4s infinite linear;
+}
+.loader span:nth-child(11) {
+  animation: load 2.5s 0.6s infinite linear;
+}
+.loader span:nth-child(12) {
+  animation: load 2.5s 0.8s infinite linear;
+}
+.loader span:nth-child(13) {
+  animation: load 2.5s 1s infinite linear;
+}
+.loader span:nth-child(14) {
+  animation: load 2.5s 1.2s infinite linear;
+}
+.loader span:nth-child(15) {
+  animation: load 2.5s 1.4s infinite linear;
+}
+
+@keyframes load {
+  0% {
+    background: #ccc;
+    margin-top: 25%;
+    height: 10%;
+  }
+  50% {
+    background: #ffffff;
+    height: 100%;
+    margin-top: 0%;
+  }
+  100% {
+    background: #ccc;
+    height: 10%;
+    margin-top: 25%;
+  }
 }

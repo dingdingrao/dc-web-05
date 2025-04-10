@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" class="dark" x-data="{ page: 'home', 'loaded': true, 'darkMode': true }" x-init="
+<html lang="en" class="dark" x-data="{ page: 'home', 'loaded': true, 'darkMode': true,
+scrollToSection(id) { const element=document.getElementById(id); if (element) { element.scrollIntoView({
+behavior: 'smooth' }); } } }" x-init="
        darkMode = JSON.parse(localStorage.getItem('darkMode'));
        $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
   :class="{'dark': darkMode === true}">
@@ -8,24 +10,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="description" content="Put your description here.">
+  <!-- <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> -->
 
   <title>AI Tools - DCWorks</title>
   <link rel="icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 
   <!-- All CSS Links -->
-  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/animate.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/dialog.css">
+  <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/animate.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/style.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="../assets/css/swiper-bundle.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="../assets/css/magnific-popup.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/dialog.min.css">
+  <link rel="stylesheet" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap">
 
   <!-- Tailwind -->
-  <script src="https://unpkg.com/@tailwindcss/browser@4">
-
-  </script>
+  <!-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
 </head>
 
 <body class="bg-[#121723] overflow-x-hidden">
@@ -109,7 +117,7 @@
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -247,7 +255,7 @@
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -349,58 +357,63 @@
         <div
           class="[&_h2]:mb-3 [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-white [&_h2]:md:text-2xl  [&_h3]:my-3 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-white [&_h3]:md:text-lg  [&_h4]:my-3 [&_h4]:text-sm [&_h4]:font-semibold [&_h4]:text-white [&_h4]:md:text-base  [&_li]:mb-2 [&_li]:md:text-sm  [&_ol]:list-decimal [&_ol]:ps-5 [&_ol]:text-sm [&_ol]:text-white [&_ol]:opacity-80 [&_p]:mb-2 [&_p]:text-sm [&_p]:text-white [&_p]:opacity-80 [&_p]:md:text-sm  [&_ul]:list-disc [&_ul]:ps-5 [&_ul]:text-sm [&_ul]:text-white [&_ul]:opacity-80 ">
           <h1 class="mt-2 text-[24px] font-bold leading-[36px] text-white sm:text-4xl sm:leading-[72px] md:mt-4">
-            Content Policy</h1>
+            Terms of Service</h1>
           <div class="mt-2 mb-10 h-[1px] w-full md:mb-16 bg-gray-500/50"></div>
           <h2>Introduction</h2>
-          <p>Vider.ai is committed to providing a safe and respectful environment for users to create videos using our
-            AI video generation services. To ensure a positive experience for everyone, we have established the
-            following content policy.</p>
+          <p>Welcome to Vider.ai. By using our services, you agree to comply with and be bound by the following Terms of
+            Service. Please read these terms carefully before using our platform.</p>
 
-          <h2>1. Prohibited Content</h2>
-          <p>You are strictly prohibited from uploading, generating, or sharing content that:</p>
-          <ul>
-            <li>Violates any applicable laws or regulations.</li>
-            </liViolates>
-            <li>Contains hate speech, harassment, or incites violence.</li>
-            <li>Depicts or promotes illegal activities, including but not limited to violence, abuse, or exploitation.
-            </li>
-            <li>Infringes on the intellectual property rights of others, including copyrighted materials without proper
-              authorization.</li>
-            <li>Contains sexually explicit, pornographic, or adult material.</li>
-            <li>Violates the privacy or personal data of any individual.</li>
-            <li>Is false, misleading, or intended to deceive.</li>
-          </ul>
+          <h2>1. Acceptance of Terms
+          </h2>
+          <p>By accessing or using Vider.ai, you accept and agree to be bound by these Terms of Service. If you do not
+            agree, please do not use our services.</p>
 
-          <h2>2. Copyright Infringement</h2>
-          <p>You must ensure that you have the necessary rights and permissions to upload and use any media content
-            through Vider.ai. If you believe that your copyrighted work has been used improperly, please contact us at
-            [support@vider.ai].
+          <h2>2. Service Description</h2>
+          <p>Vider.ai provides an AI-based video generation tool that converts text or images into videos. Our service
+            is completely free and unlimited, and does not require user registration.
           </p>
 
-          <h2>3. User Responsibilit</h2>
-          <p>- You are responsible for the content you create and share using Vider.ai.
+          <h2>3. User Responsibilities</h2>
+          <p>You are solely responsible for the content you upload and generate through our platform.</p>
+          <p>
+            You must not upload content that violates intellectual property rights, contains unlawful material, or
+            infringes on the privacy of others.
           </p>
-          <p>- You must respect the intellectual property rights and privacy of others.</p>
-          <p>- You agree to abide by all applicable laws while using our platform.</p>
+          <p>You agree not to use our services for any illegal, harmful, or unethical activities.</p>
 
-          <h2>4. Reporting Violations</h2>
-          <p>If you come across any content that violates this policy, please report it immediately to
-            [support@vider.ai]. Our team will review the reported content and take appropriate action, which may include
-            content removal or user suspension.
-          </p>
-
-          <h2>5. Consequences of Violations</h2>
-          <p>Failure to comply with this policy may result in the suspension or termination of your access to Vider.ai.
-            We reserve the right to remove any content that violates our policy without prior notice.
+          <h2>4. Content Ownership</h2>
+          <p>You retain full ownership of the content you upload and generate. Vider.ai does not claim ownership of any
+            media files or videos created through the platform.
           </p>
 
-          <h2>6. Changes to the Content Policy</h2>
-          <p>Vider.ai reserves the right to modify this content policy at any time. We encourage users to review this
-            policy periodically to stay informed of any updates.
+          <h2>5. Data Storage and Privacy</h2>
+          <p>Uploaded content and generated videos are stored for a maximum of 1 day and then permanently deleted.
+          </p>
+          <p>We do not store or share your data beyond the necessary processing time.
+          </p>
+          <p>Please refer to our Privacy Policy for more details on data handling.</p>
+
+          <h2>6. Intellectual Property Rights</h2>
+          <p>All intellectual property rights related to Vider.ai, including but not limited to algorithms, website
+            content, and branding, remain the exclusive property of Vider.ai.
           </p>
 
-          <h2>7. Contact Us</h2>
-          <p>For questions or concerns regarding our Content Policy, please reach out to us at [support@vider.ai].
+          <h2>7. Limitation of Liability</h2>
+          <p>Vider.ai is provided on an "as is" basis without warranties of any kind. We are not liable for any damages
+            or losses resulting from the use or inability to use our services.
+          </p>
+
+          <h2>8. Modifications to the Service</h2>
+          <p>We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior
+            notice.
+          </p>
+
+          <h2>9. Governing Law</h2>
+          <p>These Terms of Service shall be governed by and construed in accordance with the laws of USA.
+          </p>
+
+          <h2>10. Contact Information</h2>
+          <p>For any questions or concerns regarding these terms, please contact us at [support@vider.ai].
           </p>
         </div>
       </div>
@@ -658,7 +671,7 @@
   <div x-data="{scrollTop: false}" class="fixed bottom-8 right-8 z-[99]"
     @click="window.scrollTo({top: 0, behavior: 'smooth'})"
     @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'rb' : scrollTop }">
-    <div aria-label="scroll to top"
+    <div
       class="hover:shadow-signUp flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#252a42] text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 select-none">
       <span class="mt-[6px] h-3 w-3 rotate-45 border-l border-t border-white">
 
@@ -1024,10 +1037,10 @@
   <!-- All JS Links -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="./assets/js/wow.min.js"></script>
-  <script src="./assets/js/jquery.min.js"></script>
-  <script src="./assets/js/magnific-popup.min.js"></script>
-  <script src="./assets/js/main.js"></script>
+  <script src="../assets/js/wow.min.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/magnific-popup.min.js"></script>
+  <script src="../assets/js/main.min.js"></script>
 </body>
 
 </html>

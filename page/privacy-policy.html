@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" class="dark" x-data="{ page: 'home', 'loaded': true, 'darkMode': true }" x-init="
+<html lang="en" class="dark" x-data="{ page: 'home', 'loaded': true, 'darkMode': true,
+scrollToSection(id) { const element=document.getElementById(id); if (element) { element.scrollIntoView({
+behavior: 'smooth' }); } } }" x-init="
        darkMode = JSON.parse(localStorage.getItem('darkMode'));
        $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
   :class="{'dark': darkMode === true}">
@@ -8,24 +10,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="description" content="Put your description here.">
+  <!-- <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> -->
 
   <title>AI Tools - DCWorks</title>
   <link rel="icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 
   <!-- All CSS Links -->
-  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/animate.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/dialog.css">
+  <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/animate.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/style.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="../assets/css/swiper-bundle.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="../assets/css/magnific-popup.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/dialog.min.css">
+  <link rel="stylesheet" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap">
 
   <!-- Tailwind -->
-  <script src="https://unpkg.com/@tailwindcss/browser@4">
-
-  </script>
+  <!-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
 </head>
 
 <body class="bg-[#121723] overflow-x-hidden">
@@ -109,7 +117,7 @@
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -247,7 +255,7 @@
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -651,7 +659,7 @@
   <div x-data="{scrollTop: false}" class="fixed bottom-8 right-8 z-[99]"
     @click="window.scrollTo({top: 0, behavior: 'smooth'})"
     @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'rb' : scrollTop }">
-    <div aria-label="scroll to top"
+    <div
       class="hover:shadow-signUp flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#252a42] text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 select-none">
       <span class="mt-[6px] h-3 w-3 rotate-45 border-l border-t border-white">
 
@@ -1017,10 +1025,10 @@
   <!-- All JS Links -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="./assets/js/wow.min.js"></script>
-  <script src="./assets/js/jquery.min.js"></script>
-  <script src="./assets/js/magnific-popup.min.js"></script>
-  <script src="./assets/js/main.js"></script>
+  <script src="../assets/js/wow.min.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/magnific-popup.min.js"></script>
+  <script src="../assets/js/main.min.js"></script>
 </body>
 
 </html>

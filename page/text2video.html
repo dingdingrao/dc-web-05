@@ -10,28 +10,35 @@ behavior: 'smooth' }); } } }" x-init="
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="description" content="Put your description here.">
+  <!-- <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> -->
 
   <title>AI Tools - DCWorks</title>
   <link rel="icon" href="favicon.ico">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 
 
   <!-- All CSS Links -->
-  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-  <link rel="stylesheet" href="assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="assets/css/animate.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/dialog.css">
+  <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/animate.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/style.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="../assets/css/swiper-bundle.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="../assets/css/magnific-popup.min.css">
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="../assets/css/dialog.min.css">
+  <link rel="stylesheet" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap">
 
   <!-- Tailwind -->
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <!-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
 </head>
 
 <body class="bg-[#121723] overflow-x-hidden">
+  <!-- <body class="bg-[#080321]"> -->
+
   <!-- Navbar Area -->
   <header
     x-data="{stickyMenu: false, navigationOpen: false, isLogin: false, showProfileDropdown: false, userInfo: JSON.parse(localStorage.getItem('user'))}"
@@ -110,7 +117,7 @@ behavior: 'smooth' }); } } }" x-init="
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -185,17 +192,17 @@ behavior: 'smooth' }); } } }" x-init="
 
                   </div>
                   <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer" @click="
-                  localStorage.clear()
-                  isLogin = false;
-                ">Sign out</a>
+                localStorage.clear()
+                isLogin = false;
+              ">Sign out</a>
                   <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
-                    <span class="absolute left-0 bottom-0 -z-1 w-full">
-                      <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
-                    </span>
-                    <span class="absolute left-0 top-0 -z-1 w-full">
-                      <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
-                    </span>
-                  </div> -->
+                  <span class="absolute left-0 bottom-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                  <span class="absolute left-0 top-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                </div> -->
                 </div>
               </div>
             </div>
@@ -218,12 +225,12 @@ behavior: 'smooth' }); } } }" x-init="
             </a>
             <!-- Menu -->
             <ul class="self-center flex text-center">
-              <li class="on">
+              <li>
                 <a href="./index.html"
                   class="block px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">Image
                   to Video</a>
               </li>
-              <li>
+              <li class="on">
                 <a href="./text2video.html"
                   class="block px-5 py-6 text-[16px] hover:text-gray-300 hover:bg-[#5072fb]/10 ease-in duration-300">Text
                   to Video</a>
@@ -236,7 +243,7 @@ behavior: 'smooth' }); } } }" x-init="
             <div class="self-center flex items-center gap-5">
               <!-- Sign In -->
               <!-- <a href="#sign-dialog" class="signIn text-regular font-medium text-lg hover:text-blue-500">Sign
-                Up</a> -->
+              Up</a> -->
 
               <!-- Sign In -->
               <a x-show="!isLogin" href="#sign-dialog"
@@ -248,7 +255,7 @@ behavior: 'smooth' }); } } }" x-init="
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" class="w-7">
+                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -323,17 +330,17 @@ behavior: 'smooth' }); } } }" x-init="
 
                   </div>
                   <a class="block px-4 py-2 text-sm text-gray-300 hover:bg-blue-500/20 cursor-pointer" @click="
-                  localStorage.clear()
-                  isLogin = false;
-                ">Sign out</a>
+                localStorage.clear()
+                isLogin = false;
+              ">Sign out</a>
                   <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
-                    <span class="absolute left-0 bottom-0 -z-1 w-full">
-                      <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
-                    </span>
-                    <span class="absolute left-0 top-0 -z-1 w-full">
-                      <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
-                    </span>
-                  </div> -->
+                  <span class="absolute left-0 bottom-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                  <span class="absolute left-0 top-0 -z-1 w-full">
+                    <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                  </span>
+                </div> -->
                 </div>
               </div>
             </div>
@@ -355,21 +362,21 @@ behavior: 'smooth' }); } } }" x-init="
             <div class="mx-auto max-w-[800px] text-center animate__animated animate__fadeInUp">
               <h1
                 class="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight dc-gradient-text">
-                Free Unlimited Image to Video AI Generator</h1>
+                Free Unlimited AI Video Generator</h1>
               <p class="text-base !leading-relaxed text-gray-400 dark:text-body-color-dark sm:text-lg md:text-xl">
-                Vider.ai is The World's First Completely Free and Unlimited Image to Video AI Experience Fast, Seamless,
-                and Effortless Video Creation!</p>
+                Vider.ai is The Ultimate Free and Unlimited AI Video Generator. Transform your ideas into captivating
+                videos with just a few clicks!</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Video Background -->
-      <video autoplay muted loop class="absolute top-0 -z-1 object-cover w-full h-150 rounded-3xl shadow-lg opacity-50"
+      <video autoplay muted loop class="absolute top-0 -z-1 object-cover w-full h-150 rounded-3xl shadow-lg opacity-40"
         src="./assets/video/hero-background-video.mp4">
       </video>
 
-      <!-- Decorate -->
+      <!-- 装饰 -->
       <div class="absolute right-0 top-0 z-[-1] opacity-5 lg:opacity-15">
         <svg width="450" height="556" viewBox="0 0 450 556" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="277" cy="63" r="225" fill="url(#paint0_linear_25:217)" class="dc-animate-movebounce"></circle>
@@ -485,7 +492,7 @@ behavior: 'smooth' }); } } }" x-init="
     </section>
     <!-- Hero Area End -->
 
-    <!-- Operation Area Start -->
+    <!-- Action area Start -->
     <section id="ActionArea" class="banner-area relative z-10">
       <div class="mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-0">
         <!-- Toggle Button -->
@@ -503,51 +510,31 @@ behavior: 'smooth' }); } } }" x-init="
           class="relative w-full p-5 lg:flex-1 rounded-4xl bg-[#181d2c] animate__animated animate__fadeInUp animate__delay-0_5s">
 
           <!-- 输入中 -->
-          <form class="dc-form mx-auto max-h-[inherit] w-full text-white">
+          <form class="dc-form mx-auto max-h-[inherit] w-full max-sm:p-0 text-white">
             <div class="mb-4">
-              <h2 class="text-xl">Image to Video</h2>
+              <h2 class="text-xl">Text to Video</h2>
             </div>
 
             <!-- Content -->
             <div class="dc-form-item-control-input-content text-sm">
-              <div class="flex gap-5 max-sm:flex-col">
-                <!-- Image -->
-                <section class="flex-grow">
-                  <h3 class="inline-flex mb-4 text-gray-300 text-sm font-semibold leading-5">Image</h3>
-                  <div class="h-[279px] mb-5 p-4 bg-white/4 border border-white/10 rounded-lg">
-                    <div
-                      class="group h-[200px] flex flex-col items-center justify-center gap-2 pb-1.5 pt-1 text-center text-gray-400 hover:text-[#4d6ff9] cursor-pointer">
-                      <img class="icon-images w-[30px] h-[30px] opacity-50 group-hover:opacity-60"
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cg fill='currentColor'%3E%3Cpath d='M20.95 12.762c.584 0 1.056.461 1.05 1.03-.011 1.12-.037 1.818-.094 2.502-.102 1.222-.311 2.242-.779 3.089a4.3 4.3 0 01-.768 1.009c-.878.855-1.994 1.242-3.41 1.426-1.382.182-3.215.182-5.475.182-2.262 0-3.033 0-4.416-.182-1.415-.184-2.532-.571-3.408-1.426-.777-.758-1.18-1.7-1.392-2.87-.21-1.149-.249-2.577-.256-4.352Q2 12.492 2 11.736v-.056c0-2.204 0-3.412.186-4.76.19-1.38.587-2.468 1.464-3.322.876-.855 1.993-1.242 3.408-1.427.838-.11 1.495-.154 2.835-.17a1.03 1.03 0 011.054 1.018c0 .566-.469.973-1.05.976-1.585 0-2.108.051-2.632.103-.524.051-1.382.12-1.94.664S4.448 5.89 4.28 7.112c-.172 1.242-.174 2.661-.174 4.932l.344-.339c.43-.367.988-.56 1.559-.542a2.28 2.28 0 011.518.642l3.15 4.095a2 2 0 002.511.213l.292-.2a2.99 2.99 0 013.655.214c.495.434 2.137 2.433 2.137 2.433.279-.572.445-1.322.534-2.382.054-.647.078-1.296.088-2.394a1.044 1.044 0 011.057-1.022'/%3E%3Cpath fill-rule='evenodd' d='M17.263 11.474c-2.232 0-3.35 0-4.043-.694s-.694-1.81-.694-4.043 0-3.35.694-4.043S15.03 2 17.263 2s3.35 0 4.043.694C22 3.387 22 4.504 22 6.737s0 3.35-.694 4.043c-.693.694-1.81.694-4.043.694m.79-6.842a.79.79 0 00-1.58 0v1.315h-1.315a.79.79 0 000 1.58h1.316v1.315a.79.79 0 001.579 0V7.526h1.316a.79.79 0 100-1.579h-1.316z' clip-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E"
-                        alt="">
+              <!-- Prompt -->
+              <section class="flex-grow h-full">
+                <h3 class="inline-flex mb-4 text-gray-300 text-sm font-semibold leading-5">Prompt</h3>
 
-                      <div class="text-xs">Click to upload an image</div>
-                    </div>
+                <div class="p-4 bg-white/4 border border-white/10 rounded-lg">
+                  <textarea class="w-full min-h-[205px] focus:outline-none focus:ring-0 placeholder-gray-600"
+                    placeholder="What do you want to create with this image?"></textarea>
 
-                    <div class="pt-4 text-xs text-gray-400 border-t border-white/10">Upload JPG/PNG/WEBP images.</div>
+                  <div class="flex justify-between gap-2 pb-1.5 pt-1">
+                    <a href="#prompt-dialog"
+                      class="prompt flex items-center py-1 px-2 text-xs text-gray-400 hover:text-gray-300 bg-[#363444] rounded-sm cursor-pointer">
+                      <img class="icon-magicWand mr-2" src="./assets/img/icon/icon-magicWand.svg" alt="" srcset="">
+                      Generate with AI
+                    </a>
+                    <div class="flex items-center text-xs text-gray-500">0 / 1500</div>
                   </div>
-                </section>
-
-                <!-- Prompt -->
-                <section class="flex-grow h-full">
-                  <h3 class="inline-flex mb-4 text-gray-300 text-sm font-semibold leading-5">Prompt<span
-                      class="text-gray-500 ml-2">(Optional)</span></h3>
-
-                  <div class="p-4 bg-white/4 border border-white/10 rounded-lg">
-                    <textarea class="w-full min-h-[205px] focus:outline-none focus:ring-0 placeholder-gray-600"
-                      placeholder="What do you want to create with this image?"></textarea>
-
-                    <div class="flex justify-between gap-2 pb-1.5 pt-1">
-                      <a href="#prompt-dialog"
-                        class="prompt flex items-center py-1 px-2 text-xs text-gray-400 hover:text-gray-300 bg-[#363444] rounded-sm cursor-pointer">
-                        <img class="icon-magicWand mr-2" src="./assets/img/icon/icon-magicWand.svg" alt="" srcset="">
-                        Generate with AI
-                      </a>
-                      <div class="flex items-center text-xs text-gray-500">0 / 1500</div>
-                    </div>
-                  </div>
-                </section>
-              </div>
+                </div>
+              </section>
 
               <!-- Aspect Ratio -->
               <section>
@@ -968,12 +955,15 @@ behavior: 'smooth' }); } } }" x-init="
           </div>
         </div>
 
-        <!-- 个人作品列表 -->
+        <!-- List Of Personal Works -->
         <section
           class="mt-10 p-5 md:p-8 lg:p-10 rounded-4xl bg-[#181d2c] animate__animated animate__fadeInUp animate__delay-0_5s">
-          <h2 class="mb-10 text-xl font-bold !leading-tight text-black dark:text-white sm:text-2xl text-center">
-            My
-            creations</h2>
+          <div class="w-full md:max-w-[600px] mx-auto text-center mb-5">
+            <h2 class="mb-5 text-xl font-bold !leading-tight text-black dark:text-white sm:text-2xl text-center">
+              My
+              creations</h2>
+          </div>
+
           <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
             <li class="relative">
               <div
@@ -992,7 +982,7 @@ behavior: 'smooth' }); } } }" x-init="
                       class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1 block w-22 h-22 rounded-full backdrop-blur-[5px] bg-white/[0.04]"></span>
                   </span>
 
-                  <video class="w-200 h-full aspect-[16/11] object-cover" autoplay loop muted
+                  <video class="w-200 h-full aspect-[16/11] object-cover" loop
                     src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
                 </div>
               </div>
@@ -1071,7 +1061,7 @@ behavior: 'smooth' }); } } }" x-init="
             </li>
           </ul>
 
-          <!-- 分页 -->
+          <!-- Pagination -->
           <div class="flex max-sm:flex-col items-center justify-between border-t border-gray-700/50 mt-10 pt-5">
             <div>
               <p class="max-sm:mb-5 text-sm text-gray-500">
@@ -1091,7 +1081,7 @@ behavior: 'smooth' }); } } }" x-init="
                 <a href="#"
                   class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-700/50 ring-inset hover:bg-gray-500/20 focus:z-20 focus:outline-offset-0">
                   <span class="sr-only">Previous</span>
-                  <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                  <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" slot="icon">
                     <path fill-rule="evenodd"
                       d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
                       clip-rule="evenodd"></path>
@@ -1126,153 +1116,158 @@ behavior: 'smooth' }); } } }" x-init="
         </section>
       </div>
     </section>
-    <!-- Operation Area End -->
+    <!-- Action area End -->
 
     <!-- Exhibit of works -->
-    <section id="features" class="relative py-16 md:py-20 lg:py-28">
+    <section id="features" class="relative pt-16 md:pt-20 lg:pt-28">
       <div class="container">
         <!-- Section Title -->
-        <div class="w-full md:max-w-[600px] mx-auto text-center mb-20">
-          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">
-            Stunning Image to Video Creations</h2>
-          <p class="text-base !leading-relaxed text-body-color md:text-lg">See the high-quality videos generated from
-            images with Vider.ai - creative, dynamic, and truly impressive!</p>
-        </div>
+        <!-- <div class="w-full md:max-w-[600px] mx-auto text-center mb-20 max-sm:mb-0">
+          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">Free
+            Unlimited AI Video Generator</h2>
+          <p class="text-base !leading-relaxed text-body-color md:text-lg">Vider.ai is The Ultimate Free and Unlimited
+            AI Video Generator. Transform your ideas into captivating videos with just a few clicks!</p>
+        </div> -->
 
-        <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-          <!-- Col 1 -->
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-1x1-4-cover.webp"
-                src="./assets/video/case/image-to-video-sample-1x1-4.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-16x9-2-cover.webp"
-                src="./assets/video/case/image-to-video-sample-16x9-2.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-2-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-2.mp4">
-              </video>
-            </div>
-          </div>
+        <!-- Carousel Display -->
+        <div class="gap-5 lg:grid-cols-4 xl:gap-5">
+          <span
+            class="max-w-[128px] w-full h-[37px] block inset-0 pointer-events-none absolute z-10 left-0 top-1/2 -translate-y-1/2 bg-gradient-to-l from-dark/0 to-dark/100"></span>
+          <span
+            class="max-w-[128px] w-full h-[37px] block inset-0 pointer-events-none absolute z-10 left-auto top-1/2 -translate-y-1/2 bg-gradient-to-r from-dark/0 to-dark/100"></span>
 
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-3-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-3.mp4">
-              </video>
-            </div>
-          </div>
-
-          <!-- Col 2 -->
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-16x9-3-cover.webp"
-                src="./assets/video/case/image-to-video-sample-16x9-3.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-1x1-1-cover.webp"
-                src="./assets/video/case/image-to-video-sample-1x1-1.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-1x1-3-cover.webp"
-                src="./assets/video/case/image-to-video-sample-1x1-3.mp4">
-              </video>
-            </div>
-          </div>
-
-          <!-- Col 3 -->
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-1-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-1.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-16x9-1-cover.webp"
-                src="./assets/video/case/image-to-video-sample-16x9-1.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-4-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-4.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-7-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-7.mp4">
-              </video>
-            </div>
-          </div>
-
-          <!-- Col 4 -->
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-1x1-2-cover.webp"
-                src="./assets/video/case/image-to-video-sample-1x1-2.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-5-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-5.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-16x9-4-cover.webp"
-                src="./assets/video/case/image-to-video-sample-16x9-4.mp4">
-              </video>
-            </div>
-          </div>
-          <div class="break-inside-avoid mb-4 cursor-pointer transition-transform hover:scale-[1.02]">
-            <div class="relative overflow-hidden rounded-lg">
-              <video loop="" disablepictureinpicture="" playsinline="" disableremoteplayback=""
-                poster="./assets/video/case/image-to-video-sample-9x16-6-cover.webp"
-                src="./assets/video/case/image-to-video-sample-9x16-6.mp4">
-              </video>
+          <!-- Slider main container -->
+          <div
+            class="swiper swiper-products clients-carousel swiper-initialized swiper-horizontal swiper-backface-hidden !py-10">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper items-center select-none !ease-linear">
+              <!-- Slides -->
+              <div class="swiper-slide !w-auto overflow-hidden rounded-3xl">
+                <div
+                  class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
+                  <a class="relative block overflow-hidden rounded-3xl">
+                    <video class="aspect-[16/10] object-cover" autoplay loop muted
+                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      alt="Feature">
+                  </a>
+                  <div
+                    class="max-sm:hidden absolute bottom-4 right-4 left-4 p-4 max-sm:p-1 max-sm:text-center bg-black/80 rounded-3xl">
+                    <h3
+                      class="line-clamp-2 text-lg font-medium text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-500 xl:text-2xl max-sm:text-sm">
+                      <a>Unlimited Video Creation</a>
+                    </h3>
+                    <p class="mt-3.5 line-clamp-3 max-sm:hidden">Create as many videos as you want without any
+                      restrictions. Vider.ai offers a completely free AI video generator with no limits on usage.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Slides -->
+              <div class="swiper-slide !w-auto overflow-hidden rounded-3xl">
+                <div
+                  class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
+                  <a class="relative block overflow-hidden rounded-3xl">
+                    <video class="aspect-[16/10] object-cover" autoplay loop muted
+                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      alt="Feature">
+                  </a>
+                  <div
+                    class="max-sm:hidden absolute bottom-4 right-4 left-4 p-4 max-sm:p-1 max-sm:text-center bg-black/80 rounded-3xl">
+                    <h3
+                      class="line-clamp-2 text-lg font-medium text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-500 xl:text-2xl max-sm:text-sm">
+                      <a>High-Quality Output</a>
+                    </h3>
+                    <p class="mt-3.5 line-clamp-3 max-sm:hidden">Enjoy professional-quality videos every time.
+                      Vider.ai’s advanced AI ensures your videos look sharp, vibrant, and captivating.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Slides -->
+              <div class="swiper-slide !w-auto overflow-hidden rounded-3xl">
+                <div
+                  class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
+                  <a class="relative block overflow-hidden rounded-3xl">
+                    <video class="aspect-[16/10] object-cover" autoplay loop muted
+                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      alt="Feature">
+                  </a>
+                  <div
+                    class="max-sm:hidden absolute bottom-4 right-4 left-4 p-4 max-sm:p-1 max-sm:text-center bg-black/80 rounded-3xl">
+                    <h3
+                      class="line-clamp-2 text-lg font-medium text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-500 xl:text-2xl max-sm:text-sm">
+                      <a>Easy and Fast Proces</a>
+                    </h3>
+                    <p class="mt-3.5 line-clamp-3 max-sm:hidden">Turn your ideas into videos within minutes. Just upload
+                      your content, customize the settings, and let Vider.ai do the rest.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Slides -->
+              <div class="swiper-slide !w-auto overflow-hidden rounded-3xl">
+                <div
+                  class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
+                  <a class="relative block overflow-hidden rounded-3xl">
+                    <video class="aspect-[16/10] object-cover" autoplay loop muted
+                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      alt="Feature">
+                  </a>
+                  <div
+                    class="max-sm:hidden absolute bottom-4 right-4 left-4 p-4 max-sm:p-1 max-sm:text-center bg-black/80 rounded-3xl">
+                    <h3
+                      class="line-clamp-2 text-lg font-medium text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-500 xl:text-2xl max-sm:text-sm">
+                      <a>Unlimited Video Creation</a>
+                    </h3>
+                    <p class="mt-3.5 line-clamp-3 max-sm:hidden">Create as many videos as you want without any
+                      restrictions. Vider.ai offers a completely free AI video generator with no limits on usage.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Slides -->
+              <div class="swiper-slide !w-auto overflow-hidden rounded-3xl">
+                <div
+                  class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
+                  <a class="relative block overflow-hidden rounded-3xl">
+                    <video class="aspect-[16/10] object-cover" autoplay loop muted
+                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      alt="Feature">
+                  </a>
+                  <div
+                    class="max-sm:hidden absolute bottom-4 right-4 left-4 p-4 max-sm:p-1 max-sm:text-center bg-black/80 rounded-3xl">
+                    <h3
+                      class="line-clamp-2 text-lg font-medium text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-500 xl:text-2xl max-sm:text-sm">
+                      <a>High-Quality Output</a>
+                    </h3>
+                    <p class="mt-3.5 line-clamp-3 max-sm:hidden">Enjoy professional-quality videos every time.
+                      Vider.ai’s advanced AI ensures your videos look sharp, vibrant, and captivating.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Slides -->
+              <div class="swiper-slide !w-auto overflow-hidden rounded-3xl">
+                <div
+                  class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
+                  <a class="relative block overflow-hidden rounded-3xl">
+                    <video class="aspect-[16/10] object-cover" autoplay loop muted
+                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      alt="Feature">
+                  </a>
+                  <div
+                    class="max-sm:hidden absolute bottom-4 right-4 left-4 p-4 max-sm:p-1 max-sm:text-center bg-black/80 rounded-3xl">
+                    <h3
+                      class="line-clamp-2 text-lg font-medium text-black hover:text-blue-500 dark:text-white dark:hover:text-blue-500 xl:text-2xl max-sm:text-sm">
+                      <a>Easy and Fast Proces</a>
+                    </h3>
+                    <p class="mt-3.5 line-clamp-3 max-sm:hidden">Turn your ideas into videos within minutes. Just upload
+                      your content, customize the settings, and let Vider.ai do the rest.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Function introduction 1 -->
+    <!-- Function Introduction 1 -->
     <section class="relative py-16 md:py-20 lg:py-28">
       <div class="container relative">
         <div class="flex flex-wrap items-center">
@@ -1280,8 +1275,7 @@ behavior: 'smooth' }); } } }" x-init="
           <div class="w-full px-4 lg:w-1/2 wow animate__animated animate__fadeInLeft">
             <div class="text-center lg:text-right aspect-[4/3]">
               <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-                poster="./assets/video/p1/feature-AI-image-to-video-generator-1-cover.webp"
-                src="./assets/video/p1/feature-AI-image-to-video-generator-1.mp4">
+                src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
               </video>
             </div>
           </div>
@@ -1290,42 +1284,42 @@ behavior: 'smooth' }); } } }" x-init="
           <div class="w-full px-4 pl-30 max-sm:pl-0 max-sm:pt-10 lg:w-1/2 wow animate__animated animate__fadeInRight">
             <h2
               class="text-black dark:text-white font-bold text-3xl sm:text-4xl md:text-[45px] lg:text-4xl xl:text-[45px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-tight mb-6">
-              AI Image to Video Generator
+              Text to Video
+              <div class="w-full h-1 mt-2 dc-bg-blue"></div>
             </h2>
             <div class="max-w-[470px]">
               <div class="mb-9">
-                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  Unlimited Free</h3>
-                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Vider.ai
-                  offers completely free and unlimited image-to-video conversion. No hidden costs, no limits - create as
-                  many videos as you want!</p>
+                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Free AI
+                  Video Generator</h3>
+                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">
+                  Effortlessly convert your text into dynamic videos with Vider.ai. Just input your prompt, select your
+                  preferred style, and let the AI work its magic - all for free and without limitations!</p>
               </div>
               <div class="mb-9">
-                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">No
-                  Sign-Up Required</h3>
-                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Start
-                  generating videos instantly without the hassle of creating an account. Just upload your images and let
-                  Vider.ai do the rest.</p>
+                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
+                  Customizable Styles</h3>
+                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Craft
+                  videos that match your vision with versatile options. Whether you’re aiming for cinematic, animated,
+                  or professional, Vider.ai adapts to your creative needs..</p>
               </div>
               <div class="mb-1">
-                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                  High-Quality Output
-                </h3>
-                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Get
-                  professional-quality videos with vivid visuals and smooth transitions. Vider.ai delivers exceptional
-                  results every time, perfect for any purpose.</p>
+                <h3 class="mb-4 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Instant
+                  Results</h3>
+                <p class="text-base font-medium leading-relaxed text-body-color sm:text-lg sm:leading-relaxed">Generate
+                  videos in minutes with just a few clicks. No technical skills required - simply describe your idea and
+                  watch it come to life.</p>
               </div>
             </div>
 
             <div @click.prevent="scrollToSection('ActionArea')"
               class="inline-block mt-10 py-3 px-5 text-center text-white dc-bg-blue dc-button-hover-shadow dc-button-hover-outline-white rounded-full cursor-pointer">
-              Free Image to Video
+              Try Text to Video Now
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ornament -->
+      <!-- Decorate -->
       <div class="absolute bottom-0 right-0 z-[-1]">
         <svg width="179" height="158" viewBox="0 0 179 158" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path opacity="0.5"
@@ -1360,22 +1354,24 @@ behavior: 'smooth' }); } } }" x-init="
       </div>
     </section>
 
-    <!-- Function introduction II -->
+    <!-- Function Introduction 2 -->
     <section id="about" class="relative py-16 md:py-20 lg:py-28">
       <div class="container relative">
         <div class="border-b border-white/0">
-          <div class="flex flex-wrap items-center mx-[-16px]">
+          <div class="flex flex-wrap flex-wrap-reverse items-center mx-[-16px]">
             <!-- Left Content -->
             <div class="w-full lg:w-1/2 px-4 wow animate__animated animate__fadeInLeft">
               <div class="mb-12 lg:mb-0 max-w-[570px]" data-wow-delay=".15s"
                 style="visibility: visible; animation-delay: 0.15s;">
                 <h2
-                  class="text-black dark:text-white font-bold text-3xl sm:text-4xl md:text-[45px] lg:text-4xl xl:text-[45px] leading-tight sm:leading-tight md:leading-tight lg:leading-tight xl:leading-tight mb-6">
-                  Bring Your Images to Life with Videos
+                  class="text-black dark:text-white font-bold text-3xl sm:text-4xl md:text-[45px] lg:text-4xl xl:text-[45px] leading-tight sm:leading-light md:leading-tight lg:leading-tight xl:leading-tight mb-6">
+                  Image to Video
+                  <div class="w-full h-1 mt-2 dc-bg-blue"></div>
                 </h2>
                 <p class="font-medium text-body-color text-base sm:text-lg leading-relaxed sm:leading-relaxed mb-11">
-                  Create dynamic, eye-catching videos from your static images effortlessly with Vider.ai's powerful
-                  image to video generator. Just a few clicks to make your ideas shine.
+                  Experiment with endless possibilities using Vider.ai’s powerful image to video AI generator. Create
+                  videos from your images with customizable styles, ranging from realistic visuals to artistic
+                  animations.
                 </p>
                 <div class="flex flex-wrap mx-[-12px]">
                   <div class="w-full sm:w-1/2 lg:w-full xl:w-1/2 px-3">
@@ -1387,7 +1383,7 @@ behavior: 'smooth' }); } } }" x-init="
                           </path>
                         </svg>
                       </span>
-                      Creative Freedom
+                      High-Resolution Output
                     </p>
                     <p class="flex items-center text-body-color text-lg font-medium mb-5">
                       <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
@@ -1397,7 +1393,7 @@ behavior: 'smooth' }); } } }" x-init="
                           </path>
                         </svg>
                       </span>
-                      Customization Options
+                      Instant Processing
                     </p>
                     <p class="flex items-center text-body-color text-lg font-medium mb-5">
                       <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
@@ -1407,7 +1403,7 @@ behavior: 'smooth' }); } } }" x-init="
                           </path>
                         </svg>
                       </span>
-                      Dynamic Visuals
+                      User-Friendly Interface
                     </p>
                   </div>
                   <div class="w-full sm:w-1/2 lg:w-full xl:w-1/2 px-3">
@@ -1419,7 +1415,7 @@ behavior: 'smooth' }); } } }" x-init="
                           </path>
                         </svg>
                       </span>
-                      Community Inspiration
+                      Unlimited Usage
                     </p>
                     <p class="flex items-center text-body-color text-lg font-medium mb-5">
                       <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
@@ -1429,7 +1425,7 @@ behavior: 'smooth' }); } } }" x-init="
                           </path>
                         </svg>
                       </span>
-                      Fast Processing
+                      No Sign-Up Required
                     </p>
                     <p class="flex items-center text-body-color text-lg font-medium mb-5">
                       <span class="w-[30px] h-[30px] flex items-center justify-center rounded-md bg-[#4a6cf7]/10 mr-4">
@@ -1439,24 +1435,24 @@ behavior: 'smooth' }); } } }" x-init="
                           </path>
                         </svg>
                       </span>
-                      Visual Storytelling
+                      Multiple Uses
                     </p>
                   </div>
                 </div>
-              </div>
 
-              <div @click.prevent="scrollToSection('ActionArea')"
-                class="inline-block mt-10 max-sm:mb-20 py-3 px-5 text-center text-white dc-bg-blue dc-button-hover-shadow dc-button-hover-outline-white rounded-full cursor-pointer">
-                Free Image to Video
+                <a href="./index.html#ActionArea""
+                  class=" w-60 mt-10 py-3 px-5 text-center text-white dc-bg-blue dc-button-hover-shadow
+                  dc-button-hover-outline-white rounded-full cursor-pointer">
+                  Create Your Video Now
+                </a>
               </div>
             </div>
 
             <!-- Right Image -->
-            <div class="w-full lg:w-1/2 px-4 wow animate__animated animate__fadeInRight">
+            <div class="w-full lg:w-1/2 max-sm:mb-10 px-4 wow animate__animated animate__fadeInRight">
               <div class="text-center lg:text-right aspect-[4/3]">
                 <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-                  poster="./assets/video/p1/feature-AI-image-to-video-generator-2-cover.webp"
-                  src="./assets/video/p1/feature-AI-image-to-video-generator-2.mp4">
+                  src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
                 </video>
               </div>
             </div>
@@ -1464,7 +1460,7 @@ behavior: 'smooth' }); } } }" x-init="
         </div>
       </div>
 
-      <!-- ornament -->
+      <!-- Decorate -->
       <div class="absolute bottom-0 left-0 z-[-1]">
         <svg width="179" height="158" viewBox="0 0 179 158" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path opacity="0.5"
@@ -1478,176 +1474,13 @@ behavior: 'smooth' }); } } }" x-init="
           <defs>
             <linearGradient id="paint0_linear_70:153" x1="69.6694" y1="29.9033" x2="196.108" y2="83.2919"
               gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7" stop-opacity="0.62">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
+              <stop stop-color="#4A6CF7" stop-opacity="0.62"></stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
             </linearGradient>
             <linearGradient id="paint1_linear_70:153" x1="165.348" y1="-75.4466" x2="-3.75136" y2="103.645"
               gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7" stop-opacity="0.62">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </section>
-
-    <!-- Features -->
-    <section id="features" class="relative py-16 md:py-20 lg:py-28">
-      <div class="container relative">
-        <div class="w-full max-w-[570px] mb-[100px] max-sm:mb-20 mx-auto text-center">
-          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">Why
-            Choose Vider.ai?</h2>
-          <p class="text-base !leading-relaxed text-body-color md:text-lg">Unlock the full potential of image to video
-            creation with Vider.ai - fast, free, and unlimited. Discover why our users love creating with us!</p>
-        </div>
-
-        <div class="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-          <div class="w-full">
-            <div class="wow fadeInUp" data-wow-delay=".15s">
-              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
-                <svg width="40" height="41" viewBox="0 0 40 41" class="fill-current">
-                  <path opacity="0.5"
-                    d="M37.7778 40.2223H24C22.8954 40.2223 22 39.3268 22 38.2223V20.0001C22 18.8955 22.8954 18.0001 24 18.0001H37.7778C38.8823 18.0001 39.7778 18.8955 39.7778 20.0001V38.2223C39.7778 39.3268 38.8823 40.2223 37.7778 40.2223Z">
-                  </path>
-                  <path
-                    d="M23.2222 0C22.6699 0 22.2222 0.447715 22.2222 1V12.3333C22.2222 12.8856 22.6699 13.3333 23.2222 13.3333H39C39.5523 13.3333 40 12.8856 40 12.3333V0.999999C40 0.447714 39.5523 0 39 0H23.2222ZM0 39C0 39.5523 0.447715 40 1 40H16.7778C17.3301 40 17.7778 39.5523 17.7778 39V27.6667C17.7778 27.1144 17.3301 26.6667 16.7778 26.6667H1C0.447716 26.6667 0 27.1144 0 27.6667V39ZM0 21.2222C0 21.7745 0.447715 22.2222 1 22.2222H16.7778C17.3301 22.2222 17.7778 21.7745 17.7778 21.2222V0.999999C17.7778 0.447714 17.3301 0 16.7778 0H1C0.447716 0 0 0.447715 0 1V21.2222Z">
-                  </path>
-                </svg>
-              </div>
-              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Advanced
-                AI Technology</h3>
-              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Powered by state-of-the-art
-                algorithms to ensure smooth, high-quality video generation from images.</p>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="wow fadeInUp" data-wow-delay=".15s">
-              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
-                <svg width="40" height="40" viewBox="0 0 40 40" class="fill-current">
-                  <path opacity="0.5"
-                    d="M20.5914 34.2584C20.2394 34.5172 19.7603 34.5175 19.408 34.2593L4.19163 23.1079C3.8395 22.8498 3.36065 22.85 3.00873 23.1084L1.09802 24.5111C0.553731 24.9107 0.553731 25.7237 1.09802 26.1233L19.4082 39.5655C19.7604 39.824 20.2396 39.824 20.5918 39.5655L38.9029 26.1226C39.4469 25.7232 39.4473 24.9107 38.9036 24.5109L36.9701 23.0889C36.6177 22.8298 36.1378 22.8297 35.7854 23.0888L20.5914 34.2584Z">
-                  </path>
-                  <path
-                    d="M19.408 28.931C19.7603 29.1896 20.2396 29.1894 20.5918 28.9306L36.3556 17.3466L38.8979 15.4883C39.4437 15.0894 39.4446 14.275 38.8996 13.8749L20.5918 0.43445C20.2396 0.175911 19.7604 0.175913 19.4082 0.434452L1.09706 13.8774C0.553051 14.2767 0.552712 15.0892 1.09638 15.4891L3.62222 17.3466L19.408 28.931Z">
-                  </path>
-                </svg>
-              </div>
-              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                Optimized Performance</h3>
-              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Fast processing speed, even
-                with high-resolution images, minimizing wait times.</p>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="wow fadeInUp" data-wow-delay=".15s">
-              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
-                <svg width="40" height="40" viewBox="0 0 40 40" class="fill-current">
-                  <path opacity="0.5"
-                    d="M20 30C22.75 30 25 32.25 25 35C25 37.75 22.75 40 20 40C17.25 40 15 37.75 15 35C15 32.25 17.25 30 20 30ZM35 30C37.75 30 40 32.25 40 35C40 37.75 37.75 40 35 40C32.25 40 30 37.75 30 35C30 32.25 32.25 30 35 30ZM35 15C37.75 15 40 17.25 40 20C40 22.75 37.75 25 35 25C32.25 25 30 22.75 30 20C30 17.25 32.25 15 35 15Z">
-                  </path>
-                  <path
-                    d="M20 15C22.75 15 25 17.25 25 20C25 22.75 22.75 25 20 25C17.25 25 15 22.75 15 20C15 17.25 17.25 15 20 15ZM20 0C22.75 0 25 2.25 25 5C25 7.75 22.75 10 20 10C17.25 10 15 7.75 15 5C15 2.25 17.25 0 20 0ZM5 30C7.75 30 10 32.25 10 35C10 37.75 7.75 40 5 40C2.25 40 0 37.75 0 35C0 32.25 2.25 30 5 30ZM5 15C7.75 15 10 17.25 10 20C10 22.75 7.75 25 5 25C2.25 25 0 22.75 0 20C0 17.25 2.25 15 5 15ZM5 0C7.75 0 10 2.25 10 5C10 7.75 7.75 10 5 10C2.25 10 0 7.75 0 5C0 2.25 2.25 0 5 0ZM35 0C37.75 0 40 2.25 40 5C40 7.75 37.75 10 35 10C32.25 10 30 7.75 30 5C30 2.25 32.25 0 35 0Z">
-                  </path>
-                </svg>
-              </div>
-              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                Customizable Output</h3>
-              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Adjust video length, aspect
-                ratio, and visual effects to perfectly match your creative vision.</p>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="wow fadeInUp" data-wow-delay=".15s">
-              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
-                <svg width="40" height="42" viewBox="0 0 40 42" class="fill-current">
-                  <path opacity="0.5"
-                    d="M31.8943 25.3303C34.1233 25.3303 36.1497 26.1409 37.5682 27.762L39.1464 26.1839C39.4614 25.8689 39.9999 26.092 39.9999 26.5374V32.936C39.9999 33.2121 39.7761 33.436 39.4999 33.436H33.1014C32.6559 33.436 32.4328 32.8974 32.7478 32.5825L35.5418 29.7885C34.5286 28.9779 33.3128 28.37 31.8943 28.37C29.0573 28.37 26.8282 30.599 26.8282 33.436C26.8282 36.273 29.0573 38.5021 31.8943 38.5021C33.3549 38.5021 34.6511 37.844 35.6345 36.8244C35.8406 36.6107 36.1187 36.4756 36.4155 36.4756H38.6535C39.0072 36.4756 39.2477 36.833 39.0881 37.1487C37.7427 39.8107 35.0781 41.5417 31.8943 41.5417C27.4361 41.5417 23.7886 37.8941 23.7886 33.436C23.7886 28.9779 27.4361 25.3303 31.8943 25.3303Z">
-                  </path>
-                  <path
-                    d="M18.7226 33.436C18.7226 31.3572 19.2513 29.4548 19.9799 27.7285C20.0541 27.5529 19.9264 27.3567 19.7358 27.3567C15.8856 27.3567 12.6433 24.1144 12.6433 20.2642C12.6433 16.414 15.8856 13.1717 19.7358 13.1717C23.586 13.1717 26.8283 16.414 26.8283 20.2642C26.8283 20.5105 27.3897 21.0054 27.6246 20.9313C28.9274 20.5206 30.2827 20.2642 31.8943 20.2642C32.775 20.2642 33.6557 20.4173 34.5364 20.5905C34.7422 20.6309 34.9339 20.4739 34.9339 20.2642C34.9339 19.8699 34.9339 19.3904 34.8787 18.9362C34.827 18.5117 34.9599 18.0636 35.3001 17.8045L38.9868 14.9955C39.3921 14.5902 39.3921 14.1849 39.1894 13.7797L35.1857 6.77316C35.153 6.71599 35.1272 6.65499 35.1021 6.59411C34.9143 6.13895 34.5848 6.08618 34.1135 6.08007C33.9863 6.07841 33.86 6.10354 33.7419 6.15079L29.3957 7.88927C29.0613 8.02302 28.6829 7.96367 28.3887 7.75599C27.6155 7.21023 26.7521 6.75466 25.8752 6.31262C25.5838 6.16573 25.3813 5.88702 25.3335 5.56423L24.6729 1.10574C24.6265 0.792572 24.6613 0.389935 24.3993 0.212245C24.2235 0.0930361 23.9828 0 23.7886 0H15.6829C15.3021 0 14.7424 0.35783 14.6762 0.73726C14.6678 0.785579 14.6661 0.834927 14.6589 0.883445L13.9492 5.67408C13.894 6.04692 13.6313 6.35205 13.2873 6.50604C12.4439 6.88359 11.673 7.42345 10.8193 7.89265C10.5647 8.03264 10.26 8.04143 9.99178 7.92966L5.73545 6.15619C5.61358 6.10541 5.48273 6.07832 5.35072 6.08016C4.8506 6.08715 4.49147 6.1485 4.13234 6.68719L0.0794975 13.7797C-0.123145 14.1849 0.0794976 14.5902 0.484782 14.9955L4.34631 17.9376C4.59456 18.1268 4.74261 18.4216 4.7079 18.7317C4.65068 19.243 4.53762 19.8101 4.53762 20.2642C4.53762 20.6648 4.53762 21.1534 4.59561 21.614C4.64767 22.0276 4.52563 22.4644 4.20164 22.7267L0.484782 25.7355C0.0794976 26.1408 0.0794978 26.5461 0.28214 26.9514L4.33498 34.0439C4.5154 34.4047 4.85644 34.4443 5.35811 34.4486C5.48532 34.4497 5.61152 34.4249 5.72964 34.3776L10.0758 32.6392C10.4102 32.5054 10.7887 32.5648 11.0829 32.7724C11.8561 33.3182 12.7195 33.7738 13.5964 34.2158C13.8878 34.3627 14.0903 34.6414 14.1381 34.9642L14.8616 39.8476C14.8688 39.8961 14.871 39.9453 14.8768 39.994C14.9222 40.3734 15.3145 40.7311 15.8856 40.7311H19.13C19.9191 40.7311 20.4065 39.8523 20.0627 39.1421C19.1998 37.3593 18.7226 35.4573 18.7226 33.436Z">
-                  </path>
-                </svg>
-              </div>
-              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">Seamless
-                User Experience</h3>
-              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Intuitive interface designed
-                for hassle-free video creation, no technical skills required.</p>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="wow fadeInUp" data-wow-delay=".15s">
-              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
-                <svg width="40" height="40" viewBox="0 0 40 40" class="fill-current">
-                  <path opacity="0.5"
-                    d="M39 12C39.5523 12 40 12.4477 40 13V39C40 39.5523 39.5523 40 39 40H13C12.4477 40 12 39.5523 12 39V33C12 32.4477 12.4477 32 13 32H31C31.5523 32 32 31.5523 32 31V13C32 12.4477 32.4477 12 33 12H39Z">
-                  </path>
-                  <rect width="28" height="28" rx="1">
-
-                  </rect>
-                </svg>
-              </div>
-              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                Multi-Format Support</h3>
-              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">Supports a wide range of image
-                formats, giving you the flexibility to work with any content.</p>
-            </div>
-          </div>
-          <div class="w-full">
-            <div class="wow fadeInUp" data-wow-delay=".15s">
-              <div class="mb-10 flex h-[70px] w-[70px] items-center justify-center rounded-md bg-[#4a6cf7]/10">
-                <svg width="40" height="45" viewBox="0 0 40 45" class="fill-current">
-                  <path opacity="0.5"
-                    d="M31.579 37.8948C28.6737 37.8948 26.3158 35.5369 26.3158 32.6317C26.3158 31.9159 26.4527 31.2306 26.7135 30.6015C26.7959 30.4027 26.7605 30.1711 26.6083 30.019L24.9997 28.4103C24.7766 28.1872 24.4043 28.2238 24.2487 28.4983C23.5588 29.7145 23.1579 31.125 23.1579 32.6317C23.1579 37.2843 26.9263 41.0527 31.579 41.0527V43.0035C31.579 43.449 32.1175 43.6721 32.4325 43.3571L35.9622 39.8273C36.1575 39.6321 36.1575 39.3155 35.9622 39.1202L32.4325 35.5905C32.1175 35.2755 31.579 35.4986 31.579 35.9441V37.8948ZM31.579 24.2106V22.2598C31.579 21.8144 31.0404 21.5913 30.7254 21.9063L27.1957 25.436C27.0004 25.6313 27.0004 25.9479 27.1957 26.1431L30.7254 29.6729C31.0404 29.9879 31.579 29.7648 31.579 29.3193V27.3685C34.4842 27.3685 36.8421 29.7264 36.8421 32.6317C36.8421 33.3474 36.7052 34.0328 36.4444 34.6618C36.362 34.8606 36.3974 35.0922 36.5496 35.2444L38.1582 36.853C38.3813 37.0762 38.7536 37.0396 38.9092 36.7651C39.5991 35.5488 40 34.1384 40 32.6317C40 27.9791 36.2316 24.2106 31.579 24.2106Z">
-                  </path>
-                  <path
-                    d="M18.9474 32.6316C18.9474 35.4705 19.8099 38.0969 21.2941 40.2796C21.7904 41.0094 21.3054 42.1053 20.4229 42.1053H4.21053C1.87368 42.1053 0 40.2316 0 37.8947V4.21053C0 1.89474 1.87368 0 4.21053 0H6.31579H16.8421H29.4737C31.7895 0 33.6842 1.87368 33.6842 4.21053V17.9544C33.6842 18.5032 33.1804 18.9474 32.6316 18.9474C25.0737 18.9474 18.9474 25.0737 18.9474 32.6316Z">
-                  </path>
-                </svg>
-              </div>
-              <h3 class="mb-5 text-xl font-bold text-black dark:text-white sm:text-2xl lg:text-xl xl:text-2xl">
-                Cloud-Based Convenienc</h3>
-              <p class="pr-[10px] text-base font-medium leading-relaxed text-body-color">No downloads or installations
-                needed - access Vider.ai from any device, anywhere.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ornament -->
-      <div class="absolute right-0 top-5 z-[-1]">
-        <svg width="238" height="531" viewBox="0 0 238 531" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect opacity="0.3" x="422.819" y="-70.8145" width="196" height="541.607" rx="2"
-            transform="rotate(51.2997 422.819 -70.8145)" fill="url(#paint0_linear_83:2)">
-          </rect>
-          <rect opacity="0.3" x="426.568" y="144.886" width="59.7544" height="541.607" rx="2"
-            transform="rotate(51.2997 426.568 144.886)" fill="url(#paint1_linear_83:2)">
-          </rect>
-          <defs>
-            <linearGradient id="paint0_linear_83:2" x1="517.152" y1="-251.373" x2="517.152" y2="459.865"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-            </linearGradient>
-            <linearGradient id="paint1_linear_83:2" x1="455.327" y1="-35.673" x2="455.327" y2="675.565"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
+              <stop stop-color="#4A6CF7" stop-opacity="0.62"></stop>
+              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0"></stop>
             </linearGradient>
           </defs>
         </svg>
@@ -1657,46 +1490,92 @@ behavior: 'smooth' }); } } }" x-init="
     <!-- Steps -->
     <section id="step" class="bg-f-other-5 px-4 py-12 lg:py-[160px]">
       <div class="mx-auto container relative">
-        <div class="w-full max-w-[570px] mb-[100px] max-sm:mb-10 mx-auto text-center">
+        <div class="w-full max-w-[570px] mb-[100px] max-sm:mb-20 mx-auto text-center">
           <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">How
-            to Create Video with Images</h2>
-          <p class="text-f-text-secondary mt-3 text-sm md:text-lg">Follow these simple steps to turn your images into
-            dynamic videos with Vider.ai - no technical skills required!</p>
+            to Use the AI Video Generator</h2>
+          <p class="mt-3 text-sm md:text-lg">Follow 3 simple steps to turn your images or text into dynamic videos
+            effortlessly.</p>
         </div>
 
         <div class="mt-6 lg:mt-10 flex flex-col-reverse items-center gap-6 md:flex-row md:gap-14">
           <div class="w-full md:w-[50%] aspect-[6/4]">
             <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-              poster="./assets/video/p1/image-to-video-guide-cover.webp"
-              src="./assets/video/p1/image-to-video-guide.mp4">
+              src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
             </video>
           </div>
 
           <div class="w-full md:w-[50%] flex flex-col gap-4 md:gap-10">
-            <div class="bg-gray-500/10 border-f-border-secondary flex-1 rounded-xl border p-4 text-start md:p-6">
-              <p class="font-semibold text-sm lg:text-xl text-[#5375fd]">Step 1: Upload Your Images</p>
-              <p class="text-f-text-secondary mt-2 text-sm lg:text-base">Select images from your device to start
-                creating your video. Just click the upload button and choose your files.</p>
-            </div>
-            <div class="bg-gray-500/10 border-f-border-secondary flex-1 rounded-xl border p-4 text-start md:p-6">
-              <p class="font-semibold text-sm lg:text-xl text-[#5375fd]">Step 2: Add Your Prompt</p>
-              <p class="text-f-text-secondary mt-2 text-sm lg:text-base">Describe your desired video style or scene
-                using a simple text prompt. Let Vider.ai understand your vision.</p>
-            </div>
-            <div class="bg-gray-500/10 border-f-border-secondary flex-1 rounded-xl border p-4 text-start md:p-6">
-              <p class="font-semibold text-sm lg:text-xl text-[#5375fd]">Step 3: Generate and Download</p>
-              <p class="text-f-text-secondary mt-2 text-sm lg:text-base">Click “Generate” and let Vider.ai do the rest.
-                Once ready, preview and download your high-quality video.</p>
-            </div>
+            <ul role="list" class="-mb-8">
+              <li>
+                <div class="relative pb-8">
+                  <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-[#4a6cf7]/50" aria-hidden="true"></span>
+                  <div class="relative flex space-x-3 gap-10 min-h-30">
+                    <div class="text-2xl text-white">
+                      <span
+                        class="flex size-8 items-center justify-center rounded-full bg-[#4a6cf7] ring-8 ring-[#4a6cf7] relative before:absolute  before:bg-white/20 before:rounded-full before:animate-pulse before:-top-[5px] before:-right-[5px] before:-bottom-[5px] before:-left-[5px]">
+                        1
+                      </span>
+                    </div>
+                    <div class="flex min-w-0 flex-1 justify-between space-x-4">
+                      <div>
+                        <h6 class="mb-1.5 text-gray-300">Upload or Enter Your Content</h6>
+                        <p class="text-sm text-gray-500 leading-6">Choose your input method - either upload images from
+                          your device or enter a text prompt to start generating your video.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="relative pb-8">
+                  <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-[#4a6cf7]/50" aria-hidden="true"></span>
+                  <div class="relative flex space-x-3 gap-10 min-h-30">
+                    <div class="text-2xl text-white">
+                      <span
+                        class="flex size-8 items-center justify-center rounded-full bg-[#4a6cf7] ring-8 ring-[#4a6cf7] relative before:absolute  before:bg-white/20 before:rounded-full before:animate-pulse before:-top-[5px] before:-right-[5px] before:-bottom-[5px] before:-left-[5px]">
+                        2
+                      </span>
+                    </div>
+                    <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                      <div>
+                        <h6 class="mb-1.5 text-gray-300">Customize Your Video</h6>
+                        <p class="text-sm text-gray-500 leading-6">Use AI-generated prompts to precisely set your video
+                          requirements, including style, aspect ratio, video length, and camera movements.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="relative pb-8">
+                  <div class="relative flex space-x-3 gap-10 min-h-30">
+                    <div class="text-2xl text-white">
+                      <span
+                        class="flex size-8 items-center justify-center rounded-full bg-[#4a6cf7] ring-8 ring-[#4a6cf7] relative before:absolute  before:bg-white/20 before:rounded-full before:animate-pulse before:-top-[5px] before:-right-[5px] before:-bottom-[5px] before:-left-[5px]">
+                        3
+                      </span>
+                    </div>
+                    <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                      <div>
+                        <h6 class="mb-1.5 text-gray-300">Generate and Download</h6>
+                        <p class="text-sm text-gray-500 leading-6">Click “Generate” and let Vider.ai work its magic.
+                          Your video will be ready in minutes - simply download and share!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- ===== FAQ Start ===== -->
-    <section id="FAQ" class="overflow-hidden relative py-16 md:py-20 lg:py-28">
+    <section id="FAQ" class="relative py-16 md:py-20 lg:py-28 overflow-hidden">
       <div class="container mx-auto relative">
-        <!-- ornament -->
+        <!-- Decorate -->
         <div>
           <span class="absolute left-2 top-7">
             <svg width="57" height="65" viewBox="0 0 57 65" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1760,17 +1639,28 @@ behavior: 'smooth' }); } } }" x-init="
           <h2 class="mx-auto mb-4 text-5xl font-bold text-black dark:text-white md:w-4/5 xl:w-1/2 xl:text-5xl">
             Frequently Asked Questions
           </h2>
-          <p class="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]">Everything you need to know about creating
-            videos from images with Vider.ai - quick answers to common questions.</p>
+          <p class="mx-auto md:w-4/5 lg:w-3/5 xl:w-[46%]">
+            Find answers to common questions about using Vider.ai’s AI video generator. Get tips and insights to make
+            the most of your video creation experience.
+          </p>
         </div>
 
         <!-- Content -->
-        <div class="mt-12.5 gap-5 lg:mt-15 lg:grid-cols-4 xl:mt-20 xl:gap-5">
+        <div class="flex max-sm:flex-col gap-5 mt-12.5 lg:mt-15 lg:grid-cols-4 xl:mt-20 xl:gap-5">
+          <!-- Left Text -->
+          <div class="w-full h-full px-4 max-sm:px-0 lg:w-1/2 wow animate__animated animate__fadeInLeft">
+            <div class="text-center lg:text-right aspect-[9/11.8]">
+              <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
+                src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+              </video>
+            </div>
+          </div>
+
           <div class="wow animate__animated animate__fadeInRight">
             <div class="relative rounded-lg bg-white shadow-solid-8 dark:border dark:border-[#2d2f40] dark:bg-[#1d2430]"
               x-data="{selected:0}">
 
-              <!-- ornament -->
+              <!-- Decorate -->
               <span class="absolute right-0 top-0">
                 <svg width="162" height="91" viewBox="0 0 162 91" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g opacity="0.3">
@@ -1836,11 +1726,11 @@ behavior: 'smooth' }); } } }" x-init="
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
                   <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Is Vider.ai really free to use?
+                  Is Vider.ai completely free to use?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  Yes, Vider.ai is completely free and unlimited. You can generate as many videos as you want without
-                  any charges or subscription fees.
+                  Yes, Vider.ai is 100% free to use with no hidden fees or subscriptions. You can generate an unlimited
+                  number of videos without any cost.
                 </p>
               </div>
 
@@ -1848,11 +1738,11 @@ behavior: 'smooth' }); } } }" x-init="
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
                   <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Do I need to create an account to use Vider.ai?
+                  Can I create videos from both text and images?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  No, Vider.ai does not require any sign-up or account creation. You can start creating videos
-                  immediately after uploading your images.
+                  Absolutely! Vider.ai supports both text-to-video and image-to-video generation, giving you the
+                  flexibility to create videos from either input.
                 </p>
               </div>
 
@@ -1860,11 +1750,47 @@ behavior: 'smooth' }); } } }" x-init="
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
                   <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  What image formats are supported?
+                  Are there any limits on how many videos I can create?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  Vider.ai supports all common image formats, including JPEG, PNG, and BMP. Simply upload your files
-                  directly from your device.
+                  No, there are no limits. Vider.ai allows you to create as many videos as you want, whenever you want.
+                  Enjoy unlimited video generation for free!
+                </p>
+              </div>
+
+              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
+                <h4
+                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
+                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  Do I need to sign up or create an account to use Vider.ai?
+                </h4>
+                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
+                  No registration is required. You can start creating videos instantly without the need to sign up or
+                  provide any personal information.
+                </p>
+              </div>
+
+              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
+                <h4
+                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
+                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  Will the generated videos have a watermark?
+                </h4>
+                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
+                  No, Vider.ai does not add any watermarks to your videos. You can download and use your videos without
+                  any branding or logos.
+                </p>
+              </div>
+
+              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
+                <h4
+                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
+                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  What kind of videos can I generate?
+                </h4>
+                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
+                  You can create videos in a wide range of styles, including realistic scenes, animations, and custom
+                  visual effects. Whether from text prompts or images, Vider.ai adapts to your creative needs.
                 </p>
               </div>
 
@@ -1875,9 +1801,8 @@ behavior: 'smooth' }); } } }" x-init="
                   How long does it take to generate a video?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  The processing time depends on the number of tasks in the queue. Typically, generating a single video
-                  takes about 2 to 4 minutes. Vider.ai uses optimized algorithms to ensure fast and efficient video
-                  generation.
+                  Typically, it takes around 2 to 4 minutes to process a single video. The exact time may vary depending
+                  on the queue length and video complexity.
                 </p>
               </div>
 
@@ -1885,11 +1810,11 @@ behavior: 'smooth' }); } } }" x-init="
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
                   <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Can I customize the video output?
+                  Can I customize the generated videos?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  Absolutely! You can choose the output aspect ratio and use prompts to define the video style, camera
-                  movements, and other creative details. Vider.ai gives you full control over the final result.
+                  Yes, Vider.ai offers extensive customization options. Use AI-generated prompts to specify video style,
+                  aspect ratio, and even camera movements.
                 </p>
               </div>
 
@@ -1897,11 +1822,11 @@ behavior: 'smooth' }); } } }" x-init="
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
                   <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Is there a limit to how many videos I can create?
+                  Are there any restrictions on video usage?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  No, there are no limits. Vider.ai allows unlimited video creation for free, so you can generate as
-                  many videos as you like.
+                  No, you have full rights to use the videos generated by Vider.ai for personal or commercial projects
+                  without any limitations.
                 </p>
               </div>
 
@@ -1909,61 +1834,11 @@ behavior: 'smooth' }); } } }" x-init="
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
                   <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Will my videos be stored on Vider.ai?
+                  How long are my generated videos stored on Vider.ai?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  No, we do not permanently store your videos or images. Once the video is generated, it will be
-                  available for download. We will retain your files for up to 1 day, after which they will be
-                  automatically and permanently deleted. Please make sure to download your video within this time frame.
-                </p>
-              </div>
-
-              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
-                <h4
-                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Can I use the videos generated for commercial purposes?
-                </h4>
-                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  Yes, you have full rights to use the videos you create with Vider.ai for personal or commercial
-                  projects.
-                </p>
-              </div>
-
-              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
-                <h4
-                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  What should I do if the generated video doesn't look as expected?
-                </h4>
-                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  If the video output is not satisfactory, try adjusting your prompt with more precise and descriptive
-                  language. Providing clearer instructions can help the AI generate a better result. Simply tweak your
-                  prompt and try again.
-                </p>
-              </div>
-
-              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
-                <h4
-                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  How can I improve the quality of my generated videos?
-                </h4>
-                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  Using high-resolution images and providing clear, descriptive prompts can significantly enhance the
-                  quality of your video output.
-                </p>
-              </div>
-
-              <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
-                <h4
-                  class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
-                  Does Vider.ai add a watermark to the generated videos?
-                </h4>
-                <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
-                  No, Vider.ai does not add any watermarks to your videos. You can enjoy high-quality,
-                  professional-looking videos without any branding or logos.
+                  Videos are stored for up to 1 day after generation. After that, they are automatically and permanently
+                  deleted. Please download your videos promptly to avoid losing them.
                 </p>
               </div>
             </div>
@@ -1974,483 +1849,8 @@ behavior: 'smooth' }); } } }" x-init="
     </section>
     <!-- ===== FAQ End ===== -->
 
-    <!-- Comment -->
-    <section class="dark:bg-bg-color-dark bg-gray-light relative z-10 py-16 md:py-20 lg:py-28">
-      <div class="container">
-        <!-- Section Title -->
-        <div class="w-full mx-auto text-center" style="max-width:570px;margin-bottom:100px">
-          <h2 class="mb-4 text-3xl font-bold !leading-tight text-black dark:text-white sm:text-4xl md:text-[45px]">What
-            Our Users Says</h2>
-          <p class="text-base !leading-relaxed text-body-color md:text-lg">Hear from our users about how Vider.ai makes
-            image to video creation effortless, creative, and truly impressive.</p>
-        </div>
-
-        <!-- Slider main container -->
-        <div class="swiper swiper-comment clients-carousel swiper-initialized swiper-horizontal swiper-backface-hidden">
-          <!-- Additional required wrapper -->
-          <div class="swiper-wrapper items-center select-none !ease-linear">
-            <!-- Slides -->
-            <div class="swiper-slide !w-auto">
-              <div class="w-full">
-                <div
-                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
-                  <div class="mb-5 flex items-center space-x-1">
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                  </div>
-                  <p
-                    class="min-h-[10em] mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
-                    “I've tried several tools, but Vider.ai is by far the best image to video AI I've used. It's
-                    incredibly easy to create high-quality videos from images, and the fact that it's completely free
-                    makes it unbeatable!”</p>
-                  <div class="flex items-center">
-                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-                      <img alt="Sarah-Johnson" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
-                        srcset="./assets/img/user/Sarah-Johnson.webp" src="./assets/img/user/Sarah-Johnson.webp">
-                    </div>
-                    <div class="w-full">
-                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Sarah
-                        Johnson</h3>
-                      <p class="text-sm text-body-color">Digital Marketer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Slides -->
-            <div class="swiper-slide !w-auto">
-              <div class="w-full">
-                <div
-                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
-                  <div class="mb-5 flex items-center space-x-1">
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                  </div>
-                  <p
-                    class="min-h-[10em] mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
-                    “Vider.ai's AI image to video generator is a game-changer! I love how I can convert static images
-                    into engaging videos effortlessly. Plus, the free no watermark feature is perfect for sharing
-                    professional-looking content.”</p>
-                  <div class="flex items-center">
-                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-                      <img alt="Mike-Davis" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
-                        srcset="./assets/img/user/Mike-Davis.webp" src="./assets/img/user/Mike-Davis.webp">
-                    </div>
-                    <div class="w-full">
-                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Mike
-                        Davis</h3>
-                      <p class="text-sm text-body-color">Content Creator</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Slides -->
-            <div class="swiper-slide !w-auto">
-              <div class="w-full">
-                <div
-                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
-                  <div class="mb-5 flex items-center space-x-1">
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                  </div>
-                  <p
-                    class="min-h-[10em] mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
-                    “I was looking for an AI image to video free tool, and Vider.ai exceeded my expectations. The
-                    quality is impressive, and the platform is easy to use. Highly recommended!”</p>
-                  <div class="flex items-center">
-                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-                      <img alt="Lisa Chen" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
-                        srcset="./assets/img/user/Lisa-Chen.webp" src="./assets/img/user/Lisa-Chen.webp">
-                    </div>
-                    <div class="w-full">
-                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Lisa Chen
-                      </h3>
-                      <p class="text-sm text-body-color">Graphic Designer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Slides -->
-            <div class="swiper-slide !w-auto">
-              <div class="w-full">
-                <div
-                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
-                  <div class="mb-5 flex items-center space-x-1">
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                  </div>
-                  <p
-                    class="min-h-[10em] mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
-                    “Vider.ai makes content creation so easy. The image to video AI free feature is a lifesaver when I
-                    need to quickly generate videos for social media. The output quality is always top-notch!”</p>
-                  <div class="flex items-center">
-                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-                      <img alt="Tom Hernandez" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
-                        srcset="./assets/img/user/Tom-Hernandez.webp" src="./assets/img/user/Tom-Hernandez.webp">
-                    </div>
-                    <div class="w-full">
-                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Tom
-                        Hernandez</h3>
-                      <p class="text-sm text-body-color">Social Media Manager</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Slides -->
-            <div class="swiper-slide !w-auto">
-              <div class="w-full">
-                <div
-                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
-                  <div class="mb-5 flex items-center space-x-1">
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                  </div>
-                  <p
-                    class="min-h-[10em] mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
-                    “I use Vider.ai to turn my photo series into dynamic videos. The AI image to video tool is simple to
-                    use and delivers stunning results every time. Plus, it's free and no watermark!”</p>
-                  <div class="flex items-center">
-                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-                      <img alt="Emily Rivera" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
-                        srcset="./assets/img/user/Emily-Rivera.webp" src="./assets/img/user/Emily-Rivera.webp">
-                    </div>
-                    <div class="w-full">
-                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">Emily
-                        Rivera</h3>
-                      <p class="text-sm text-body-color">Photographer</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Slides -->
-            <div class="swiper-slide !w-auto">
-              <div class="w-full">
-                <div
-                  class="w-110 max-sm:w-[90vw] rounded-xl p-8 shadow-two duration-300 hover:shadow-one dark:bg-[#1d2430] dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
-                  <div class="mb-5 flex items-center space-x-1">
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                    <span class="text-yellow">
-                      <svg width="18" height="16" viewBox="0 0 18 16" class="fill-current">
-                        <path
-                          d="M9.09815 0.361679L11.1054 6.06601H17.601L12.3459 9.59149L14.3532 15.2958L9.09815 11.7703L3.84309 15.2958L5.85035 9.59149L0.595291 6.06601H7.0909L9.09815 0.361679Z">
-                        </path>
-                      </svg>
-                    </span>
-                  </div>
-                  <p
-                    class="min-h-[10em] mb-8 border-b border-[#3c4157] pb-8 text-base leading-relaxed text-body-color dark:border-[#3c4157] dark:text-white">
-                    “As a professional, I need reliable tools, and Vider.ai's AI image to video generator is just that.
-                    It's fast, free, and produces high-quality videos. Perfect for quick projects!”</p>
-                  <div class="flex items-center">
-                    <div class="relative mr-4 h-[50px] w-full max-w-[50px] overflow-hidden rounded-full">
-                      <img alt="David Lee" loading="lazy" decoding="async" data-nimg="fill" sizes="100vw"
-                        srcset="./assets/img/user/David-Lee.webp" src="./assets/img/user/David-Lee.webp">
-                    </div>
-                    <div class="w-full">
-                      <h3 class="mb-1 text-lg font-semibold text-dark dark:text-white lg:text-base xl:text-lg">David Lee
-                      </h3>
-                      <p class="text-sm text-body-color">Video Editor</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Decorate -->
-      <div class="absolute right-0 top-5 z-[-1]">
-        <svg width="238" height="531" viewBox="0 0 238 531" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect opacity="0.3" x="422.819" y="-70.8145" width="196" height="541.607" rx="2"
-            transform="rotate(51.2997 422.819 -70.8145)" fill="url(#paint0_linear_83:2)">
-          </rect>
-          <rect opacity="0.3" x="426.568" y="144.886" width="59.7544" height="541.607" rx="2"
-            transform="rotate(51.2997 426.568 144.886)" fill="url(#paint1_linear_83:2)">
-          </rect>
-          <defs>
-            <linearGradient id="paint0_linear_83:2" x1="517.152" y1="-251.373" x2="517.152" y2="459.865"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-            </linearGradient>
-            <linearGradient id="paint1_linear_83:2" x1="455.327" y1="-35.673" x2="455.327" y2="675.565"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <!-- Decorate -->
-      <div class="absolute bottom-5 left-0 z-[-1]">
-        <svg width="279" height="106" viewBox="0 0 279 106" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g opacity="0.5">
-            <path
-              d="M-57 12L50.0728 74.8548C55.5501 79.0219 70.8513 85.7589 88.2373 79.3692C109.97 71.3821 116.861 60.9642 156.615 63.7423C178.778 65.291 195.31 69.2985 205.911 62.3533C216.513 55.408 224.994 47.7682 243.016 49.1572C255.835 50.1453 265.278 50.8936 278 45.3373"
-              stroke="url(#paint0_linear_72:302)">
-            </path>
-            <path
-              d="M-57 1L50.0728 63.8548C55.5501 68.0219 70.8513 74.7589 88.2373 68.3692C109.97 60.3821 116.861 49.9642 156.615 52.7423C178.778 54.291 195.31 58.2985 205.911 51.3533C216.513 44.408 224.994 36.7682 243.016 38.1572C255.835 39.1453 265.278 39.8936 278 34.3373"
-              stroke="url(#paint1_linear_72:302)">
-            </path>
-            <path
-              d="M-57 23L50.0728 85.8548C55.5501 90.0219 70.8513 96.7589 88.2373 90.3692C109.97 82.3821 116.861 71.9642 156.615 74.7423C178.778 76.291 195.31 80.2985 205.911 73.3533C216.513 66.408 224.994 58.7682 243.016 60.1572C255.835 61.1453 265.278 61.8936 278 56.3373"
-              stroke="url(#paint2_linear_72:302)">
-            </path>
-            <path
-              d="M-57 35L50.0728 97.8548C55.5501 102.022 70.8513 108.759 88.2373 102.369C109.97 94.3821 116.861 83.9642 156.615 86.7423C178.778 88.291 195.31 92.2985 205.911 85.3533C216.513 78.408 224.994 70.7682 243.016 72.1572C255.835 73.1453 265.278 73.8936 278 68.3373"
-              stroke="url(#paint3_linear_72:302)">
-            </path>
-          </g>
-          <defs>
-            <linearGradient id="paint0_linear_72:302" x1="256.267" y1="53.6717" x2="-40.8688" y2="8.15715"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7">
-
-              </stop>
-            </linearGradient>
-            <linearGradient id="paint1_linear_72:302" x1="256.267" y1="42.6717" x2="-40.8688" y2="-2.84285"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7">
-
-              </stop>
-            </linearGradient>
-            <linearGradient id="paint2_linear_72:302" x1="256.267" y1="64.6717" x2="-40.8688" y2="19.1572"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7">
-
-              </stop>
-            </linearGradient>
-            <linearGradient id="paint3_linear_72:302" x1="256.267" y1="76.6717" x2="-40.8688" y2="31.1572"
-              gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4A6CF7" stop-opacity="0">
-
-              </stop>
-              <stop offset="1" stop-color="#4A6CF7">
-
-              </stop>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </section>
-
     <!-- ===== CTA Start ===== -->
-    <section class="pb-20 lg:pb-25 xl:pb-30">
+    <section class="overflow-hidden pb-20 lg:pb-25 xl:pb-30">
       <div class="container">
         <div class="overflow-hidden relative z-1 rounded-xl bg-gradient-to-t from-[#F8F9FF]
         to-[#DEE7FF] py-22.5 dark:bg-[#1d2430] dark:bg-gradient-to-t dark:from-transparent dark:to-transparent
@@ -2469,7 +1869,7 @@ behavior: 'smooth' }); } } }" x-init="
             </span>
           </div>
 
-          <!-- 装饰 -->
+          <!-- Decorate -->
           <div>
             <span class="absolute left-2 top-7">
               <svg width="57" height="65" viewBox="0 0 57 65" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2592,23 +1992,24 @@ behavior: 'smooth' }); } } }" x-init="
           <div class="flex items-center justify-evenly max-sm:flex-col">
             <div class="wow animate__animated animate__fadeInUp w-[50%] max-sm:w-full px-4 max-sm:px-0 text-center">
               <h2 class="leading-15 mb-8 text-5xl font-bold text-black dark:text-white xl:text-5xl dc-gradient-text">
-                Turn Your Images into Videos with Vider.ai</h2>
-              <p class="mx-auto lg:w-11/12">Fast, unlimited, and watermark-free - create stunning videos from your
-                images effortlessly.</p>
+                Start Creating Videos for Free</h2>
+              <p class="mx-auto lg:w-11/12">
+                Experience the power of unlimited AI video generation with Vider.ai - no sign-up, no fees, just endless
+                creativity.</p>
             </div>
 
             <!-- Right -->
             <div class="mt-10 flex items-center justify-center gap-x-6">
-              <div @click.prevent="scrollToSection('ActionArea')" class="flex items-center text-center dc-button-hover-outline-white rounded-full leading-none
-          dc-bg-blue px-5 py-5 text-[13px] md:text-[16px] text-white shadow-xs cursor-pointer">
-                <div class="w-40 h-[20px] leading-[20px]">
-                  Get Started Now
+              <a @click.prevent="scrollToSection('ActionArea')" class="flex items-center text-center dc-button-hover-outline-white rounded-full leading-none
+          dc-bg-blue px-10 py-5 text-[13px] md:text-[16px] text-white shadow-xs cursor-pointer">
+                <div class="w-50 h-[20px] leading-[20px]">
+                  Create Your Video Now
                 </div>
                 <span
                   class="inline-block ml-2 wow animate__animated animate__wobble animate__slow animate__infinite animated">
                   <img src="./assets/img/other/icon-arrow-light.svg" alt="Arrow" class="hidden dark:block">
                 </span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -2625,8 +2026,8 @@ behavior: 'smooth' }); } } }" x-init="
           <div class="mb-12 max-w-[360px] lg:mb-16">
 
             <a class="navbar-brand shrink-0 text-5xl font-bold" href="./index.html">
-              <!-- LOGO -->
-              <img src="./assets/img/logo.svg" alt="Logo" class="w-50 hidden dark:block">
+              LOGO
+              <!-- <img src="./assets/img/other/logo-dark.svg" alt="Logo" class="hidden dark:block"> -->
             </a>
             <p class="mt-5 mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
               Create stunning AI videos with Vider.ai, free, fast, and limitless.</p>
@@ -2868,7 +2269,7 @@ behavior: 'smooth' }); } } }" x-init="
   <div x-data="{scrollTop: false}" class="fixed bottom-8 right-8 z-[99]"
     @click="window.scrollTo({top: 0, behavior: 'smooth'})"
     @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'rb' : scrollTop }">
-    <div aria-label="scroll to top"
+    <div
       class="hover:shadow-signUp flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#252a42] text-white shadow-md transition duration-300 ease-in-out hover:bg-opacity-80 select-none">
       <span class="mt-[6px] h-3 w-3 rotate-45 border-l border-t border-white">
 
@@ -2947,7 +2348,7 @@ behavior: 'smooth' }); } } }" x-init="
         </div>
 
         <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
-          <!-- 错误信息将显示在这里 -->
+          <!-- The Error Message Will Be Displayed Here -->
         </div>
 
         <!-- Tab Content -->
@@ -3004,7 +2405,7 @@ behavior: 'smooth' }); } } }" x-init="
                     fill="#918EA0" />
                 </svg>
               </span>
-              <input type="email" placeholder="Enter your email" id="signIn_tab_2_email" value="aaa@aaa.com"
+              <input type="email" placeholder="Enter your email" id="signUp_tab_2_email" value="aaa@aaa.com"
                 class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
             </div>
 
@@ -3091,7 +2492,7 @@ behavior: 'smooth' }); } } }" x-init="
         </span>
 
         <div id="error-bar" class="hidden text-red-500 mb-2" role="alert">
-          <!-- the error message will be displayed here -->
+          <!-- The Error Message Will Be Displayed Here -->
         </div>
 
         <!-- Mail -->
@@ -3103,7 +2504,7 @@ behavior: 'smooth' }); } } }" x-init="
                 fill="#918EA0" />
             </svg>
           </span>
-          <input id="signUp_tab_2_email" type="email" placeholder="Enter your email" value="aaa@aaa.com"
+          <input id="tab_2_email" type="email" placeholder="Enter your email" value="aaa@aaa.com"
             class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
         </div>
 
@@ -3161,10 +2562,10 @@ behavior: 'smooth' }); } } }" x-init="
   <div id="prompt-dialog"
     class="mx-auto zoom-anim-dialog mfp-hide rounded-xl overflow-hidden w-[80%] max-w-[600px] max-sm:w-[90%] bg-[#201e2a] border border-[#343340] rounded-xl"
     x-data="{step: 1, selected: 1}">
-    <div class="p-8">
+    <div class="p-8 max-sm:p-4">
       <!-- prompt form -->
-      <div <div x-show="step === 1" class="flex flex-col justify-center items-center">
-        <div class="w-full mb-2 text-base font-semibold md:text-lg">Tell us anything about your video</div>
+      <div x-show="step === 1" class="flex flex-col justify-center items-center">
+        <div class="w-full mb-2 mr-2 text-base font-semibold md:text-lg">Tell us anything about your video</div>
         <div class="w-full border-f-border inline-block py-0 pl-0">
           <div class="relative">
             <textarea rows="4" placeholder="Futuristic fantasy video"
@@ -3234,10 +2635,10 @@ behavior: 'smooth' }); } } }" x-init="
   <!-- All JS Links -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="./assets/js/wow.min.js"></script>
-  <script src="./assets/js/jquery.min.js"></script>
-  <script src="./assets/js/magnific-popup.min.js"></script>
-  <script src="./assets/js/main.js"></script>
+  <script src="../assets/js/wow.min.js"></script>
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/magnific-popup.min.js"></script>
+  <script src="../assets/js/main.min.js"></script>
 </body>
 
 </html>

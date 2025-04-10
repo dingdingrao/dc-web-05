@@ -225,3 +225,34 @@ function downloadVideo(url) {
   a.click()
   document.body.removeChild(a)
 }
+
+
+// 自执行函数
+(function () {
+  window.addEventListener('load', () => {
+    // 获取所有需要懒加载的视频元素
+    const videos = document.querySelectorAll('video');
+
+    // 创建 IntersectionObserver
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                // const videoSource = video.querySelector('source');
+                // 当视频进入视窗时，开始加载视频
+                video.src = video.getAttribute('data-src');
+                // console.log('video loaded', video.src);
+                
+                video.load(); // 加载视频
+                video.play(); // 自动播放视频（可选）
+                observer.unobserve(video); // 停止观察这个视频
+            }
+        });
+    }, { threshold: 0.5 }); // threshold: 0.5 表示视频至少一半进入视窗时触发
+
+    // 遍历所有视频，开始观察
+    videos.forEach(video => {
+        observer.observe(video);
+    });
+  });
+})()

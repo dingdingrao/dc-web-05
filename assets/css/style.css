@@ -1471,14 +1471,19 @@ img[src*='icon-arrow-light.svg'] {
 .swiper-button-prev,
 .swiper-button-next {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 40px!important;
+  height: 40px!important;
   background: #5476fe90;
   border-radius: 50%;
 }
 .swiper-button-prev:after,
 .swiper-button-next:after {
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px!important;
+  height: 40px!important;
+  font-size: 12px!important;
   color: white;
 }
 .swiper-button-prev:hover,

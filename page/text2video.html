@@ -84,7 +84,7 @@ behavior: 'smooth' }); } } }" x-init="
 
             <a class="navbar-brand shrink-0 text-xl font-bold" href="./index.html">
               <!-- LOGO -->
-              <img src="./assets/img/logo.svg" alt="Logo" class="w-25 hidden dark:block">
+              <img src="../assets/img/logo.svg" alt="Logo" class="w-25 hidden dark:block">
             </a>
           </div>
 
@@ -117,7 +117,7 @@ behavior: 'smooth' }); } } }" x-init="
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
+                    <img src="../assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ behavior: 'smooth' }); } } }" x-init="
                   <span class="absolute -inset-1.5">
 
                   </span>
-                  <img class="size-8 rounded-full object-cover" src="./assets/img/user/user3.jpg" alt="Avatar">
+                  <img class="size-8 rounded-full object-cover" src="../assets/img/user/user3.jpg" alt="Avatar">
                 </div>
 
                 <div id="profile_dropdown" :class="{'!block': showProfileDropdown}"
@@ -173,7 +173,7 @@ behavior: 'smooth' }); } } }" x-init="
                   <div class="flex items-center justify-between px-4 py-2 text-sm text-gray-300">
                     <div class="flex items-center gap-2">
                       <span class="inline-block w-4">
-                        <img src="./assets/img/header/gold_coins.svg" alt="">
+                        <img src="../assets/img/header/gold_coins.svg" alt="">
                       </span>
                       <span x-text="userInfo?.credit || '0'">
 
@@ -197,10 +197,10 @@ behavior: 'smooth' }); } } }" x-init="
               ">Sign out</a>
                   <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
                   <span class="absolute left-0 bottom-0 -z-1 w-full">
-                    <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                    <img src="../assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
                   </span>
                   <span class="absolute left-0 top-0 -z-1 w-full">
-                    <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                    <img src="../assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
                   </span>
                 </div> -->
                 </div>
@@ -220,7 +220,7 @@ behavior: 'smooth' }); } } }" x-init="
             <!-- Logo -->
             <a class="navbar-brand shrink-0 w-[150px] mr-5 text-4xl font-bold text-white" href="./index.html">
               <!-- LOGO -->
-              <img class="w-full" src="./assets/img/logo.svg" alt="logo">
+              <img class="w-full" src="../assets/img/logo.svg" alt="logo">
               <!-- <img class="w-100" src="assets/img/logo.png" alt="logo"> -->
             </a>
             <!-- Menu -->
@@ -255,7 +255,7 @@ behavior: 'smooth' }); } } }" x-init="
                 <div
                   class="text-f-text-tertiary flex items-center justify-between py-1 pe-[2px] ps-1.5 hover:cursor-pointer">
                   <div class="flex flex-1 items-center justify-between gap-3 pr-2">
-                    <img src="./assets/img/icon/earth.svg" alt="earth" class="w-7">
+                    <img src="../assets/img/icon/earth.svg" alt="earth" class="w-7">
                     <p class="text-sm leading-5 text-gray-300">English</p>
                   </div>
                 </div>
@@ -297,7 +297,7 @@ behavior: 'smooth' }); } } }" x-init="
                   <span class="absolute -inset-1.5">
 
                   </span>
-                  <img class="size-8 rounded-full object-cover" src="./assets/img/user/user3.jpg" alt="Avatar">
+                  <img class="size-8 rounded-full object-cover" src="../assets/img/user/user3.jpg" alt="Avatar">
                 </div>
 
                 <div id="profile_dropdown" :class="{'!block': showProfileDropdown}"
@@ -311,7 +311,7 @@ behavior: 'smooth' }); } } }" x-init="
                   <div class="flex items-center justify-between px-4 py-2 text-sm text-gray-300">
                     <div class="flex items-center gap-2">
                       <span class="inline-block w-4">
-                        <img src="./assets/img/header/gold_coins.svg" alt="">
+                        <img src="../assets/img/header/gold_coins.svg" alt="">
                       </span>
                       <span x-text="userInfo?.credit || '0'">
 
@@ -335,10 +335,10 @@ behavior: 'smooth' }); } } }" x-init="
               ">Sign out</a>
                   <!-- <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden">
                   <span class="absolute left-0 bottom-0 -z-1 w-full">
-                    <img src="./assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
+                    <img src="../assets/img/header/blur-16.svg" alt="blur" class="max-w-none w-full">
                   </span>
                   <span class="absolute left-0 top-0 -z-1 w-full">
-                    <img src="./assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
+                    <img src="../assets/img/header/blur-17.svg" alt="blur" class="max-w-none w-full">
                   </span>
                 </div> -->
                 </div>
@@ -372,8 +372,9 @@ behavior: 'smooth' }); } } }" x-init="
       </div>
 
       <!-- Video Background -->
-      <video autoplay muted loop class="absolute top-0 -z-1 object-cover w-full h-150 rounded-3xl shadow-lg opacity-40"
-        src="./assets/video/hero-background-video.mp4">
+      <video autoplay muted loop class="absolute top-0 -z-1 object-cover w-full h-150 rounded-3xl shadow-lg opacity-50"
+        poster="../assets/video/hero-background-video-cover.webp" data-src="../assets/video/hero-background-video.mp4">
+        <track src="" kind="captions" srclang="en" label="english_captions">
       </video>
 
       <!-- 装饰 -->
@@ -528,7 +529,7 @@ behavior: 'smooth' }); } } }" x-init="
                   <div class="flex justify-between gap-2 pb-1.5 pt-1">
                     <a href="#prompt-dialog"
                       class="prompt flex items-center py-1 px-2 text-xs text-gray-400 hover:text-gray-300 bg-[#363444] rounded-sm cursor-pointer">
-                      <img class="icon-magicWand mr-2" src="./assets/img/icon/icon-magicWand.svg" alt="" srcset="">
+                      <img class="icon-magicWand mr-2" src="../assets/img/icon/icon-magicWand.svg" alt="" srcset="">
                       Generate with AI
                     </a>
                     <div class="flex items-center text-xs text-gray-500">0 / 1500</div>
@@ -637,13 +638,13 @@ behavior: 'smooth' }); } } }" x-init="
               <!-- Blur Background -->
               <div class="absolute pointer-events-none inset-0 overflow-hidden opacity-20">
                 <span class="absolute left-0 right-0 top-0 -z-1">
-                  <img src="./assets/img/other/blur-19.svg" alt="blur" class="w-full">
+                  <img src="../assets/img/other/blur-19.svg" alt="blur" class="w-full">
                 </span>
                 <span class="absolute left-0 right-0 top-0 -z-1">
-                  <img src="./assets/img/other/blur-20.svg" alt="blur" class="w-full">
+                  <img src="../assets/img/other/blur-20.svg" alt="blur" class="w-full">
                 </span>
                 <span class="absolute left-0 right-0 top-0 -z-1">
-                  <img src="./assets/img/other/blur-21.svg" alt="blur" class="w-full">
+                  <img src="../assets/img/other/blur-21.svg" alt="blur" class="w-full">
                 </span>
               </div>
 
@@ -752,13 +753,13 @@ behavior: 'smooth' }); } } }" x-init="
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
                       <video class="w-full h-full object-cover rounded-xl over-hidden" autoplay loop muted
-                        src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
+                        data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
                     </div>
                     <div class="swiper-slide">
                       <img class="absolute top-0 bottom-0 right-0 left-0 w-10 h-10 m-auto"
-                        src="./assets/img/icon/loading.svg">
+                        src="../assets/img/icon/loading.svg">
                       <video class="w-full h-full object-cover rounded-xl over-hidden" autoplay loop muted
-                        src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
+                        data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
                     </div>
                   </div>
                 </div>
@@ -834,13 +835,13 @@ behavior: 'smooth' }); } } }" x-init="
               <!-- Blur Background -->
               <div class="absolute pointer-events-none inset-0 overflow-hidden opacity-20">
                 <span class="absolute left-0 right-0 top-0 -z-1">
-                  <img src="./assets/img/other/blur-19.svg" alt="blur" class="w-full">
+                  <img src="../assets/img/other/blur-19.svg" alt="blur" class="w-full">
                 </span>
                 <span class="absolute left-0 right-0 top-0 -z-1">
-                  <img src="./assets/img/other/blur-20.svg" alt="blur" class="w-full">
+                  <img src="../assets/img/other/blur-20.svg" alt="blur" class="w-full">
                 </span>
                 <span class="absolute left-0 right-0 top-0 -z-1">
-                  <img src="./assets/img/other/blur-21.svg" alt="blur" class="w-full">
+                  <img src="../assets/img/other/blur-21.svg" alt="blur" class="w-full">
                 </span>
               </div>
 
@@ -937,7 +938,7 @@ behavior: 'smooth' }); } } }" x-init="
 
               <div class="relative h-full flex flex-col items-center justify-center gap-5 px-5">
                 <video class="w-100 h-full object-cover rounded-xl over-hidden" autoplay loop muted
-                  src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
+                  data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
 
                 <div class="flex gap-15 max-sm:gap-3 max-sm:text-sm items-center">
                   <div
@@ -983,7 +984,7 @@ behavior: 'smooth' }); } } }" x-init="
                   </span>
 
                   <video class="w-200 h-full aspect-[16/11] object-cover" loop
-                    src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
+                    data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"></video>
                 </div>
               </div>
               <p class="pointer-events-none mt-4 mb-2 block truncate text-sm font-medium text-gray-200">2025-04-02
@@ -1147,7 +1148,7 @@ behavior: 'smooth' }); } } }" x-init="
                   class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
                   <a class="relative block overflow-hidden rounded-3xl">
                     <video class="aspect-[16/10] object-cover" autoplay loop muted
-                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
                       alt="Feature">
                   </a>
                   <div
@@ -1167,7 +1168,7 @@ behavior: 'smooth' }); } } }" x-init="
                   class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
                   <a class="relative block overflow-hidden rounded-3xl">
                     <video class="aspect-[16/10] object-cover" autoplay loop muted
-                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
                       alt="Feature">
                   </a>
                   <div
@@ -1187,7 +1188,7 @@ behavior: 'smooth' }); } } }" x-init="
                   class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
                   <a class="relative block overflow-hidden rounded-3xl">
                     <video class="aspect-[16/10] object-cover" autoplay loop muted
-                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
                       alt="Feature">
                   </a>
                   <div
@@ -1207,7 +1208,7 @@ behavior: 'smooth' }); } } }" x-init="
                   class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
                   <a class="relative block overflow-hidden rounded-3xl">
                     <video class="aspect-[16/10] object-cover" autoplay loop muted
-                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
                       alt="Feature">
                   </a>
                   <div
@@ -1227,7 +1228,7 @@ behavior: 'smooth' }); } } }" x-init="
                   class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
                   <a class="relative block overflow-hidden rounded-3xl">
                     <video class="aspect-[16/10] object-cover" autoplay loop muted
-                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
                       alt="Feature">
                   </a>
                   <div
@@ -1247,7 +1248,7 @@ behavior: 'smooth' }); } } }" x-init="
                   class="relative w-[60vw] wow animate__ animate__fadeInUp group rounded-4xl bg-white shadow-solid-8 dark:bg-[#1c2238] overflow-hidden animated">
                   <a class="relative block overflow-hidden rounded-3xl">
                     <video class="aspect-[16/10] object-cover" autoplay loop muted
-                      src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
+                      data-src="https://v2-kling.klingai.com/bs2/upload-ylab-stunt/special-effect/output/HB1_PROD_ai_web_102218599/359180432179695985/output.mp4?x-kcdn-pid=112452"
                       alt="Feature">
                   </a>
                   <div
@@ -1275,7 +1276,7 @@ behavior: 'smooth' }); } } }" x-init="
           <div class="w-full px-4 lg:w-1/2 wow animate__animated animate__fadeInLeft">
             <div class="text-center lg:text-right aspect-[4/3]">
               <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-                src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+                data-src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
               </video>
             </div>
           </div>
@@ -1452,7 +1453,7 @@ behavior: 'smooth' }); } } }" x-init="
             <div class="w-full lg:w-1/2 max-sm:mb-10 px-4 wow animate__animated animate__fadeInRight">
               <div class="text-center lg:text-right aspect-[4/3]">
                 <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-                  src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+                  data-src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
                 </video>
               </div>
             </div>
@@ -1500,7 +1501,7 @@ behavior: 'smooth' }); } } }" x-init="
         <div class="mt-6 lg:mt-10 flex flex-col-reverse items-center gap-6 md:flex-row md:gap-14">
           <div class="w-full md:w-[50%] aspect-[6/4]">
             <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-              src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+              data-src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
             </video>
           </div>
 
@@ -1651,7 +1652,7 @@ behavior: 'smooth' }); } } }" x-init="
           <div class="w-full h-full px-4 max-sm:px-0 lg:w-1/2 wow animate__animated animate__fadeInLeft">
             <div class="text-center lg:text-right aspect-[9/11.8]">
               <video autoplay loop muted class="object-cover w-full h-full rounded-3xl shadow-lg"
-                src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
+                data-src="https://videocdn.pollo.ai/web-cdn/pollo/production/cm4cc1sft0039mujrzts9zs91/video/1737618181838-51498b9d-ecb4-4ad5-91f9-4d4c21785006.mp4">
               </video>
             </div>
           </div>
@@ -1725,7 +1726,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Is Vider.ai completely free to use?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1737,7 +1738,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Can I create videos from both text and images?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1749,7 +1750,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Are there any limits on how many videos I can create?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1761,7 +1762,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Do I need to sign up or create an account to use Vider.ai?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1773,7 +1774,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Will the generated videos have a watermark?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1785,7 +1786,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   What kind of videos can I generate?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1797,7 +1798,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   How long does it take to generate a video?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1809,7 +1810,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Can I customize the generated videos?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1821,7 +1822,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   Are there any restrictions on video usage?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1833,7 +1834,7 @@ behavior: 'smooth' }); } } }" x-init="
               <div class="flex flex-col border-b border-stroke last-of-type:border-none dark:border-[#2d2f40]">
                 <h4
                   class="flex gap-5 cursor-pointer items-center px-6 py-5 text-metatitle3 font-medium text-black dark:text-white lg:px-9 lg:py-7.5">
-                  <img src="./assets/img/other/icon-plus-dark.svg" alt="plus">
+                  <img src="../assets/img/other/icon-plus-dark.svg" alt="plus">
                   How long are my generated videos stored on Vider.ai?
                 </h4>
                 <p class="border-t border-stroke px-6 py-5 dark:border-[#2d2f40] lg:px-9 lg:py-7.5 block">
@@ -1859,13 +1860,13 @@ behavior: 'smooth' }); } } }" x-init="
           <!-- Blur Background -->
           <div class="absolute -z-10 pointer-events-none inset-0 overflow-hidden opacity-20">
             <span class="absolute left-0 right-0 top-0 -z-1">
-              <img src="./assets/img/other/blur-19.svg" alt="blur" class="w-full">
+              <img src="../assets/img/other/blur-19.svg" alt="blur" class="w-full">
             </span>
             <span class="absolute left-0 right-0 top-0 -z-1">
-              <img src="./assets/img/other/blur-20.svg" alt="blur" class="w-full">
+              <img src="../assets/img/other/blur-20.svg" alt="blur" class="w-full">
             </span>
             <span class="absolute left-0 right-0 top-0 -z-1">
-              <img src="./assets/img/other/blur-21.svg" alt="blur" class="w-full">
+              <img src="../assets/img/other/blur-21.svg" alt="blur" class="w-full">
             </span>
           </div>
 
@@ -2007,7 +2008,7 @@ behavior: 'smooth' }); } } }" x-init="
                 </div>
                 <span
                   class="inline-block ml-2 wow animate__animated animate__wobble animate__slow animate__infinite animated">
-                  <img src="./assets/img/other/icon-arrow-light.svg" alt="Arrow" class="hidden dark:block">
+                  <img src="../assets/img/other/icon-arrow-light.svg" alt="Arrow" class="hidden dark:block">
                 </span>
               </a>
             </div>
@@ -2027,7 +2028,7 @@ behavior: 'smooth' }); } } }" x-init="
 
             <a class="navbar-brand shrink-0 text-5xl font-bold" href="./index.html">
               LOGO
-              <!-- <img src="./assets/img/other/logo-dark.svg" alt="Logo" class="hidden dark:block"> -->
+              <!-- <img src="../assets/img/other/logo-dark.svg" alt="Logo" class="hidden dark:block"> -->
             </a>
             <p class="mt-5 mb-9 text-base leading-relaxed text-body-color dark:text-body-color-dark">
               Create stunning AI videos with Vider.ai, free, fast, and limitless.</p>
@@ -2411,7 +2412,7 @@ behavior: 'smooth' }); } } }" x-init="
 
             <div class="mb-5 relative">
               <span class="absolute top-1/2 -translate-y-1/2 left-6">
-                <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+                <img class="w-[20px]" src="../assets/img/icon/captcha.svg" alt="" srcset="">
               </span>
               <input type="captcha" placeholder="Captcha" id="tab_2_captcha"
                 class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />
@@ -2534,7 +2535,7 @@ behavior: 'smooth' }); } } }" x-init="
         <!-- Verification Code -->
         <div class="mb-5 relative">
           <span class="absolute top-1/2 -translate-y-1/2 left-6">
-            <img class="w-[20px]" src="./assets/img/icon/captcha.svg" alt="" srcset="">
+            <img class="w-[20px]" src="../assets/img/icon/captcha.svg" alt="" srcset="">
           </span>
           <input type="captcha" placeholder="Captcha" id="signUp_captcha"
             class="w-full border border-white/[0.12] bg-transparent rounded-full focus:border-white pl-14.5 pr-4 py-3.5 font-medium outline-none focus-visible:shadow-none" />

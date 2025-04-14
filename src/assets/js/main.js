@@ -6,7 +6,7 @@
     offset: 200,
   }).init()
 
-  // 滚动吸顶
+  // Rolling ceilings
   // $(window).on('scroll', function () {
   //   let scrollY = window.scrollY
   //   let $sticky = $('#sticky')
@@ -14,27 +14,27 @@
 
   //   const offset = 150
 
-  //   let stickyHeight = $sticky.outerHeight() // 获取 .videos 的高度
-  //   let areaTop = $scrollArea.offset().top - offset // 获取 .scroll-area 的顶部距离
-  //   let areaHeight = $scrollArea.outerHeight() // 获取 .scroll-area 的高度
-  //   let areaBottom = areaTop + areaHeight - stickyHeight // 计算 .scroll-area 的底部距离
-  //   // console.log("sticky 高度:", stickyHeight);
-  //   // console.log("sticky 高度:", stickyHeight);
+  //   let stickyHeight = $sticky.outerHeight() // Gets the height of the .videos
+  //   let areaTop = $scrollArea.offset().top - offset // Gets the top distance of the .scroll-area
+  //   let areaHeight = $scrollArea.outerHeight() // Gets the height of the .scroll-area
+  //   let areaBottom = areaTop + areaHeight - stickyHeight // Calculate the bottom distance of the .scroll-area
+  //   // console.log("sticky height:", stickyHeight);
+  //   // console.log("sticky height:", stickyHeight);
   //   // console.log("areaTop:", scrollY, areaBottom, scrollY >= areaBottom);
 
   //   if (scrollY > areaTop && scrollY < areaBottom) {
-  //     // 在 .scroll-area 范围内，固定吸顶
+  //     // In the .scroll-area range, the ceiling is fixed
   //     $sticky.addClass('active').css({ position: 'fixed', top: offset + 'px', bottom: 'auto' })
   //   } else if (scrollY >= areaBottom) {
-  //     // 超过 .scroll-area，跟随滚动
+  //     // Exceed .scroll-area to follow the scroll
   //     $sticky.removeClass('active').css({ position: 'absolute', top: 'auto', bottom: 0 })
   //   } else {
-  //     // 低于 .scroll-area，取消固定
+  //     // Below .scroll-area, unpin
   //     $sticky.removeClass('active').css({ position: '', top: '' })
   //   }
   // })
 
-  // 登录弹窗
+  // Login pop-up
   $(document).ready(function () {
     $('.signIn').magnificPopup({
       type: 'inline',
@@ -62,7 +62,7 @@
     })
   })
 
-  // 提示词弹窗
+  // Prompt pop-up
   $(document).ready(function () {
     $('.prompt').magnificPopup({
       type: 'inline',
@@ -92,26 +92,26 @@
 })(jQuery)
 
 new Swiper('.swiper-comment', {
-  loop: true, // 开启循环滚动
+  loop: true, // Turn on cycle scrolling
   autoplay: {
-    delay: 0, // 设置为 0 使其无间隔滚动
-    disableOnInteraction: true, // 用户交互后是否停止自动滚动
+    delay: 0, // Set it to 0 to make it scroll without intervals
+    disableOnInteraction: true, // Whether to stop auto-scrolling after user interaction
   },
-  speed: 8000, // 滚动速度（ms），调整更流畅
-  slidesPerView: 'auto', // 适应内容大小
-  spaceBetween: 30, // 幻灯片间距
-  centeredSlides: true, // 使当前项居中
+  speed: 8000, // Scroll speed (ms) for smoother adjustments
+  slidesPerView: 'auto', // Adapts to the size of the content
+  spaceBetween: 30, // Slide spacing
+  centeredSlides: true, // Center the current item
 })
 
 new Swiper('.swiper-products', {
   effect: 'coverflow',
-  loop: true, // 开启循环滚动
+  loop: true, // Turn on cycle scrolling
   // autoplay: {
-  //   delay: 0, // 设置为 0 使其无间隔滚动
-  //   disableOnInteraction: true, // 用户交互后是否停止自动滚动
+  //   delay: 0, // Set it to 0 to make it scroll without intervals
+  //   disableOnInteraction: true, // Whether to stop auto-scrolling after user interaction
   // },
-  // speed: 1000, // 滚动速度（ms），调整更流畅
-  // spaceBetween: '1vw', // 幻灯片间距
+  // speed: 1000, // Scroll speed (ms) for smoother adjustments
+  // spaceBetween: '1vw', // Slide spacing
   grabCursor: true,
   centeredSlides: true,
   slidesPerView: 'auto',
@@ -144,18 +144,18 @@ new Swiper('.swiper-my-products', {
   },
 })
 
-// 视频播放
+// Video playback
 document.addEventListener('DOMContentLoaded', function () {
-  // 获取所有作品容器
+  // Get all the work containers
   const mediaItems = document.querySelectorAll('.break-inside-avoid')
 
   mediaItems.forEach(item => {
-    // 在每个容器中查找video元素
+    // Look for the video element in each container
     const video = item.querySelector('video')
 
-    // 如果是视频容器
+    // If it's a video container
     if (video) {
-      // 创建播放按钮的 SVG
+      // Create a play button SVG
       const playButtonSVG = `
         <svg class="svg-icon play-button w-[40px] h-[40px] absolute top-0 left-0 bottom-0 right-0 m-auto z-10" fill="currentColor">
           <use href="#icon-card-play"></use>
@@ -179,38 +179,37 @@ document.addEventListener('DOMContentLoaded', function () {
         </svg>
       `
 
-      // 将播放按钮插入到视频容器的顶部
+      // Insert the play button into the top of the video container
       video.insertAdjacentHTML('beforebegin', playButtonSVG)
 
-      const playButton = item.querySelector('.play-button') // 使用类名选择器
-
-      // 预加载视频元数据
+      const playButton = item.querySelector('.play-button')
+      // Preload video metadata
       video.addEventListener('loadedmetadata', () => {
-        video.currentTime = 0 // 初始定位到开头
-        video.pause() // 确保初始状态是暂停的
+        video.currentTime = 0 // Initial targeting to the beginning
+        video.pause() // Make sure that the initial state is paused
       })
 
-      // 鼠标进入时播放
+      // Play when the mouse enters
       item.addEventListener('mouseenter', () => {
-        video.muted = true // 静音
+        video.muted = true // mute
         video.play().catch(error => {
           console.error('Video playback failed:', error)
         })
         if (playButton) {
-          playButton.style.display = 'none' // 隐藏播放按钮
+          playButton.style.display = 'none' // Hide the play button
         }
       })
 
-      // 鼠标离开时暂停
+      // Pause when the mouse is away
       item.addEventListener('mouseleave', () => {
         video.pause()
-        video.currentTime = 0 // 重置播放进度
+        video.currentTime = 0 // Reset the playback progress
         if (playButton) {
-          playButton.style.display = 'block' // 显示播放按钮
+          playButton.style.display = 'block' // The play button is displayed
         }
       })
     }
-    // 图片容器不需要处理
+    // The image container does not need to be processed
   })
 })
 
@@ -226,34 +225,34 @@ function downloadVideo(url) {
   document.body.removeChild(a)
 }
 
-// 自执行函数
+// Self-executing functions
 ;(function () {
   window.addEventListener('load', () => {
-    // 获取所有需要懒加载的视频元素
+    // Get all the video elements that need to be lazy loaded
     const videos = document.querySelectorAll('video')
 
-    // 创建 IntersectionObserver
+    // create IntersectionObserver
     const observer = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const video = entry.target
             // const videoSource = video.querySelector('source');
-            // 当视频进入视窗时，开始加载视频
+            // When the video enters the window, the video starts loading
             video.src = video.getAttribute('data-src')
             console.log('video loaded', video.src)
             console.log(video.getAttribute('poster'))
 
-            video.load() // 加载视频
-            video.play() // 自动播放视频（可选）
-            observer.unobserve(video) // 停止观察这个视频
+            video.load() // Load the video
+            video.play() // Autoplay video (optional)
+            observer.unobserve(video) // Stop watching this video
           }
         })
       },
       { threshold: 0.5 }
-    ) // threshold: 0.5 表示视频至少一半进入视窗时触发
+    ) // threshold: 0.5 Indicates that it is triggered when at least half of the video enters the window
 
-    // 遍历所有视频，开始观察
+    // Go through all the videos and start observing
     videos.forEach(video => {
       observer.observe(video)
     })
